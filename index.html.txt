@@ -10,9 +10,6 @@
     
     <style>
         body {
-<div class="logo-container" style="text-align: center; padding: 20px 0;">
-    <img src="logo.png" alt="明昌 MC Fire Logo" style="max-height: 80px; width: auto;">
-</div>
             font-family: 'Noto Sans TC', sans-serif;
             background-color: #f8fafc;
             color: #0f172a;
@@ -106,7 +103,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-black text-white tracking-wider flex items-center gap-3 cursor-pointer" onclick="switchView('home')">
                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.15)] p-0.5 transition-transform hover:scale-110 relative">
-                    <img src="明昌LOGO-01.png" alt="明昌消防 Logo" class="w-full h-full object-contain relative z-10 rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="logo.png" alt="明昌消防 Logo" class="w-full h-full object-contain relative z-10 rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="hidden w-full h-full rounded-full border-2 border-[#e60000] text-[#e60000] flex items-center justify-center font-black text-[14px] tracking-tighter bg-white absolute inset-0 z-0">MC</div>
                 </div>
                 <span class="tracking-widest">MC</span> 
