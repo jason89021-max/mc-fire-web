@@ -1807,13 +1807,22 @@
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-yellow-500 transition-colors flex flex-col group';
+                
+                // 這裡就是關鍵！動態判斷：如果有設定 image 就顯示圖片，沒有就顯示原本的 Emoji 背景
+                const bgContent = p.image && p.image !== '' 
+                    ? `<img src="${p.image}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 z-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                       <div class="hidden absolute inset-0 bg-[radial-gradient(circle_at_top_right,#334155,transparent)] z-0"></div>
+                       <div class="hidden text-6xl opacity-20 absolute group-hover:scale-110 transition-transform duration-500 z-0">${p.icon}</div>`
+                    : `<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#334155,transparent)] z-0"></div>
+                       <div class="text-6xl opacity-20 absolute group-hover:scale-110 transition-transform duration-500 z-0">${p.icon}</div>`;
+
                 card.innerHTML = `
-                    <div class="h-48 bg-slate-700 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#334155,transparent)]"></div>
-                        <div class="text-6xl opacity-20 absolute group-hover:scale-110 transition-transform duration-500">${p.icon}</div>
+                    <div class="h-48 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+                        ${bgContent}
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-90 z-0"></div>
                         <div class="absolute bottom-4 left-4 text-yellow-500 text-xs font-bold tracking-widest uppercase border border-yellow-500/50 px-2 py-1 rounded bg-slate-900/80 z-10">${p.label}</div>
                     </div>
-                    <div class="p-8 flex-grow flex flex-col">
+                    <div class="p-8 flex-grow flex flex-col relative z-10 bg-slate-800">
                         <h3 class="text-2xl font-bold mb-3 text-white">${p.title}</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">${p.desc}</p>
                     </div>
