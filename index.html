@@ -1471,21 +1471,18 @@
                     </p>
                 </div>
 
-                <div class="w-full relative flex flex-col items-center justify-center mt-8 mb-16">
+                <div class="w-full relative flex flex-col items-center justify-center mt-4 mb-16">
                     
-                    <div class="category-scene relative w-full h-[350px] md:h-[400px] flex justify-center items-center">
+                    <div class="category-scene relative w-full h-[350px] md:h-[500px] flex justify-center items-center">
                         
                         <div class="absolute inset-y-0 left-0 w-1/5 md:w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         <div class="absolute inset-y-0 right-0 w-1/5 md:w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
 
-                        <button onclick="rotateCategoryCarousel(-1)" class="absolute left-2 md:left-12 z-30 w-10 h-10 bg-white/80 backdrop-blur border border-slate-200 rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-yellow-600 transition-colors">❮</button>
-                        <button onclick="rotateCategoryCarousel(1)" class="absolute right-2 md:right-12 z-30 w-10 h-10 bg-white/80 backdrop-blur border border-slate-200 rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-yellow-600 transition-colors">❯</button>
-
-                        <div id="category-carousel" class="category-carousel-container relative w-[120px] h-[120px] md:w-[150px] md:h-[150px]">
+                        <div id="category-carousel" class="category-carousel-container relative w-[120px] h-[120px] md:w-[200px] md:h-[200px]">
                             </div>
                     </div>
 
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-2">
                         <h3 id="active-category-title" class="text-2xl md:text-3xl font-black text-slate-800 mb-2 transition-all duration-300">全部商品</h3>
                         <div class="w-16 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full"></div>
                     </div>
@@ -1493,7 +1490,6 @@
 
                 <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-500 transform translate-y-0 opacity-100">
                     </div>
-
             </div>
         </div>
 
@@ -1919,18 +1915,21 @@
             if(!carouselContainer) return;
             carouselContainer.innerHTML = '';
             
-            // 判斷手機版與電腦版，設定不同的環形半徑
+            // 判斷手機版與電腦版
             const isMobile = window.innerWidth < 768;
-            const baseRadius = isMobile ? 160 : 280; 
+            
+            // 🌟 核心修改：電腦版的半徑從 280 大幅拉寬到 420，讓商品距離更遠、環形更寬闊！
+            const baseRadius = isMobile ? 160 : 420; 
 
-            // 為了創造微小的不規則漂浮感 (也可設為 0 變成完美圓環)
+            // 為了創造微小的不規則漂浮感
             const yOffsets = [0, -5, 8, -6, 10, -8, 5, -4]; 
             const rOffsets = [0, 10, -10, 15, -5, 10, -15, 5];
 
             categoryRingList.forEach((cat, index) => {
                 const item = document.createElement('div');
                 
-                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[150px] md:h-[150px] bg-gradient-to-br ${cat.color} rounded-full shadow-xl flex flex-col items-center justify-center text-white border-4 border-white/20 cursor-pointer select-none group`;
+                // 🌟 核心修改：電腦版的商品卡片大幅放大為 w-[200px] h-[200px]，邊框加粗 md:border-8
+                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[200px] md:h-[200px] bg-gradient-to-br ${cat.color} rounded-full shadow-xl flex flex-col items-center justify-center text-white border-4 md:border-[6px] border-white/20 cursor-pointer select-none group`;
                 
                 const itemAngle = index * anglePerItem;
                 const r = baseRadius + rOffsets[index];
@@ -1944,8 +1943,9 @@
                 // 初始排版：繞圓心放射狀推開
                 item.style.transform = `rotateY(${itemAngle}deg) translateZ(${r}px) translateY(${y}px)`;
                 
+                // 🌟 核心修改：電腦版的 Icon 放大為 text-7xl
                 item.innerHTML = `
-                    <div class="text-4xl md:text-5xl drop-shadow-md group-hover:scale-110 transition-transform">${cat.icon}</div>
+                    <div class="text-4xl md:text-7xl drop-shadow-md group-hover:scale-110 transition-transform">${cat.icon}</div>
                 `;
                 
                 // 點擊事件：旋轉到該分類
