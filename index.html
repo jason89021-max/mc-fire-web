@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
+    <style>
+        /* 🌟 商品分類 3D 環形旋轉專用設定 🌟 */
+        .category-scene {
+            perspective: 1000px; /* 數值越小，遠近變形感越強 */
+        }
+        .category-carousel-container {
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .category-carousel-item {
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            /* 加上下方倒影，讓 3D 空間感更真實 */
+            -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.05));
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MC Fire 明昌消防 | 頂級消防整合顧問</title>
@@ -1445,42 +1460,40 @@
         </div>
 
         <!-- 5. Product 頁面 (器材與商品分類型錄) -->
-        <div id="view-products" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+        <div id="view-products" class="page-view py-20 bg-slate-50 border-t border-slate-200 overflow-hidden">
             <div class="max-w-7xl mx-auto px-6">
                 
-                <div class="mb-12 text-center flex flex-col md:flex-row justify-between items-end gap-6 border-b border-slate-200 pb-8">
-                    <div class="text-left">
-                        <p class="text-sm font-bold text-yellow-600 tracking-widest mb-2 uppercase">Equipment Retail & Supply</p>
-                        <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">消防器材與商品型錄</h2>
-                        <p class="text-slate-600 leading-relaxed text-base max-w-2xl">
-                            明昌消防提供最齊全的消防零組件與器材零售。請點擊兩側分類圖示，或使用箭頭旋轉瀏覽對應的專業設備。
-                        </p>
+                <div class="mb-4 text-center flex flex-col items-center justify-center border-b border-slate-200 pb-8">
+                    <p class="text-sm font-bold text-yellow-600 tracking-widest mb-2 uppercase">Equipment Retail & Supply</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">消防器材與商品型錄</h2>
+                    <p class="text-slate-500 text-sm tracking-widest bg-slate-200/50 px-4 py-1.5 rounded-full inline-block">
+                        👆 點擊兩側分類圖示進行旋轉切換
+                    </p>
+                </div>
+
+                <div class="w-full relative flex flex-col items-center justify-center mt-8 mb-16">
+                    
+                    <div class="category-scene relative w-full h-[350px] md:h-[400px] flex justify-center items-center">
+                        
+                        <div class="absolute inset-y-0 left-0 w-1/5 md:w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
+                        <div class="absolute inset-y-0 right-0 w-1/5 md:w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
+
+                        <button onclick="rotateCategoryCarousel(-1)" class="absolute left-2 md:left-12 z-30 w-10 h-10 bg-white/80 backdrop-blur border border-slate-200 rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-yellow-600 transition-colors">❮</button>
+                        <button onclick="rotateCategoryCarousel(1)" class="absolute right-2 md:right-12 z-30 w-10 h-10 bg-white/80 backdrop-blur border border-slate-200 rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-yellow-600 transition-colors">❯</button>
+
+                        <div id="category-carousel" class="category-carousel-container relative w-[120px] h-[120px] md:w-[150px] md:h-[150px]">
+                            </div>
                     </div>
-                    <div>
-                        <button onclick="switchView('contact')" class="bg-slate-900 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-600 transition-colors shadow-lg whitespace-nowrap">
-                            📝 批發採購詢價
-                        </button>
+
+                    <div class="text-center mt-4">
+                        <h3 id="active-category-title" class="text-2xl md:text-3xl font-black text-slate-800 mb-2 transition-all duration-300">全部商品</h3>
+                        <div class="w-16 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full"></div>
                     </div>
                 </div>
 
-                <div class="relative w-full py-16 mb-6 flex justify-center items-center h-[300px] md:h-[350px] select-none" style="perspective: 1200px;">
-                    <div class="absolute inset-y-0 left-0 w-1/4 md:w-1/3 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
-                    <div class="absolute inset-y-0 right-0 w-1/4 md:w-1/3 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
-
-                    <button onclick="rotateCategory(-1)" class="absolute left-2 md:left-10 z-50 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:text-yellow-600 hover:border-yellow-400 transition-all focus:outline-none">❮</button>
-                    <button onclick="rotateCategory(1)" class="absolute right-2 md:right-10 z-50 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:text-yellow-600 hover:border-yellow-400 transition-all focus:outline-none">❯</button>
-
-                    <div id="category-ring" class="relative w-full max-w-5xl h-full flex items-center justify-center transform-style-preserve-3d transition-transform duration-700 ease-out">
+                <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-500 transform translate-y-0 opacity-100">
                     </div>
-                </div>
 
-                <div class="text-center mb-16 relative z-30">
-                    <h3 id="active-category-title" class="text-3xl md:text-4xl font-black text-slate-800 mb-3 drop-shadow-sm transition-all duration-300">全部商品</h3>
-                    <div class="w-20 h-2 bg-yellow-500 mx-auto rounded-full shadow-sm"></div>
-                </div>
-
-                <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-opacity duration-300">
-                    </div>
             </div>
         </div>
 
@@ -1883,128 +1896,147 @@
             renderCatalog(cat);
         }
 
-        // --- 🌟 商品分類 3D 環繞旋轉邏輯 🌟 ---
+        // --- 🌟 商品分類 3D 真實環形旋轉邏輯 🌟 ---
         const categoryRingList = [
-            { id: 'all', name: '全部商品', icon: '🌟' },
-            { id: 'extinguisher', name: '各類滅火器', icon: '🧯' },
-            { id: 'lighting', name: '照明與出口方向燈', icon: '💡' },
-            { id: 'alarm', name: '住警器與蜂鳴器', icon: '🚨' },
-            { id: 'detector', name: '各類專業探測器', icon: '📡' },
-            { id: 'sprinkler', name: '專業消防撒水頭', icon: '🚿' },
-            { id: 'broadcast', name: '緊急廣播與聲光警報', icon: '📢' },
-            { id: 'others', name: '閥類與其他配件零售', icon: '🔧' }
+            { id: 'all', name: '全部商品', icon: '🌟', color: 'from-slate-700 to-slate-900' },
+            { id: 'extinguisher', name: '各類滅火器', icon: '🧯', color: 'from-red-500 to-rose-600' },
+            { id: 'lighting', name: '照明/方向燈', icon: '💡', color: 'from-yellow-400 to-amber-500' },
+            { id: 'alarm', name: '住警器與蜂鳴器', icon: '🚨', color: 'from-orange-500 to-red-500' },
+            { id: 'detector', name: '各類探測器', icon: '📡', color: 'from-blue-400 to-indigo-500' },
+            { id: 'sprinkler', name: '消防撒水頭', icon: '🚿', color: 'from-sky-400 to-blue-500' },
+            { id: 'broadcast', name: '緊急廣播設備', icon: '📢', color: 'from-indigo-500 to-purple-600' },
+            { id: 'others', name: '閥類與其他配件', icon: '🔧', color: 'from-slate-400 to-gray-600' }
         ];
 
-        let currentRingIndex = 0;
-        let isAnimating = false; // 防止連續點擊導致動畫卡頓
+        const carouselContainer = document.getElementById('category-carousel');
+        const itemCount = categoryRingList.length; // 8 個分類
+        const anglePerItem = 360 / itemCount; // 每個相差 45 度
+        
+        let currentRotation = 0; // 容器旋轉角度
+        let activeIndex = 0; // 正中央的索引
 
-        function renderCategoryRing() {
-            const ring = document.getElementById('category-ring');
-            const titleEl = document.getElementById('active-category-title');
-            if(!ring) return;
-
-            ring.innerHTML = '';
-            const total = categoryRingList.length;
+        function initCategoryCarousel() {
+            if(!carouselContainer) return;
+            carouselContainer.innerHTML = '';
             
-            // 判斷是否為手機版 (手機版轉距縮小)
+            // 判斷手機版與電腦版，設定不同的環形半徑
             const isMobile = window.innerWidth < 768;
-            
-            // 🌟 3D 環形參數設置 🌟
-            const radius = isMobile ? 250 : 350; // 環形的半徑 (決定立體感與間距)
-            const angleIncrement = 360 / total; // 每個圖示的起始角度
-            const perspective = 1200; // 3D 景深距離 (與 CSS 一致)
+            const baseRadius = isMobile ? 160 : 280; 
+
+            // 為了創造微小的不規則漂浮感 (也可設為 0 變成完美圓環)
+            const yOffsets = [0, -5, 8, -6, 10, -8, 5, -4]; 
+            const rOffsets = [0, 10, -10, 15, -5, 10, -15, 5];
 
             categoryRingList.forEach((cat, index) => {
-                // 1. 計算該圖示當前的角度，讓 active 圖示固定在正中央 (90度)
-                const currentAngle = (90 + (index - currentRingIndex) * angleIncrement) % 360;
-                const radian = currentAngle * (Math.PI / 180); // 轉為弧度
-
-                // 2. 利用三角函數計算 3D 空間位置 (X, Y=0, Z)
-                const x = radius * Math.cos(radian); // X軸位置
-                const z = radius * Math.sin(radian); // Z軸位置 (景深)
-
-                // 3. 計算 3D 縮放與透明度 (越靠近中央景深 Z 越大，Z > 0 為前，Z < 0 為後)
-                const baseScale = (z + perspective) / (radius + perspective); // 根據景深計算縮放比例
-                const scale = Math.max(0.6, baseScale * 0.8); // 限制最小縮放比例
-                
-                const opacity = Math.max(0, Math.min(1, (z + radius) / (2 * radius))); // 根據 Z 軸景深計算透明度
-
-                // 4. 計算 3D 旋轉角度，讓圖示背向環形圓心
-                const rotationY = currentAngle - 90; // 讓圖示轉向圓心
-
                 const item = document.createElement('div');
-                // 🌟 使用 translate3d、scale、rotateY 產生強烈的 3D 立體感與環繞感
-                item.className = `absolute top-1/2 -translate-y-1/2 flex items-center justify-center transition-all duration-700 ease-out cursor-pointer group rounded-full select-none`;
-                item.style.zIndex = Math.round(z + radius); // 讓靠近前面的圖示 z-index 更高
-                item.style.transform = `translate3d(${x}px, 0px, ${z}px) scale(${scale}) rotateY(${rotationY}deg)`;
-                item.style.opacity = opacity;
-
-                // 🌟 正中央圖示的特殊樣式 (diff 為 0 代表正中央)
-                let isCenter = currentAngle === 90 || Math.abs(currentAngle - 90) < 0.1;
                 
-                if (isCenter) {
-                    item.style.transform = `translate3d(${x}px, 0px, ${z}px) scale(1.3) rotateY(${rotationY}deg)`;
-                    item.style.opacity = 1;
-                    item.innerHTML = `
-                        <div class="w-20 h-20 md:w-24 md:h-24 bg-white border-2 border-yellow-500 rounded-full shadow-[0_15px_30px_-5px_rgba(234,179,8,0.5)] flex items-center justify-center text-4xl md:text-5xl transition-transform group-hover:scale-110">
-                            ${cat.icon}
-                        </div>`;
-                    titleEl.innerText = cat.name; // 更新下方大標題
-                } else {
-                    item.innerHTML = `
-                        <div class="w-20 h-20 bg-slate-100 border border-slate-200 rounded-full shadow flex items-center justify-center text-3xl md:text-4xl group-hover:bg-slate-200 transition-colors">
-                            ${cat.icon}
-                        </div>
-                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-500 whitespace-nowrap opacity-0 md:group-hover:opacity-100 transition-opacity">${cat.name}</span>`;
-                }
-
-                // 🌟 點擊兩側圖示，自動旋轉到正中央
-                item.onclick = (e) => {
-                    if (isAnimating || isCenter) return;
-                    e.stopPropagation(); // 防止冒泡
+                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[150px] md:h-[150px] bg-gradient-to-br ${cat.color} rounded-full shadow-xl flex flex-col items-center justify-center text-white border-4 border-white/20 cursor-pointer select-none group`;
+                
+                const itemAngle = index * anglePerItem;
+                const r = baseRadius + rOffsets[index];
+                const y = yOffsets[index];
+                
+                // 記錄在屬性中
+                item.dataset.angle = itemAngle;
+                item.dataset.r = r;
+                item.dataset.y = y;
+                
+                // 初始排版：繞圓心放射狀推開
+                item.style.transform = `rotateY(${itemAngle}deg) translateZ(${r}px) translateY(${y}px)`;
+                
+                item.innerHTML = `
+                    <div class="text-4xl md:text-5xl drop-shadow-md group-hover:scale-110 transition-transform">${cat.icon}</div>
+                `;
+                
+                // 點擊事件：旋轉到該分類
+                item.addEventListener('click', () => {
+                    let diff = index - activeIndex;
+                    // 確保走最短路徑
+                    if (diff > itemCount / 2) diff -= itemCount;
+                    if (diff < -itemCount / 2) diff += itemCount;
                     
-                    // 計算要旋轉的步數 (考慮圓環陣列)
-                    let diff = index - currentRingIndex;
-                    if (diff > total / 2) diff -= total;
-                    if (diff < -total / 2) diff += total;
-                    
-                    rotateCategory(diff);
-                };
+                    if (diff !== 0) {
+                        rotateCategoryCarousel(-diff); // 因為容器往左轉，索引是往右，所以要加負號
+                    }
+                });
 
-                ring.appendChild(item);
+                carouselContainer.appendChild(item);
             });
+            
+            updateCategoryScene();
         }
 
-        // 控制旋轉導航並更新下方商品
-        function rotateCategory(direction) {
-            if (isAnimating) return;
-            isAnimating = true;
+        // 外部箭頭點擊呼叫用
+        function rotateCategoryCarousel(direction) {
+            currentRotation += direction * anglePerItem;
+            updateCategoryScene();
+        }
 
-            currentRingIndex = (currentRingIndex + direction + categoryRingList.length) % categoryRingList.length;
+        // 更新 3D 場景與下方商品
+        function updateCategoryScene() {
+            if(!carouselContainer) return;
             
-            // 下方商品網格閃爍效果
+            // 💡 整個軌道前傾 10 度，營造俯視感
+            carouselContainer.style.transform = `rotateX(-10deg) rotateY(${currentRotation}deg)`;
+
+            // 計算目前是哪一個分類在正前方
+            activeIndex = Math.round(currentRotation / -anglePerItem);
+            activeIndex = ((activeIndex % itemCount) + itemCount) % itemCount;
+
+            const items = carouselContainer.children;
+            for (let i = 0; i < items.length; i++) {
+                let diff = Math.abs(i - activeIndex);
+                if (diff > itemCount / 2) diff = itemCount - diff;
+
+                const angle = items[i].dataset.angle;
+                const r = items[i].dataset.r;
+                const y = items[i].dataset.y;
+
+                if (i === activeIndex) {
+                    // 🌟 正中央：放大、發光、不透明
+                    items[i].style.opacity = '1';
+                    items[i].style.boxShadow = '0 0 30px rgba(234, 179, 8, 0.6), inset 0 0 0 4px rgba(255,255,255,0.9)';
+                    items[i].style.pointerEvents = 'none'; 
+                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(1.2)`;
+                } else {
+                    // 🌟 兩側及後方：根據距離縮小與變透明
+                    const scaleRate = 0.8 - (diff * 0.15); 
+                    const opacityRate = Math.max(0.1, 0.6 - (diff * 0.2)); 
+
+                    items[i].style.opacity = opacityRate.toString(); 
+                    items[i].style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+                    items[i].style.pointerEvents = 'auto'; 
+                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(${scaleRate})`;
+                }
+            }
+
+            // 更新標題與下方商品網格
+            document.getElementById('active-category-title').innerText = categoryRingList[activeIndex].name;
+            
+            // 下方商品網格動畫：先淡出、往下沉
             const grid = document.getElementById('catalog-grid');
-            grid.style.opacity = '0';
+            grid.classList.remove('opacity-100', 'translate-y-0');
+            grid.classList.add('opacity-0', 'translate-y-8');
             
-            renderCategoryRing(); // 🌟 重新繪製 3D 分類圓環 (觸發所有圖示的 3D 旋轉動畫)
-            
+            // 動畫一半時更新商品，然後浮現
             setTimeout(() => {
-                renderCatalog(categoryRingList[currentRingIndex].id); // 更新商品
-                grid.style.opacity = '1';
-                isAnimating = false; // 動畫結束
-            }, 300); // 旋轉動畫中間更新商品
+                renderCatalog(categoryRingList[activeIndex].id); // 呼叫您原本寫好的渲染商品函數
+                grid.classList.remove('opacity-0', 'translate-y-8');
+                grid.classList.add('opacity-100', 'translate-y-0');
+            }, 300);
         }
 
-        // 確保視窗縮放時重新計算 3D 景深位置 (為了手機版響應式)
+        // RWD：視窗改變時重新計算半徑
         window.addEventListener('resize', () => {
             if (document.getElementById('view-products').classList.contains('active')) {
-                renderCategoryRing();
+                initCategoryCarousel();
             }
         });
 
-        // 初始載入：繪製圓環並載入全部商品
-        renderCategoryRing();
-        renderCatalog('all');
+        // 初始化啟動
+        document.addEventListener('DOMContentLoaded', () => {
+            initCategoryCarousel();
+        });
         // --- 🌟 3D 環繞旋轉邏輯結束 🌟 ---
 
         // --- 圓餅圖表 ---
