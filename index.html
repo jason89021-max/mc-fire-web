@@ -1478,11 +1478,11 @@
                         <div class="absolute inset-y-0 left-0 w-1/5 md:w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         <div class="absolute inset-y-0 right-0 w-1/5 md:w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
 
-                        <div id="category-carousel" class="category-carousel-container relative w-[120px] h-[120px] md:w-[200px] md:h-[200px]">
+                        <div id="category-carousel" class="category-carousel-container relative w-[100px] h-[100px] md:w-[160px] md:h-[160px]">
                             </div>
                     </div>
 
-                    <div class="text-center mt-2">
+                    <div class="text-center mt-12 md:mt-24 z-30 relative">
                         <h3 id="active-category-title" class="text-2xl md:text-3xl font-black text-slate-800 mb-2 transition-all duration-300">全部商品</h3>
                         <div class="w-16 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full"></div>
                     </div>
@@ -1892,16 +1892,19 @@
             renderCatalog(cat);
         }
 
-        // --- 🌟 商品分類 3D 真實環形旋轉邏輯 🌟 ---
+        // --- 🌟 商品分類 3D 真實環形旋轉邏輯 (圖片版) 🌟 ---
+        
+        // 1. 核心修改：將原本的 emoji (icon) 替換為真實圖片路徑 (image)
+        // 建議您將去背好的 PNG 檔放到 images/products/icons/ 目錄中
         const categoryRingList = [
-            { id: 'all', name: '全部商品', icon: '🌟', color: 'from-slate-700 to-slate-900' },
-            { id: 'extinguisher', name: '各類滅火器', icon: '🧯', color: 'from-red-500 to-rose-600' },
-            { id: 'lighting', name: '照明/方向燈', icon: '💡', color: 'from-yellow-400 to-amber-500' },
-            { id: 'alarm', name: '住警器與蜂鳴器', icon: '🚨', color: 'from-orange-500 to-red-500' },
-            { id: 'detector', name: '各類探測器', icon: '📡', color: 'from-blue-400 to-indigo-500' },
-            { id: 'sprinkler', name: '消防撒水頭', icon: '🚿', color: 'from-sky-400 to-blue-500' },
-            { id: 'broadcast', name: '緊急廣播設備', icon: '📢', color: 'from-indigo-500 to-purple-600' },
-            { id: 'others', name: '閥類與其他配件', icon: '🔧', color: 'from-slate-400 to-gray-600' }
+            { id: 'all', name: '全部商品', image: 'images/products/icons/all_products.png', color: 'from-slate-700 to-slate-900' },
+            { id: 'extinguisher', name: '各類滅火器', image: 'images/products/icons/extinguisher.png', color: 'from-red-500 to-rose-600' },
+            { id: 'lighting', name: '照明/方向燈', image: 'images/products/icons/lighting.png', color: 'from-yellow-400 to-amber-500' },
+            { id: 'alarm', name: '住警器與蜂鳴器', image: 'images/products/icons/alarm.png', color: 'from-orange-500 to-red-500' },
+            { id: 'detector', name: '各類探測器', image: 'images/products/icons/detector.png', color: 'from-blue-400 to-indigo-500' },
+            { id: 'sprinkler', name: '消防撒水頭', image: 'images/products/icons/sprinkler.png', color: 'from-sky-400 to-blue-500' },
+            { id: 'broadcast', name: '緊急廣播設備', image: 'images/products/icons/broadcast.png', color: 'from-indigo-500 to-purple-600' },
+            { id: 'others', name: '閥類與其他配件', image: 'images/products/icons/others.png', color: 'from-slate-400 to-gray-600' }
         ];
 
         const carouselContainer = document.getElementById('category-carousel');
@@ -1918,18 +1921,19 @@
             // 判斷手機版與電腦版
             const isMobile = window.innerWidth < 768;
             
-            // 🌟 核心修改：電腦版的半徑從 280 大幅拉寬到 420，讓商品距離更遠、環形更寬闊！
+            // 🌟 電腦版的半徑維持 420 (寬闊軌道)，以騰出中間視距 🌟
             const baseRadius = isMobile ? 160 : 420; 
 
-            // 為了創造微小的不規則漂浮感
-            const yOffsets = [0, -5, 8, -6, 10, -8, 5, -4]; 
-            const rOffsets = [0, 10, -10, 15, -5, 10, -15, 5];
+            // 漂浮高低差微調 (讓 PNG 的倒影不那麼僵硬)
+            const yOffsets = [0, -3, 6, -4, 8, -6, 3, -2]; 
+            const rOffsets = [0, 8, -8, 12, -4, 8, -12, 4];
 
             categoryRingList.forEach((cat, index) => {
                 const item = document.createElement('div');
                 
-                // 🌟 核心修改：電腦版的商品卡片大幅放大為 w-[200px] h-[200px]，邊框加粗 md:border-8
-                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[200px] md:h-[200px] bg-gradient-to-br ${cat.color} rounded-full shadow-xl flex flex-col items-center justify-center text-white border-4 md:border-[6px] border-white/20 cursor-pointer select-none group`;
+                // 🌟 核心修改：尺寸稍微調小：md:w-[160px] md:h-[160px] (原本是200) 🌟
+                // 並且微調邊框： md:border-[6px] 
+                item.className = `category-carousel-item absolute w-[100px] h-[100px] md:w-[160px] md:h-[160px] bg-gradient-to-br ${cat.color} rounded-full shadow-2xl flex flex-col items-center justify-center text-white border-4 md:border-[6px] border-white/20 cursor-pointer select-none group`;
                 
                 const itemAngle = index * anglePerItem;
                 const r = baseRadius + rOffsets[index];
@@ -1943,20 +1947,22 @@
                 // 初始排版：繞圓心放射狀推開
                 item.style.transform = `rotateY(${itemAngle}deg) translateZ(${r}px) translateY(${y}px)`;
                 
-                // 🌟 核心修改：電腦版的 Icon 放大為 text-7xl
+                // 🌟 核心修改：替換原本的 emoji Icon 為去背圖片 🌟
+                // 加入 md:max-w-[100px] 限制圖片尺寸在圓圈中間
                 item.innerHTML = `
-                    <div class="text-4xl md:text-7xl drop-shadow-md group-hover:scale-110 transition-transform">${cat.icon}</div>
+                    <div class="drop-shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center p-2">
+                        <img src="${cat.image}" alt="${cat.name}" class="max-w-[60px] max-h-[60px] md:max-w-[100px] md:max-h-[100px] object-contain">
+                    </div>
                 `;
                 
                 // 點擊事件：旋轉到該分類
                 item.addEventListener('click', () => {
                     let diff = index - activeIndex;
-                    // 確保走最短路徑
                     if (diff > itemCount / 2) diff -= itemCount;
                     if (diff < -itemCount / 2) diff += itemCount;
                     
                     if (diff !== 0) {
-                        rotateCategoryCarousel(-diff); // 因為容器往左轉，索引是往右，所以要加負號
+                        rotateCategoryCarousel(-diff);
                     }
                 });
 
