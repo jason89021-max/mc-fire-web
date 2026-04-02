@@ -1448,12 +1448,12 @@
         <div id="view-products" class="page-view py-20 bg-slate-50 border-t border-slate-200">
             <div class="max-w-7xl mx-auto px-6">
                 
-                <div class="mb-10 text-center flex flex-col md:flex-row justify-between items-end gap-6 border-b border-slate-200 pb-8">
+                <div class="mb-12 text-center flex flex-col md:flex-row justify-between items-end gap-6 border-b border-slate-200 pb-8">
                     <div class="text-left">
                         <p class="text-sm font-bold text-yellow-600 tracking-widest mb-2 uppercase">Equipment Retail & Supply</p>
                         <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">消防器材與商品型錄</h2>
                         <p class="text-slate-600 leading-relaxed text-base max-w-2xl">
-                            明昌消防提供最齊全的消防零組件與器材零售。請點擊或使用箭頭旋轉下方分類，瀏覽對應的專業設備。
+                            明昌消防提供最齊全的消防零組件與器材零售。請點擊兩側分類圖示，或使用箭頭旋轉瀏覽對應的專業設備。
                         </p>
                     </div>
                     <div>
@@ -1463,20 +1463,20 @@
                     </div>
                 </div>
 
-                <div class="relative w-full py-8 mb-6 flex justify-center items-center overflow-hidden h-[200px] select-none" style="perspective: 1200px;">
-                    <div class="absolute inset-y-0 left-0 w-1/5 md:w-1/3 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
-                    <div class="absolute inset-y-0 right-0 w-1/5 md:w-1/3 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
+                <div class="relative w-full py-16 mb-6 flex justify-center items-center h-[300px] md:h-[350px] select-none" style="perspective: 1200px;">
+                    <div class="absolute inset-y-0 left-0 w-1/4 md:w-1/3 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
+                    <div class="absolute inset-y-0 right-0 w-1/4 md:w-1/3 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
 
-                    <button onclick="rotateCategory(-1)" class="absolute left-2 md:left-10 z-30 w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:text-yellow-600 hover:border-yellow-400 transition-all focus:outline-none">❮</button>
-                    <button onclick="rotateCategory(1)" class="absolute right-2 md:right-10 z-30 w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:text-yellow-600 hover:border-yellow-400 transition-all focus:outline-none">❯</button>
+                    <button onclick="rotateCategory(-1)" class="absolute left-2 md:left-10 z-50 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:text-yellow-600 hover:border-yellow-400 transition-all focus:outline-none">❮</button>
+                    <button onclick="rotateCategory(1)" class="absolute right-2 md:right-10 z-50 w-10 h-10 md:w-12 md:h-12 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:text-yellow-600 hover:border-yellow-400 transition-all focus:outline-none">❯</button>
 
-                    <div id="category-ring" class="relative w-full max-w-4xl h-full flex items-center justify-center transform-style-preserve-3d">
+                    <div id="category-ring" class="relative w-full max-w-5xl h-full flex items-center justify-center transform-style-preserve-3d transition-transform duration-700 ease-out">
                     </div>
                 </div>
 
-                <div class="text-center mb-12 relative z-30">
-                    <h3 id="active-category-title" class="text-2xl md:text-3xl font-black text-slate-800 mb-3 drop-shadow-sm transition-all duration-300">全部商品</h3>
-                    <div class="w-16 h-1.5 bg-yellow-500 mx-auto rounded-full shadow-sm"></div>
+                <div class="text-center mb-16 relative z-30">
+                    <h3 id="active-category-title" class="text-3xl md:text-4xl font-black text-slate-800 mb-3 drop-shadow-sm transition-all duration-300">全部商品</h3>
+                    <div class="w-20 h-2 bg-yellow-500 mx-auto rounded-full shadow-sm"></div>
                 </div>
 
                 <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-opacity duration-300">
@@ -1883,19 +1883,20 @@
             renderCatalog(cat);
         }
 
-        // --- 🌟 3D 環形商品分類邏輯 🌟 ---
+        // --- 🌟 商品分類 3D 環繞旋轉邏輯 🌟 ---
         const categoryRingList = [
             { id: 'all', name: '全部商品', icon: '🌟' },
             { id: 'extinguisher', name: '各類滅火器', icon: '🧯' },
-            { id: 'lighting', name: '照明/方向燈', icon: '💡' },
+            { id: 'lighting', name: '照明與出口方向燈', icon: '💡' },
             { id: 'alarm', name: '住警器與蜂鳴器', icon: '🚨' },
-            { id: 'detector', name: '各類探測器', icon: '📡' },
-            { id: 'sprinkler', name: '消防撒水頭', icon: '🚿' },
-            { id: 'broadcast', name: '緊急廣播設備', icon: '📢' },
-            { id: 'others', name: '閥類與其他配件', icon: '🔧' }
+            { id: 'detector', name: '各類專業探測器', icon: '📡' },
+            { id: 'sprinkler', name: '專業消防撒水頭', icon: '🚿' },
+            { id: 'broadcast', name: '緊急廣播與聲光警報', icon: '📢' },
+            { id: 'others', name: '閥類與其他配件零售', icon: '🔧' }
         ];
 
         let currentRingIndex = 0;
+        let isAnimating = false; // 防止連續點擊導致動畫卡頓
 
         function renderCategoryRing() {
             const ring = document.getElementById('category-ring');
@@ -1907,85 +1908,94 @@
             
             // 判斷是否為手機版 (手機版轉距縮小)
             const isMobile = window.innerWidth < 768;
-            const stepX = isMobile ? 85 : 150; 
+            
+            // 🌟 3D 環形參數設置 🌟
+            const radius = isMobile ? 250 : 350; // 環形的半徑 (決定立體感與間距)
+            const angleIncrement = 360 / total; // 每個圖示的起始角度
+            const perspective = 1200; // 3D 景深距離 (與 CSS 一致)
 
             categoryRingList.forEach((cat, index) => {
-                // 計算圓環陣列的相對距離 (-total/2 ~ +total/2)
-                let diff = index - currentRingIndex;
-                if (diff > total / 2) diff -= total;
-                if (diff < -total / 2) diff += total;
+                // 1. 計算該圖示當前的角度，讓 active 圖示固定在正中央 (90度)
+                const currentAngle = (90 + (index - currentRingIndex) * angleIncrement) % 360;
+                const radian = currentAngle * (Math.PI / 180); // 轉為弧度
+
+                // 2. 利用三角函數計算 3D 空間位置 (X, Y=0, Z)
+                const x = radius * Math.cos(radian); // X軸位置
+                const z = radius * Math.sin(radian); // Z軸位置 (景深)
+
+                // 3. 計算 3D 縮放與透明度 (越靠近中央景深 Z 越大，Z > 0 為前，Z < 0 為後)
+                const baseScale = (z + perspective) / (radius + perspective); // 根據景深計算縮放比例
+                const scale = Math.max(0.6, baseScale * 0.8); // 限制最小縮放比例
+                
+                const opacity = Math.max(0, Math.min(1, (z + radius) / (2 * radius))); // 根據 Z 軸景深計算透明度
+
+                // 4. 計算 3D 旋轉角度，讓圖示背向環形圓心
+                const rotationY = currentAngle - 90; // 讓圖示轉向圓心
 
                 const item = document.createElement('div');
-                item.className = 'absolute top-1/2 -translate-y-1/2 transition-all duration-500 ease-out cursor-pointer flex flex-col items-center group';
+                // 🌟 使用 translate3d、scale、rotateY 產生強烈的 3D 立體感與環繞感
+                item.className = `absolute top-1/2 -translate-y-1/2 flex items-center justify-center transition-all duration-700 ease-out cursor-pointer group rounded-full select-none`;
+                item.style.zIndex = Math.round(z + radius); // 讓靠近前面的圖示 z-index 更高
+                item.style.transform = `translate3d(${x}px, 0px, ${z}px) scale(${scale}) rotateY(${rotationY}deg)`;
+                item.style.opacity = opacity;
 
-                // 根據距離設定 3D 位置與大小
-                if (diff === 0) {
-                    // 正中央 (Active)
-                    item.style.transform = `translateX(0px) scale(1.3) translateZ(0px)`;
-                    item.style.zIndex = 40;
+                // 🌟 正中央圖示的特殊樣式 (diff 為 0 代表正中央)
+                let isCenter = currentAngle === 90 || Math.abs(currentAngle - 90) < 0.1;
+                
+                if (isCenter) {
+                    item.style.transform = `translate3d(${x}px, 0px, ${z}px) scale(1.3) rotateY(${rotationY}deg)`;
                     item.style.opacity = 1;
                     item.innerHTML = `
-                        <div class="w-16 h-16 md:w-20 md:h-20 bg-white border-2 border-yellow-500 rounded-full shadow-[0_10px_25px_-5px_rgba(234,179,8,0.4)] flex items-center justify-center text-3xl md:text-4xl transition-transform group-hover:scale-110">
+                        <div class="w-20 h-20 md:w-24 md:h-24 bg-white border-2 border-yellow-500 rounded-full shadow-[0_15px_30px_-5px_rgba(234,179,8,0.5)] flex items-center justify-center text-4xl md:text-5xl transition-transform group-hover:scale-110">
                             ${cat.icon}
                         </div>`;
                     titleEl.innerText = cat.name; // 更新下方大標題
-                } else if (Math.abs(diff) === 1) {
-                    // 左右第一層
-                    const sign = diff > 0 ? 1 : -1;
-                    item.style.transform = `translateX(${sign * stepX}px) scale(0.8) translateZ(-50px)`;
-                    item.style.zIndex = 30;
-                    item.style.opacity = 0.6;
+                } else {
                     item.innerHTML = `
-                        <div class="w-16 h-16 bg-slate-100 border border-slate-200 rounded-full shadow flex items-center justify-center text-2xl group-hover:bg-slate-200 transition-colors">
+                        <div class="w-20 h-20 bg-slate-100 border border-slate-200 rounded-full shadow flex items-center justify-center text-3xl md:text-4xl group-hover:bg-slate-200 transition-colors">
                             ${cat.icon}
                         </div>
-                        <span class="mt-3 text-xs font-bold text-slate-500 whitespace-nowrap opacity-100 transition-opacity">${cat.name}</span>`;
-                } else if (Math.abs(diff) === 2) {
-                    // 左右第二層
-                    const sign = diff > 0 ? 1 : -1;
-                    item.style.transform = `translateX(${sign * stepX * 1.8}px) scale(0.6) translateZ(-100px)`;
-                    item.style.zIndex = 20;
-                    item.style.opacity = 0.3;
-                    item.innerHTML = `
-                        <div class="w-16 h-16 bg-slate-100 border border-slate-200 rounded-full flex items-center justify-center text-xl">
-                            ${cat.icon}
-                        </div>`;
-                } else {
-                    // 隱藏在後方
-                    const sign = diff > 0 ? 1 : -1;
-                    item.style.transform = `translateX(${sign * stepX * 2.5}px) scale(0.4) translateZ(-200px)`;
-                    item.style.zIndex = 10;
-                    item.style.opacity = 0;
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-500 whitespace-nowrap opacity-0 md:group-hover:opacity-100 transition-opacity">${cat.name}</span>`;
                 }
 
-                // 點擊事件：點選旁邊的分類直接旋轉過去
-                item.onclick = () => {
-                    if(diff !== 0) {
-                        rotateCategory(diff);
-                    }
+                // 🌟 點擊兩側圖示，自動旋轉到正中央
+                item.onclick = (e) => {
+                    if (isAnimating || isCenter) return;
+                    e.stopPropagation(); // 防止冒泡
+                    
+                    // 計算要旋轉的步數 (考慮圓環陣列)
+                    let diff = index - currentRingIndex;
+                    if (diff > total / 2) diff -= total;
+                    if (diff < -total / 2) diff += total;
+                    
+                    rotateCategory(diff);
                 };
 
                 ring.appendChild(item);
             });
         }
 
-        // 控制旋轉並更新下方商品
+        // 控制旋轉導航並更新下方商品
         function rotateCategory(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+
             currentRingIndex = (currentRingIndex + direction + categoryRingList.length) % categoryRingList.length;
             
-            // 讓下方網格有漸變閃爍效果
+            // 下方商品網格閃爍效果
             const grid = document.getElementById('catalog-grid');
             grid.style.opacity = '0';
             
-            renderCategoryRing();
+            renderCategoryRing(); // 🌟 重新繪製 3D 分類圓環 (觸發所有圖示的 3D 旋轉動畫)
             
             setTimeout(() => {
-                renderCatalog(categoryRingList[currentRingIndex].id);
+                renderCatalog(categoryRingList[currentRingIndex].id); // 更新商品
                 grid.style.opacity = '1';
-            }, 250); // 等旋轉動畫跑一半再顯示新商品
+                isAnimating = false; // 動畫結束
+            }, 300); // 旋轉動畫中間更新商品
         }
 
-        // 確保視窗縮放時重新計算距離 (為了手機版響應式)
+        // 確保視窗縮放時重新計算 3D 景深位置 (為了手機版響應式)
         window.addEventListener('resize', () => {
             if (document.getElementById('view-products').classList.contains('active')) {
                 renderCategoryRing();
@@ -1995,97 +2005,7 @@
         // 初始載入：繪製圓環並載入全部商品
         renderCategoryRing();
         renderCatalog('all');
-        // --- 🌟 環形邏輯結束 🌟 ---
-
-        // --- ⬇️ 新增：實績案例過濾與渲染邏輯 ⬇️ ---
-        const portfolioData = [
-            { category: 'commercial', title: '台南紡織夢時代購物中心', label: '超大型複合商場', image: '01.webp', desc: '應對超大型商場龐大人流與複雜空間，精準完成多系統介面衝突檢討與排煙避難動線規劃。' },
-            { category: 'commercial', title: '洲際棒球場漢神百貨', label: '指標性商業與育樂場館', image: '02.png', desc: '結合運動場館與百貨商場的雙重嚴苛標準，克服大跨距建築的排煙難題。' },
-            { category: 'healthcare', title: '內湖三軍總醫院重症大樓', label: '最高規格醫療防護', image: '03.jpeg', desc: '實施最高等級的消防系統建置與連動，保障病患與醫護人員的絕對生命安全。' },
-            { category: 'healthcare', title: '輔大醫學院', label: '專業醫療學術機構', image: '04.jpg', desc: '高度整合實驗室、教學空間的特殊滅火與極早期預警系統，確保學術研究環境萬無一失。' },
-            { category: 'residential', title: '紅樹林山海匯 - 鄉林建設', label: '頂級景觀豪宅聚落', image: '05.jpg', desc: '完美配合高端建商隱匿消防管線與探測設備，實現頂尖安全與室內極致美學的雙贏。' },
-            { category: 'commercial', title: '金門昇恆昌', label: '大型免稅商場與飯店', image: '06.webp', desc: '複合式商業設施，提供最嚴密的安全防護與廣闊挑高空間的排煙規劃。' },
-            { category: 'public', title: '高雄市立圖書館總館', label: '世界級公共建築', image: '07.webp', desc: '針對懸吊式綠建築的特殊結構，量身打造無死角的消防預警與滅火系統。' },
-            { category: 'commercial', title: '新北 裕隆城', label: '超大型複合商場', image: '08.jpeg', desc: '結合大坪數商場與影城，透過精準排煙運算與介面整合，確保龐大消費人流的安全。' },
-            { category: 'healthcare', title: '臺大醫院 健康大樓', label: '國家級醫療防護', image: '09.jpeg', desc: '針對頂尖醫療中心高規格需求，實施嚴密消防連動與避難規劃。' },
-            { category: 'commercial', title: '大直 102-3 高級商辦', label: '頂級 A 級商辦', image: '10.jpeg', desc: '導入極早期預警系統與高效連動機制，為跨國企業總部提供最穩定可靠的防火神經網路。' },
-            { category: 'residential', title: '瓏山林五谷王段 住宅大樓', label: '頂級景觀豪宅', image: '11.jpeg', desc: '隱蔽化配置預警與滅火系統，實現安全防護與生活品味的完美平衡。' },
-            { category: 'public', title: '台鐵機務段檢修庫', label: '國家交通基礎建設', image: '12.jpeg', desc: '量身設計特殊滅火系統與挑高空間的消防佈護，確保國家交通命脈運作無虞。' },
-            { category: 'residential', title: '淡水區 水仙段開發案', label: '大型集合住宅開發', image: '13.jpeg', desc: '提供從地下室停車場到高樓層住區的全方位水壓運算與消防整合。' }
-        ];
-
-        function renderPortfolio(filter) {
-            const grid = document.getElementById('portfolio-grid');
-            if(!grid) return;
-            grid.innerHTML = '';
-            const filtered = filter === 'all' ? portfolioData : portfolioData.filter(p => p.category === filter);
-
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-yellow-500 transition-colors flex flex-col group';
-                
-                // 這裡就是關鍵！動態判斷：如果有設定 image 就顯示圖片，沒有就顯示原本的 Emoji 背景
-                const bgContent = p.image && p.image !== '' 
-                    ? `<img src="${p.image}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 z-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                       <div class="hidden absolute inset-0 bg-[radial-gradient(circle_at_top_right,#334155,transparent)] z-0"></div>
-                       <div class="hidden text-6xl opacity-20 absolute group-hover:scale-110 transition-transform duration-500 z-0">${p.icon}</div>`
-                    : `<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#334155,transparent)] z-0"></div>
-                       <div class="text-6xl opacity-20 absolute group-hover:scale-110 transition-transform duration-500 z-0">${p.icon}</div>`;
-
-                card.innerHTML = `
-                    <div class="h-48 bg-slate-900 relative overflow-hidden flex items-center justify-center">
-                        ${bgContent}
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-90 z-0"></div>
-                        <div class="absolute bottom-4 left-4 text-yellow-500 text-xs font-bold tracking-widest uppercase border border-yellow-500/50 px-2 py-1 rounded bg-slate-900/80 z-10">${p.label}</div>
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col relative z-10 bg-slate-800">
-                        <h3 class="text-2xl font-bold mb-3 text-white">${p.title}</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">${p.desc}</p>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterPortfolio(cat, btnElement) {
-            document.querySelectorAll('.portfolio-filter').forEach(btn => {
-                btn.classList.remove('active', 'bg-yellow-600', 'text-slate-900', 'border-transparent');
-                btn.classList.add('bg-slate-800', 'text-slate-400', 'border-slate-700');
-            });
-            if (btnElement) {
-                btnElement.classList.add('active', 'bg-yellow-600', 'text-slate-900', 'border-transparent');
-                btnElement.classList.remove('bg-slate-800', 'text-slate-400', 'border-slate-700');
-            }
-            renderPortfolio(cat);
-        }
-
-        // 渲染進行中與完工實績清單
-        const ongoingProjects = [
-            { icon: '🏨', name: '台中凱悅飯店', desc: '國際級連鎖飯店' }, { icon: '🏢', name: '新北 馥華艾美', desc: '頂級飯店與住宅' },
-            { icon: '🏨', name: '蘇澳冷熱泉度假飯店', desc: '度假休閒設施' }, { icon: '🏨', name: '宜蘭 山河飯店', desc: '高端旅宿' },
-            { icon: '💻', name: '新竹 緯創AI智慧園區', desc: '高科技廠辦' }, { icon: '🏢', name: '新莊 MOXA 企業總部', desc: 'A級商辦' },
-            { icon: '📦', name: '桃園 MOMO 倉儲', desc: '大型物流中心' }, { icon: '🏗️', name: '南港國際都市更新案', desc: '複合都更案' },
-            { icon: '🏗️', name: '合環建設寶強都更', desc: '指標型都更' }, { icon: '🏘️', name: '林口 富貴莊園', desc: '高端景觀住宅' },
-            { icon: '🛡️', name: '空軍防空指揮部', desc: '軍事公共工程' }
-        ];
-
-        const completedProjects = [
-            '🚇 台北捷運環狀線', '🚆 台灣高速鐵路 苗栗站', '✈️ 中正機場二期航廈', '🏛️ 外交部國有財產局駐華大樓',
-            '🏥 台北榮總 第三醫療大樓', '🏥 宜蘭羅東聖母醫院', '🔬 同步輻射研究中心', '🏨 高雄御盟菁英酒店',
-            '🏦 上海商銀 仁愛分行', '🏬 日湖百貨', '🏢 台中中港經貿大樓', '🏘️ 林口天地晰住宅'
-        ];
-
-        function renderLists() {
-            const ongoingGrid = document.getElementById('ongoing-grid');
-            const completedGrid = document.getElementById('completed-grid');
-            if(ongoingGrid) ongoingProjects.forEach(p => ongoingGrid.innerHTML += `<div class="bg-slate-800/50 p-4 rounded-lg flex items-center gap-4"><div class="text-xl">${p.icon}</div><div><h4 class="text-white text-sm">${p.name}</h4><p class="text-slate-400 text-xs">${p.desc}</p></div></div>`);
-            if(completedGrid) completedProjects.forEach(p => completedGrid.innerHTML += `<div class="bg-slate-800/30 p-4 rounded-lg border border-slate-700/50 flex items-center gap-4 text-slate-300">${p}</div>`);
-        }
-        
-        // 觸發初始渲染
-        renderPortfolio('all');
-        renderLists();
-        // --- ⬆️ 實績案例過濾與渲染邏輯結束 ⬆️ ---
+        // --- 🌟 3D 環繞旋轉邏輯結束 🌟 ---
 
         // --- 圓餅圖表 ---
         window.chartInitialized = false;
