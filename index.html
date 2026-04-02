@@ -181,7 +181,64 @@
                     </div>
                 </div>
             </header>
+<section class="py-16 bg-slate-50 relative border-b border-slate-200">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="mb-10 text-center flex flex-col items-center">
+                        <p class="text-sm font-bold text-yellow-600 tracking-widest mb-2 uppercase">Featured Projects</p>
+                        <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">精選指標工程</h2>
+                        <div class="w-16 h-1 bg-yellow-500 rounded-full"></div>
+                    </div>
+                    
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl group border border-slate-200 bg-slate-900">
+                        
+                        <div id="carousel-track" class="flex w-full h-full transition-transform duration-700 ease-in-out">
+                            
+                            <div class="w-full h-full flex-shrink-0 relative">
+                                <img src="images/hero/slider1.jpeg" alt="輪播圖 1" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                                <div class="hidden absolute inset-0 flex items-center justify-center text-slate-600 text-6xl bg-slate-800">🏢</div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent pointer-events-none"></div>
+                                <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 pointer-events-none">
+                                    <span class="bg-yellow-500 text-slate-900 text-[10px] md:text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-3 inline-block">Commercial</span>
+                                    <h3 class="text-white text-xl md:text-4xl font-black mb-2 drop-shadow-lg">超大型複合商場整合</h3>
+                                    <p class="text-slate-300 text-xs md:text-lg max-w-2xl drop-shadow-md hidden sm:block">精準克服大跨距空間與龐大消費人流的排煙避難與系統連動挑戰。</p>
+                                </div>
+                            </div>
 
+                            <div class="w-full h-full flex-shrink-0 relative">
+                                <img src="images/hero/slider2.jpeg" alt="輪播圖 2" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                                <div class="hidden absolute inset-0 flex items-center justify-center text-slate-600 text-6xl bg-slate-800">🏥</div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent pointer-events-none"></div>
+                                <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 pointer-events-none">
+                                    <span class="bg-blue-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-3 inline-block">Healthcare</span>
+                                    <h3 class="text-white text-xl md:text-4xl font-black mb-2 drop-shadow-lg">國家級醫療防護網</h3>
+                                    <p class="text-slate-300 text-xs md:text-lg max-w-2xl drop-shadow-md hidden sm:block">實施最高等級消防系統建置，保障病患與第一線醫護人員的絕對生命安全。</p>
+                                </div>
+                            </div>
+
+                            <div class="w-full h-full flex-shrink-0 relative">
+                                <img src="images/hero/slider3.jpeg" alt="輪播圖 3" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                                <div class="hidden absolute inset-0 flex items-center justify-center text-slate-600 text-6xl bg-slate-800">🏘️</div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent pointer-events-none"></div>
+                                <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 pointer-events-none">
+                                    <span class="bg-emerald-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-3 inline-block">Residential</span>
+                                    <h3 class="text-white text-xl md:text-4xl font-black mb-2 drop-shadow-lg">頂級景觀豪宅聚落</h3>
+                                    <p class="text-slate-300 text-xs md:text-lg max-w-2xl drop-shadow-md hidden sm:block">完美隱匿消防管線與探測設備，實現頂尖防護與室內極致美學的雙贏。</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button onclick="prevSlide()" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/30 hover:bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-lg md:text-2xl transition-all opacity-100 lg:opacity-0 group-hover:opacity-100 border border-white/20 z-20 shadow-lg">❮</button>
+                        <button onclick="nextSlide()" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/30 hover:bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-lg md:text-2xl transition-all opacity-100 lg:opacity-0 group-hover:opacity-100 border border-white/20 z-20 shadow-lg">❯</button>
+
+                        <div class="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 z-20">
+                            <button onclick="goToSlide(0)" class="carousel-dot w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white transition-all shadow-md"></button>
+                            <button onclick="carousel-dot w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white transition-all shadow-md"></button>
+                            <button onclick="goToSlide(2)" class="carousel-dot w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white transition-all shadow-md"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="py-24 bg-white relative">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center mb-16">
@@ -1954,6 +2011,63 @@
                 btn.disabled = false; btn.classList.remove('opacity-50');
             }
         }
+        // --- 輪播圖邏輯 (Carousel) ---
+        let currentSlide = 0;
+        const totalSlides = 3; // 目前設定 3 張幻燈片
+        let slideInterval;
+
+        function updateCarousel() {
+            const track = document.getElementById('carousel-track');
+            const dots = document.querySelectorAll('.carousel-dot');
+            if (!track) return;
+            
+            // 移動軌道 (依據百分比移動)
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // 更新指示點的顏色與大小
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.replace('bg-white/50', 'bg-yellow-500');
+                    dot.classList.add('scale-125', 'w-4', 'md:w-6'); // 當前點點拉長變色
+                } else {
+                    dot.classList.replace('bg-yellow-500', 'bg-white/50');
+                    dot.classList.remove('scale-125', 'w-4', 'md:w-6');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+            resetInterval();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+            resetInterval();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetInterval();
+        }
+
+        function startInterval() {
+            slideInterval = setInterval(nextSlide, 5000); // 設定每 3 秒自動換下一張
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval(); // 使用者點擊後重新計算 3 秒
+        }
+
+        // 網頁載入後馬上啟動輪播圖
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCarousel();
+            startInterval();
+        });
     </script>
 </body>
 </html>
