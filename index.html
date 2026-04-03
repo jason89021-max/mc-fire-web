@@ -1892,10 +1892,7 @@
             renderCatalog(cat);
         }
 
-        // --- 🌟 商品分類 3D 真實環形旋轉邏輯 (逸品滿版化) 🌟 ---
-        
-        // 建議您將去背好的專業高清 PNG 檔放到 images/products/icons/ 目錄中
-        // 以下圖片路徑僅供參考，請修改為您實際的圖片名稱
+        // --- 🌟 商品分類 3D 真實環形旋轉邏輯 (逸品滿版化 / 修復變數撞名) 🌟 ---
         const categoryRingList = [
             { id: 'all', name: '全部商品', image: 'images/products/icons/all_products.png' },
             { id: 'extinguisher', name: '各類滅火器', image: 'images/products/icons/extinguisher.png' },
@@ -1907,34 +1904,30 @@
             { id: 'others', name: '閥類與其他配件', image: 'images/products/icons/others.png' }
         ];
 
-        let currentRingIndex = 0;
-        const totalSlides = categoryRingList.length;
-        const anglePerItem = 360 / totalSlides;
+        // 🌟 使用 ring 前綴避免與首頁輪播圖撞名 🌟
+        const ringTotalItems = categoryRingList.length;
+        const ringAnglePerItem = 360 / ringTotalItems;
         
         const carouselContainer = document.getElementById('category-carousel');
-        let currentRotation = 0; 
-        let activeIndex = 0;
+        let ringCurrentRotation = 0; 
+        let ringActiveIndex = 0;
 
         function initCategoryCarousel() {
             if(!carouselContainer) return;
             carouselContainer.innerHTML = '';
             
             const isMobile = window.innerWidth < 768;
-            // 維持寬闊軌道半徑以騰出視距
             const baseRadius = isMobile ? 160 : 420; 
 
-            // 為了創造微小的不規則漂浮感
             const yOffsets = [0, -3, 6, -4, 8, -6, 3, -2]; 
             const rOffsets = [0, 8, -8, 12, -4, 8, -12, 4];
 
             categoryRingList.forEach((cat, index) => {
                 const item = document.createElement('div');
                 
-                // 🌟 核心修改 1：移除所有裝飾性 container (背景、圓角、邊框) 🌟
-                // 並且將電腦版的尺寸再放大：md:w-[240px] md:h-[240px] (原本是160)
                 item.className = `category-carousel-item absolute w-[100px] h-[100px] md:w-[240px] md:h-[240px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
                 
-                const itemAngle = index * anglePerItem;
+                const itemAngle = index * ringAnglePerItem;
                 const r = baseRadius + rOffsets[index];
                 const y = yOffsets[index];
                 
@@ -1942,22 +1935,18 @@
                 item.dataset.r = r;
                 item.dataset.y = y;
                 
-                // 初始排版
                 item.style.transform = `rotateY(${itemAngle}deg) translateZ(${r}px) translateY(${y}px)`;
                 
-                // 🌟 核心修改 2：將圖片直接放在裡面，並且加上跟隨形狀的陰影 (Filter: drop-shadow) 🌟
-                // 圖片在滑鼠移過去時微縮 scale(1.05)，並加上強烈的 3D 形狀跟隨陰影
                 item.innerHTML = `
                     <img src="${cat.image}" alt="${cat.name}" 
                          class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-110 
                                 drop-shadow-[0_10px_10px_rgba(0,0,0,0.15)] md:drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] z-0 relative">
                 `;
                 
-                // 點擊事件
                 item.addEventListener('click', () => {
-                    let diff = index - activeIndex;
-                    if (diff > totalSlides / 2) diff -= totalSlides;
-                    if (diff < -totalSlides / 2) diff += totalSlides;
+                    let diff = index - ringActiveIndex;
+                    if (diff > ringTotalItems / 2) diff -= ringTotalItems;
+                    if (diff < -ringTotalItems / 2) diff += ringTotalItems;
                     
                     if (diff !== 0) {
                         rotateCategoryCarousel(-diff);
@@ -1970,55 +1959,44 @@
             updateCategoryScene();
         }
 
-        // 外部箭頭點擊呼叫用
         function rotateCategoryCarousel(direction) {
-            currentRotation += direction * anglePerItem;
+            ringCurrentRotation += direction * ringAnglePerItem;
             updateCategoryScene();
         }
 
-        // 核心邏輯：更新 3D 場景與下方商品
         function updateCategoryScene() {
             if(!carouselContainer) return;
             
-            // 💡 整個軌道稍微前傾，創造俯視銀河的立體景深
-            carouselContainer.style.transform = `rotateX(-10deg) rotateY(${currentRotation}deg)`;
+            carouselContainer.style.transform = `rotateX(-10deg) rotateY(${ringCurrentRotation}deg)`;
 
-            // 計算目前是哪一個分類在正前方
-            activeIndex = Math.round(currentRotation / -anglePerItem);
-            activeIndex = ((activeIndex % totalSlides) + totalSlides) % totalSlides;
+            ringActiveIndex = Math.round(ringCurrentRotation / -ringAnglePerItem);
+            ringActiveIndex = ((ringActiveIndex % ringTotalItems) + ringTotalItems) % ringTotalItems;
 
             const items = carouselContainer.children;
             for (let i = 0; i < items.length; i++) {
-                let diff = Math.abs(i - activeIndex);
-                if (diff > totalSlides / 2) diff = totalSlides - diff;
+                let diff = Math.abs(i - ringActiveIndex);
+                if (diff > ringTotalItems / 2) diff = ringTotalItems - diff;
 
                 const angle = items[i].dataset.angle;
                 const r = items[i].dataset.r;
                 const y = items[i].dataset.y;
 
-                if (i === activeIndex) {
-                    // 🌟 核心修改 3：正中央卡片樣式調整 (大幅放大且不透明) 🌟
+                if (i === ringActiveIndex) {
                     items[i].style.opacity = '1';
                     items[i].style.pointerEvents = 'none'; 
-                    // 💡 放大倍率從 1.2 大幅提高到 1.3，並加上強烈的 3D 透視壓線感
                     items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(1.3)`;
-                    // 💡 加入一個專門為正中央逸品產生的立體光暈陰影 (跟隨商品形狀)
                     const img = items[i].querySelector('img');
                     if(img) {
-                        img.style.filter = 'drop-shadow(0 20px 30px rgba(0,0,0,0.3)) drop-shadow(0 0 10px rgba(234, 179, 8, 0.1))'; // 加入微弱黃色光暈
+                        img.style.filter = 'drop-shadow(0 20px 30px rgba(0,0,0,0.3)) drop-shadow(0 0 10px rgba(234, 179, 8, 0.1))'; 
                     }
                 } else {
-                    // 🌟 核心修改 4：兩側及後方卡片樣式調整 (縮小且變透明) 🌟
-                    // 💡 將縮小倍率緩和 (`0.8` -> `0.85` )，避免後方圖片縮太小
                     const scaleRate = 0.85 - (diff * 0.15); 
-                    // 💡 稍微提高後方的最低透明度 (`0.1` -> `0.2`)，讓客戶能隱約看到後面有東西
                     const opacityRate = Math.max(0.2, 0.7 - (diff * 0.2)); 
 
                     items[i].style.opacity = opacityRate.toString(); 
                     items[i].style.pointerEvents = 'auto'; 
                     items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(${scaleRate})`;
                     
-                    // 💡 恢復兩側商品的標準陰影，並移除光暈
                     const img = items[i].querySelector('img');
                     if(img) {
                         img.style.filter = 'drop-shadow(0 10px 10px rgba(0,0,0,0.15))';
@@ -2026,34 +2004,35 @@
                 }
             }
 
-            // 更新標題與下方商品網格
-            document.getElementById('active-category-title').innerText = categoryRingList[activeIndex].name;
+            document.getElementById('active-category-title').innerText = categoryRingList[ringActiveIndex].name;
             
-            // 下方商品網格動畫
             const grid = document.getElementById('catalog-grid');
-            grid.classList.remove('opacity-100', 'translate-y-0');
-            grid.classList.add('opacity-0', 'translate-y-8');
-            
-            setTimeout(() => {
-                // 這裡呼叫您原本寫好的渲染商品函數
-                renderCatalog(categoryRingList[activeIndex].id); 
-                grid.classList.remove('opacity-0', 'translate-y-8');
-                grid.classList.add('opacity-100', 'translate-y-0');
-            }, 300);
+            if(grid) {
+                grid.classList.remove('opacity-100', 'translate-y-0');
+                grid.classList.add('opacity-0', 'translate-y-8');
+                
+                setTimeout(() => {
+                    if (typeof renderCatalog === "function") {
+                        renderCatalog(categoryRingList[ringActiveIndex].id); 
+                    }
+                    grid.classList.remove('opacity-0', 'translate-y-8');
+                    grid.classList.add('opacity-100', 'translate-y-0');
+                }, 300);
+            }
         }
 
-        // RWD：視窗改變時重新計算半徑
         window.addEventListener('resize', () => {
-            if (document.getElementById('view-products').classList.contains('active')) {
+            const productView = document.getElementById('view-products');
+            if (productView && productView.classList.contains('active')) {
                 initCategoryCarousel();
             }
         });
 
-        // 初始化啟動
+        // 初始化 3D 軌道
         document.addEventListener('DOMContentLoaded', () => {
             initCategoryCarousel();
         });
-        // --- 🌟 3D 環繞旋轉邏輯結束 🌟 ---
+
 
         // --- 圓餅圖表 ---
         window.chartInitialized = false;
@@ -2110,7 +2089,8 @@
                 btn.disabled = false; btn.classList.remove('opacity-50');
             }
         }
-        // --- 輪播圖邏輯 (Carousel 升級版：支援手勢) ---
+
+        // --- 首頁輪播圖邏輯 (Carousel 升級版：支援手勢) ---
         let currentSlide = 0;
         const totalSlides = 5; 
         let slideInterval;
@@ -2152,7 +2132,7 @@
         }
 
         function startInterval() {
-            slideInterval = setInterval(nextSlide, 4000); // 改為 4 秒自動換頁節奏較好
+            slideInterval = setInterval(nextSlide, 4000);
         }
 
         function resetInterval() {
@@ -2160,34 +2140,37 @@
             startInterval(); 
         }
 
+        // 初始化首頁輪播圖與手勢
         document.addEventListener('DOMContentLoaded', () => {
             updateCarousel();
             startInterval();
             
-            // 🌟 觸控滑動魔法 (Touch Swipe) 🌟
             const track = document.getElementById('carousel-track');
-            let startX = 0;
-            let endX = 0;
+            if(track) {
+                let startX = 0;
+                let endX = 0;
 
-            track.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                clearInterval(slideInterval); // 手指碰到時暫停輪播
-            }, {passive: true});
+                track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    clearInterval(slideInterval); 
+                }, {passive: true});
 
-            track.addEventListener('touchmove', (e) => {
-                endX = e.touches[0].clientX;
-            }, {passive: true});
+                track.addEventListener('touchmove', (e) => {
+                    endX = e.touches[0].clientX;
+                }, {passive: true});
 
-            track.addEventListener('touchend', () => {
-                if (startX - endX > 50) {
-                    nextSlide(); // 向左滑 (下一張)
-                } else if (endX - startX > 50) {
-                    prevSlide(); // 向右滑 (上一張)
-                } else {
-                    startInterval(); // 沒滑動多少則恢復自動播放
-                }
-            });
+                track.addEventListener('touchend', () => {
+                    if (startX - endX > 50) {
+                        nextSlide(); 
+                    } else if (endX - startX > 50) {
+                        prevSlide(); 
+                    } else {
+                        startInterval(); 
+                    }
+                });
+            }
         });
+
     </script>
 </body>
 </html>
