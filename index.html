@@ -1778,7 +1778,10 @@
 
             categoryRingList.forEach((cat, index) => {
                 const item = document.createElement('div');
-                item.className = `category-carousel-item absolute w-[100px] h-[100px] md:w-[240px] md:h-[240px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
+                
+                // 🌟 核心畫質優化 1：把基底容器大幅撐大至 350px (原本是240px)
+                // 讓瀏覽器一開始就分配「高解析度」的渲染畫布給這張圖片
+                item.className = `category-carousel-item absolute w-[140px] h-[140px] md:w-[350px] md:h-[350px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
                 
                 const itemAngle = index * ringAnglePerItem;
                 const r = baseRadius + rOffsets[index];
@@ -1789,12 +1792,13 @@
                 item.dataset.y = y;
                 item.style.transform = `rotateY(${itemAngle}deg) translateZ(${r}px) translateY(${y}px)`;
                 
-                // 🌟 onerror 備援機制：如果圖片不存在，就自動顯示原本的 Emoji
+                // 🌟 核心畫質優化 2：加入強制硬體加速與抗鋸齒語法 (style="..." 裡面的內容)
                 item.innerHTML = `
                     <img src="${cat.image}" alt="${cat.name}" 
                          onerror="this.outerHTML='<span class=\\'text-5xl md:text-8xl drop-shadow-lg transition-transform group-hover:scale-110\\'>${cat.icon}</span>'"
-                         class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-110 
-                                drop-shadow-[0_10px_10px_rgba(0,0,0,0.15)] md:drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] z-0 relative">
+                         style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); image-rendering: -webkit-optimize-contrast;"
+                         class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-105 
+                                drop-shadow-[0_10px_10px_rgba(0,0,0,0.15)] md:drop-shadow-[0_20px_20px_rgba(0,0,0,0.3)] z-0 relative">
                 `;
                 
                 item.addEventListener('click', () => {
@@ -1807,7 +1811,6 @@
             });
             updateCategoryScene();
         }
-
         function rotateCategoryCarousel(direction) {
             ringCurrentRotation += direction * ringAnglePerItem;
             updateCategoryScene();
@@ -1830,16 +1833,21 @@
                 const y = items[i].dataset.y;
 
                 if (i === ringActiveIndex) {
+                    // 🌟 核心畫質優化 3：正中央商品改為縮小至 0.9 (取代原本放大的 1.3 倍)
+                    // 由於基底已變成超大的 350px，縮小到 0.9 會讓圖片無比銳利且巨大！
                     items[i].style.opacity = '1';
                     items[i].style.pointerEvents = 'none'; 
-                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(1.3)`;
+                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(0.9)`;
                     const imgOrSpan = items[i].children[0];
                     if(imgOrSpan) {
-                        imgOrSpan.style.filter = 'drop-shadow(0 20px 30px rgba(0,0,0,0.3)) drop-shadow(0 0 10px rgba(234, 179, 8, 0.1))'; 
+                        imgOrSpan.style.filter = 'drop-shadow(0 25px 35px rgba(0,0,0,0.35)) drop-shadow(0 0 15px rgba(234, 179, 8, 0.15))'; 
                     }
                 } else {
-                    const scaleRate = 0.85 - (diff * 0.15); 
-                    const opacityRate = Math.max(0.2, 0.7 - (diff * 0.2)); 
+                    // 🌟 核心畫質優化 4：兩側與後方的商品，依照距離更進一步縮小
+                    // 基礎尺寸夠大，即使縮小到 0.5 依然會非常精細
+                    const scaleRate = 0.55 - (diff * 0.1); 
+                    const opacityRate = Math.max(0.15, 0.7 - (diff * 0.2)); 
+                    
                     items[i].style.opacity = opacityRate.toString(); 
                     items[i].style.pointerEvents = 'auto'; 
                     items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(${scaleRate})`;
@@ -1864,7 +1872,6 @@
                 }, 300);
             }
         }
-
         // ==========================================
         // 4. 工程實績資料與渲染 (Portfolio)
         // ==========================================
