@@ -1760,7 +1760,7 @@
         }
 
         // ==========================================
-        // 3. [規則高清流暢版] 商品分類 3D 環形旋轉邏輯
+        // 3. 商品分類展示邏輯 (電腦版 3D 環形 / 手機版橫向滑動)
         // ==========================================
         const categoryRingList = [
             { id: 'all', name: '全部商品', icon: '🌟', image: 'images/prodects/icons/all_products.png' },
@@ -1775,46 +1775,97 @@
 
         const ringTotalItems = categoryRingList.length;
         const ringAnglePerItem = 360 / ringTotalItems;
-        const carouselContainer = document.getElementById('category-carousel');
         let ringCurrentRotation = 0; 
         let ringActiveIndex = 0;
 
         function initCategoryCarousel() {
-            if(!carouselContainer) return;
-            carouselContainer.innerHTML = '';
-            const isMobile = window.innerWidth < 768;
+            const carouselContainer = document.getElementById('category-carousel');
+            const mobileContainer = document.getElementById('mobile-category-list');
             
-            // 🌟 升級 1：環形大幅加寬！電腦版半徑從 380 加大到 500
-            const baseRadius = isMobile ? 160 : 500; 
+            if(carouselContainer) carouselContainer.innerHTML = '';
+            if(mobileContainer) mobileContainer.innerHTML = '';
+
+            const baseRadius = 500; // 電腦版專屬超大半徑
 
             categoryRingList.forEach((cat, index) => {
-                const item = document.createElement('div');
-                
-                // 🌟 升級 2：商品尺寸放大！電腦版從 260px 加大到 290px
-                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[290px] md:h-[290px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
-                
-                const itemAngle = index * ringAnglePerItem;
-                item.dataset.angle = itemAngle;
-                item.style.transform = `rotateY(${itemAngle}deg) translateZ(${baseRadius}px)`;
-                
-                item.innerHTML = `
-                    <img src="${cat.image}" alt="${cat.name}" 
-                         onerror="this.outerHTML='<span class=\\'text-5xl md:text-8xl transition-transform group-hover:scale-110\\'>${cat.icon}</span>'"
-                         style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); image-rendering: -webkit-optimize-contrast;"
-                         class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-105 relative z-10">
-                `;
-                
-                item.addEventListener('click', () => {
-                    let diff = index - ringActiveIndex;
-                    if (diff > ringTotalItems / 2) diff -= ringTotalItems;
-                    if (diff < -ringTotalItems / 2) diff += ringTotalItems;
-                    if (diff !== 0) rotateCategoryCarousel(-diff);
-                });
-                carouselContainer.appendChild(item);
+                // --- 💻 電腦版 3D 環形繪製 ---
+                if(carouselContainer) {
+                    const item = document.createElement('div');
+                    item.className = `category-carousel-item absolute w-[290px] h-[290px] flex items-center justify-center cursor-pointer select-none group`;
+                    
+                    const itemAngle = index * ringAnglePerItem;
+                    item.dataset.angle = itemAngle;
+                    item.style.transform = `rotateY(${itemAngle}deg) translateZ(${baseRadius}px)`;
+                    
+                    item.innerHTML = `
+                        <img src="${cat.image}" alt="${cat.name}" 
+                             onerror="this.outerHTML='<div class=\\'flex flex-col items-center justify-center bg-white border border-slate-200 rounded-3xl w-full h-full shadow-lg transition-transform group-hover:scale-105\\'><span class=\\'text-8xl mb-4\\'>${cat.icon}</span><span class=\\'font-bold text-slate-500\\'>${cat.name}</span></div>'"
+                             style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0);"
+                             class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-105 relative z-10">
+                    `;
+                    
+                    item.addEventListener('click', () => {
+                        let diff = index - ringActiveIndex;
+                        if (diff > ringTotalItems / 2) diff -= ringTotalItems;
+                        if (diff < -ringTotalItems / 2) diff += ringTotalItems;
+                        if (diff !== 0) rotateCategoryCarousel(-diff);
+                    });
+                    carouselContainer.appendChild(item);
+                }
+
+                // --- 📱 手機版 原生橫向滑動卡片繪製 ---
+                if(mobileContainer) {
+                    const mItem = document.createElement('div');
+                    mItem.className = `snap-center shrink-0 w-[120px] h-[130px] bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center p-3 cursor-pointer transition-colors`;
+                    mItem.id = `mobile-cat-${index}`;
+                    
+                    mItem.innerHTML = `
+                        <div class="w-14 h-14 mb-3 flex items-center justify-center">
+                            <img src="${cat.image}" alt="${cat.name}" 
+                                 onerror="this.outerHTML='<span class=\\'text-5xl\\'>${cat.icon}</span>'"
+                                 class="w-full h-full object-contain pointer-events-none">
+                        </div>
+                        <span class="text-xs font-bold text-slate-700 text-center leading-tight">${cat.name}</span>
+                    `;
+                    
+                    mItem.addEventListener('click', () => {
+                        updateMobileCategory(index);
+                    });
+                    mobileContainer.appendChild(mItem);
+                }
             });
-            updateCategoryScene();
+            
+            // 初始化狀態 (根據螢幕寬度決定啟動哪一個)
+            if(window.innerWidth >= 768) {
+                updateCategoryScene();
+            } else {
+                updateMobileCategory(0);
+            }
         }
 
+        // 📱 手機版切換邏輯
+        function updateMobileCategory(index) {
+            ringActiveIndex = index;
+            
+            const titleElMobile = document.getElementById('active-category-title-mobile');
+            if(titleElMobile) titleElMobile.innerText = categoryRingList[ringActiveIndex].name;
+            
+            const mobileContainer = document.getElementById('mobile-category-list');
+            if(mobileContainer) {
+                Array.from(mobileContainer.children).forEach((child, i) => {
+                    if(i === index) {
+                        child.classList.add('border-yellow-500', 'ring-2', 'ring-yellow-500/50', 'bg-yellow-50');
+                        // 讓選中的卡片自動滑動到畫面中間，非常有質感！
+                        child.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    } else {
+                        child.classList.remove('border-yellow-500', 'ring-2', 'ring-yellow-500/50', 'bg-yellow-50');
+                    }
+                });
+            }
+            triggerCatalogUpdate();
+        }
+
+        // 💻 電腦版 3D 旋轉馬達
         function rotateCategoryCarousel(direction) {
             ringCurrentRotation += direction * ringAnglePerItem;
             updateCategoryScene();
@@ -1823,16 +1874,12 @@
         function updateCategoryScene() {
             if(!carouselContainer) return;
             
-            const isMobile = window.innerWidth < 768;
-            
-            // 🌟 升級 3：更趨近於平行！電腦版俯視角度從 -12度 改平為 -5度
-            const tiltAngle = isMobile ? -10 : -5;
-            carouselContainer.style.transform = `rotateX(${tiltAngle}deg) rotateY(${ringCurrentRotation}deg)`;
+            carouselContainer.style.transform = `rotateX(-5deg) rotateY(${ringCurrentRotation}deg)`;
 
             ringActiveIndex = Math.round(ringCurrentRotation / -ringAnglePerItem);
             ringActiveIndex = ((ringActiveIndex % ringTotalItems) + ringTotalItems) % ringTotalItems;
 
-            const baseRadius = isMobile ? 160 : 500; 
+            const baseRadius = 500; 
             const items = carouselContainer.children;
 
             for (let i = 0; i < items.length; i++) {
@@ -1846,18 +1893,22 @@
                     items[i].style.pointerEvents = 'none'; 
                     items[i].style.transform = `rotateY(${angle}deg) translateZ(${baseRadius}px) scale(1)`;
                 } else {
-                    const scaleRate = isMobile ? (0.75 - (diff * 0.12)) : (0.8 - (diff * 0.1)); 
+                    const scaleRate = 0.8 - (diff * 0.1); 
                     const opacityRate = Math.max(0.15, 0.7 - (diff * 0.15)); 
-                    
                     items[i].style.opacity = opacityRate.toString(); 
                     items[i].style.pointerEvents = 'auto'; 
                     items[i].style.transform = `rotateY(${angle}deg) translateZ(${baseRadius}px) scale(${scaleRate})`;
                 }
             }
 
-            const titleEl = document.getElementById('active-category-title');
-            if(titleEl) titleEl.innerText = categoryRingList[ringActiveIndex].name;
+            const titleElDesktop = document.getElementById('active-category-title-desktop');
+            if(titleElDesktop) titleElDesktop.innerText = categoryRingList[ringActiveIndex].name;
             
+            triggerCatalogUpdate();
+        }
+        
+        // 🔄 共用的「更新下方商品網格」函數
+        function triggerCatalogUpdate() {
             const grid = document.getElementById('catalog-grid');
             if(grid) {
                 grid.classList.remove('opacity-100', 'translate-y-0');
