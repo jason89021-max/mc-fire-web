@@ -1839,7 +1839,7 @@
             if(window.innerWidth >= 768) {
                 updateCategoryScene();
             } else {
-                updateMobileCategory(0);
+                updateMobileCategory(ringActiveIndex); // 🌟 記住當前分類，不要再跳回第 0 個！
             }
         }
 
@@ -1855,7 +1855,6 @@
                 Array.from(mobileContainer.children).forEach((child, i) => {
                     if(i === index) {
                         child.classList.add('border-yellow-500', 'ring-2', 'ring-yellow-500/50', 'bg-yellow-50');
-                        // 讓選中的卡片自動滑動到畫面中間，非常有質感！
                         child.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                     } else {
                         child.classList.remove('border-yellow-500', 'ring-2', 'ring-yellow-500/50', 'bg-yellow-50');
@@ -1872,6 +1871,8 @@
         }
 
         function updateCategoryScene() {
+            // 🌟 核心修復：把遺失的容器宣告補回來了！
+            const carouselContainer = document.getElementById('category-carousel');
             if(!carouselContainer) return;
             
             carouselContainer.style.transform = `rotateX(-5deg) rotateY(${ringCurrentRotation}deg)`;
@@ -2127,7 +2128,11 @@
                 });
             }
 
+            let lastWindowWidth = window.innerWidth;
             window.addEventListener('resize', () => {
+                if (window.innerWidth === lastWindowWidth) return; 
+                lastWindowWidth = window.innerWidth;
+
                 const productView = document.getElementById('view-products');
                 if (productView && productView.classList.contains('active')) {
                     initCategoryCarousel();
