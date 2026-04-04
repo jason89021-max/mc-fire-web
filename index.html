@@ -2,25 +2,22 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <style>
-        /* 🌟 商品分類 3D 環形旋轉專用設定 🌟 */
+        /* 🌟 徹底解決手機版閃屏：優化 3D 渲染與硬體加速 🌟 */
         .category-scene {
-            perspective: 1000px; /* 數值越小，遠近變形感越強 */
+            perspective: 1200px;
+            -webkit-perspective: 1200px;
         }
         .category-carousel-container {
             transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            -webkit-transform-style: preserve-3d;
+            will-change: transform; /* 預先告知瀏覽器這裡會動，鎖定顯示卡效能 */
         }
         .category-carousel-item {
             transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            /* 加上下方倒影，讓 3D 空間感更真實 */
-            -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.05));
-        }
-        
-        /* 👇 這是我們剛剛新增的質感呼吸燈動畫 👇 */
-        @keyframes activePulse {
-            0% { transform: scale(0.85) translate3d(0, 0, 0); }
-            50% { transform: scale(0.87) translate3d(0, -3px, 0); }
-            100% { transform: scale(0.85) translate3d(0, 0, 0); }
+            /* ⚠️ 移除了 -webkit-box-reflect (倒影)，它是導致 iPhone 滑動破圖閃爍的元凶！ */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
         }
     </style>
     <meta charset="UTF-8">
@@ -1776,26 +1773,23 @@
             carouselContainer.innerHTML = '';
             const isMobile = window.innerWidth < 768;
             
-            // 🌟 完美軌道核心 1：設定標準半徑
-            const baseRadius = isMobile ? 160 : 380; 
+            // 🌟 升級 1：環形大幅加寬！電腦版半徑從 380 加大到 500
+            const baseRadius = isMobile ? 160 : 500; 
 
             categoryRingList.forEach((cat, index) => {
                 const item = document.createElement('div');
-                // 電腦版基礎大小設為 260px，避免太大互相碰撞
-                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[260px] md:h-[260px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
+                
+                // 🌟 升級 2：商品尺寸放大！電腦版從 260px 加大到 290px
+                item.className = `category-carousel-item absolute w-[120px] h-[120px] md:w-[290px] md:h-[290px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
                 
                 const itemAngle = index * ringAnglePerItem;
                 item.dataset.angle = itemAngle;
-                
-                // 🌟 完美軌道核心 2：捨棄人工 sin/cos 計算，交給 CSS 原生 3D 引擎。
-                // 邏輯：先轉角度 (rotateY) -> 再往外推 (translateZ)。這會畫出一個絕對完美的正圓形！
                 item.style.transform = `rotateY(${itemAngle}deg) translateZ(${baseRadius}px)`;
                 
-                // 圖片內部維持高清抗鋸齒設定
                 item.innerHTML = `
                     <img src="${cat.image}" alt="${cat.name}" 
                          onerror="this.outerHTML='<span class=\\'text-5xl md:text-8xl transition-transform group-hover:scale-110\\'>${cat.icon}</span>'"
-                         style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0);"
+                         style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); image-rendering: -webkit-optimize-contrast;"
                          class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-105 relative z-10">
                 `;
                 
@@ -1818,14 +1812,16 @@
         function updateCategoryScene() {
             if(!carouselContainer) return;
             
-            // 🌟 完美軌道核心 3：整個舞台輕微前傾 (-12deg)，營造高級的俯視立體感
-            carouselContainer.style.transform = `rotateX(-12deg) rotateY(${ringCurrentRotation}deg)`;
+            const isMobile = window.innerWidth < 768;
+            
+            // 🌟 升級 3：更趨近於平行！電腦版俯視角度從 -12度 改平為 -5度
+            const tiltAngle = isMobile ? -10 : -5;
+            carouselContainer.style.transform = `rotateX(${tiltAngle}deg) rotateY(${ringCurrentRotation}deg)`;
 
             ringActiveIndex = Math.round(ringCurrentRotation / -ringAnglePerItem);
             ringActiveIndex = ((ringActiveIndex % ringTotalItems) + ringTotalItems) % ringTotalItems;
 
-            const isMobile = window.innerWidth < 768;
-            const baseRadius = isMobile ? 160 : 380; 
+            const baseRadius = isMobile ? 160 : 500; 
             const items = carouselContainer.children;
 
             for (let i = 0; i < items.length; i++) {
@@ -1835,12 +1831,10 @@
                 const angle = parseFloat(items[i].dataset.angle);
 
                 if (i === ringActiveIndex) {
-                    // 🌟 正中央商品：維持 1:1 原比例，視覺最清晰
                     items[i].style.opacity = '1';
                     items[i].style.pointerEvents = 'none'; 
                     items[i].style.transform = `rotateY(${angle}deg) translateZ(${baseRadius}px) scale(1)`;
                 } else {
-                    // 🌟 兩側與後方商品：完美依據等比例縮小 (scaleRate)，絕不亂飄
                     const scaleRate = isMobile ? (0.75 - (diff * 0.12)) : (0.8 - (diff * 0.1)); 
                     const opacityRate = Math.max(0.15, 0.7 - (diff * 0.15)); 
                     
