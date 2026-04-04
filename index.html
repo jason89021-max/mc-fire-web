@@ -15,6 +15,13 @@
             /* 加上下方倒影，讓 3D 空間感更真實 */
             -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.05));
         }
+        
+        /* 👇 這是我們剛剛新增的質感呼吸燈動畫 👇 */
+        @keyframes activePulse {
+            0% { transform: scale(0.85) translate3d(0, 0, 0); }
+            50% { transform: scale(0.87) translate3d(0, -3px, 0); }
+            100% { transform: scale(0.85) translate3d(0, 0, 0); }
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1749,7 +1756,7 @@
         }
 
         // ==========================================
-        // 3. 商品分類 3D 真實環形旋轉邏輯 (已修正路徑為 prodects)
+        // 3. [規則高清流暢版] 商品分類 3D 環形旋轉邏輯
         // ==========================================
         const categoryRingList = [
             { id: 'all', name: '全部商品', icon: '🌟', image: 'images/prodects/icons/all_products.png' },
@@ -1772,34 +1779,42 @@
             if(!carouselContainer) return;
             carouselContainer.innerHTML = '';
             const isMobile = window.innerWidth < 768;
-            const baseRadius = isMobile ? 160 : 420; 
-            const yOffsets = [0, -3, 6, -4, 8, -6, 3, -2]; 
-            const rOffsets = [0, 8, -8, 12, -4, 8, -12, 4];
+
+            // 🌟 優化 1：重新定義更規則的軌道幾何參數
+            // 半徑拉長，讓空間感更好，不會擠在一起
+            const baseRadius = isMobile ? 180 : 450; 
+            
+            // 🌟 優化 2：徹底移除 yOffsets 和 rOffsets，軌跡將由幾何公式精確計算
 
             categoryRingList.forEach((cat, index) => {
                 const item = document.createElement('div');
-                // 🌟 畫質優化 1：把基底容器撐大至 350px，給予高解析度畫布
-                item.className = `category-carousel-item absolute w-[140px] h-[140px] md:w-[350px] md:h-[350px] flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out`;
+                
+                // 🌟 優化 3：更高級的容器樣式
+                // 增加 -webkit-font-smoothing: antialiased 強制硬體抗鋸齒，提升高清感
+                item.className = `category-carousel-item absolute flex items-center justify-center cursor-pointer select-none group transition-all duration-700 ease-out `;
+                item.style.cssText = "-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;";
+
+                // 設置基本尺寸與響應式大小
+                const baseWidth = isMobile ? 150 : 380;
+                item.style.width = `${baseWidth}px`;
+                item.style.height = `${baseWidth}px`;
                 
                 const itemAngle = index * ringAnglePerItem;
-                const r = baseRadius + rOffsets[index];
-                const y = yOffsets[index];
-                
                 item.dataset.angle = itemAngle;
-                item.dataset.r = r;
-                item.dataset.y = y;
-                item.style.transform = `rotateY(${itemAngle}deg) translateZ(${r}px) translateY(${y}px)`;
                 
-                // 🌟 畫質優化 2：移除 drop-shadow，並加入硬體加速 (translateZ(0))
+                // 🌟 優化 4：[圖生畫質] 核心，徹底移除效果殺手 drop-shadow 濾鏡
+                // onerror 優化：用精緻的分類卡片代替單純 Emoji，防止破圖感
                 item.innerHTML = `
                     <img src="${cat.image}" alt="${cat.name}" 
-                         onerror="this.outerHTML='<span class=\\'text-5xl md:text-8xl transition-transform group-hover:scale-110\\'>${cat.icon}</span>'"
-                         style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0);"
+                         onerror="this.outerHTML='<div class=\\'flex flex-col items-center gap-2 p-6 bg-slate-100 rounded-3xl shadow-inner border border-slate-200 transition-transform group-hover:scale-105\\'><span class=\\'text-7xl md:text-9xl\\'>${cat.icon}</span><span class=\\'text-xs font-bold text-slate-500 uppercase tracking-widest\\'>${cat.name}</span></div>'"
+                         style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); image-rendering: -webkit-optimize-contrast;"
                          class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-105 relative z-10">
                 `;
                 
+                // 🌟 優化 5：[流暢度提升] 核心 - 增加無縫循環點擊邏輯
                 item.addEventListener('click', () => {
                     let diff = index - ringActiveIndex;
+                    // 無縫循環計算：選擇最短路徑旋轉
                     if (diff > ringTotalItems / 2) diff -= ringTotalItems;
                     if (diff < -ringTotalItems / 2) diff += ringTotalItems;
                     if (diff !== 0) rotateCategoryCarousel(-diff);
@@ -1809,7 +1824,7 @@
             updateCategoryScene();
         }
 
-        // (rotateCategoryCarousel 函數請保留)
+        // 👉 這個「旋轉馬達」一定要留著！
         function rotateCategoryCarousel(direction) {
             ringCurrentRotation += direction * ringAnglePerItem;
             updateCategoryScene();
@@ -1817,39 +1832,63 @@
 
         function updateCategoryScene() {
             if(!carouselContainer) return;
-            carouselContainer.style.transform = `rotateX(-10deg) rotateY(${ringCurrentRotation}deg)`;
+
+            // 🌟 核心修改 1：[區域上移與重疊解決] 
+            // 重新定義整個環形的垂直中心。原本是 -10deg，我們拉高角度到 -18deg，
+            // 結合更規則的軌跡公式，會讓整個結構自然地整體向上平移，在圖片顯示完整的同時，拉開下方文字的距離。
+            carouselContainer.style.transform = `rotateX(-18deg) rotateY(${ringCurrentRotation}deg)`;
 
             ringActiveIndex = Math.round(ringCurrentRotation / -ringAnglePerItem);
             ringActiveIndex = ((ringActiveIndex % ringTotalItems) + ringTotalItems) % ringTotalItems;
 
+            const isMobile = window.innerWidth < 768;
+            const baseRadius = isMobile ? 180 : 450; 
             const items = carouselContainer.children;
+            const tiltFactor = 0.05; // 設置一個輕微的垂直擺動幅度，增加質感
+
             for (let i = 0; i < items.length; i++) {
                 let diff = Math.abs(i - ringActiveIndex);
+                // 用幾何公式計算正確的 3D 距離 (不是隨機偏移)
                 if (diff > ringTotalItems / 2) diff = ringTotalItems - diff;
 
-                const angle = items[i].dataset.angle;
-                const r = items[i].dataset.r;
-                const y = items[i].dataset.y;
+                const angle = parseFloat(items[i].dataset.angle);
+                
+                // 🌟 核心修改 2：[規則化軌道公式] 
+                // 採用純三角函數計算規則軌道。讓商品完美的上升、下降、變大、縮小。
+                // Math.sin(angle * Math.PI / 180) 計算水平角度偏移 (X軸)
+                // Math.cos(angle * Math.PI / 180) 計算深度偏移 (Z軸)，這會讓後面的商品正確變小
+                const calculatedX = Math.sin(angle * Math.PI / 180) * baseRadius;
+                const calculatedZ = Math.cos(angle * Math.PI / 180) * baseRadius;
+                
+                // 加上一個基於 diff 的輕微垂直擺動，這比隨機偏移要有質感的多
+                const calculatedY = Math.sin((i - ringActiveIndex) * 0.5) * baseRadius * tiltFactor;
 
                 if (i === ringActiveIndex) {
                     items[i].style.opacity = '1';
                     items[i].style.pointerEvents = 'none'; 
-                    // 🌟 畫質優化 3：正中央商品改為縮小至 0.9 (取代原本放大的 1.3 倍)，畫質會無比銳利
-                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(0.9)`;
+                    // 🌟 [圖生畫質] 高清核心：正中央縮小至 0.85 (搭配 380px 的大容器)
+                    // 使用精確計算的 Y軸位置，徹底拉開與下方文字的距離
+                    items[i].style.transform = `translate3d(${calculatedX}px, ${calculatedY}px, ${calculatedZ}px) scale(0.85)`;
                     
                     const imgOrSpan = items[i].children[0];
-                    if(imgOrSpan) imgOrSpan.style.filter = 'none'; // 確保移除濾鏡
-                    
+                    if(imgOrSpan) {
+                        imgOrSpan.style.filter = 'none'; // 移除任何濾鏡
+                        // 為正中央商品加入呼吸燈質感
+                        if(!isMobile) items[i].style.animation = "activePulse 3s ease-in-out infinite"; 
+                    }
                 } else {
-                    const scaleRate = 0.55 - (diff * 0.1); 
-                    const opacityRate = Math.max(0.15, 0.7 - (diff * 0.2)); 
+                    // 🌟 核心修改 3：[有質感循環] 
+                    // 根據 diff 完美線性縮小
+                    const scaleRate = isMobile ? (0.6 - (diff * 0.12)) : (0.75 - (diff * 0.13)); 
+                    const opacityRate = Math.max(0.12, 0.7 - (diff * 0.18)); 
                     
+                    items[i].style.animation = "none"; // 移除呼吸燈
                     items[i].style.opacity = opacityRate.toString(); 
                     items[i].style.pointerEvents = 'auto'; 
-                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${r}px) translateY(${y}px) scale(${scaleRate})`;
+                    items[i].style.transform = `translate3d(${calculatedX}px, ${calculatedY}px, ${calculatedZ}px) scale(${scaleRate})`;
                     
                     const imgOrSpan = items[i].children[0];
-                    if(imgOrSpan) imgOrSpan.style.filter = 'none'; // 確保移除濾鏡
+                    if(imgOrSpan) imgOrSpan.style.filter = 'none'; // 移除任何濾鏡
                 }
             }
 
