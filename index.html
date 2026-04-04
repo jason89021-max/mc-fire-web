@@ -2,22 +2,28 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <style>
-        /* 🌟 徹底解決手機版閃屏：優化 3D 渲染與硬體加速 🌟 */
+        /* 🌟 電腦版 3D 環形旋轉專用設定 🌟 */
         .category-scene {
             perspective: 1200px;
-            -webkit-perspective: 1200px;
         }
         .category-carousel-container {
             transform-style: preserve-3d;
-            -webkit-transform-style: preserve-3d;
-            will-change: transform; /* 預先告知瀏覽器這裡會動，鎖定顯示卡效能 */
+            /* 👇 就是這行！我上次不小心刪掉了，補回來動畫就會非常平滑！ */
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .category-carousel-item {
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            /* ⚠️ 移除了 -webkit-box-reflect (倒影)，它是導致 iPhone 滑動破圖閃爍的元凶！ */
-            -webkit-backface-visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             backface-visibility: hidden;
-            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+        }
+        
+        /* 🌟 手機版橫向滑動列隱藏醜醜的捲軸 🌟 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
     <meta charset="UTF-8">
@@ -1464,7 +1470,7 @@
         </div>
 
         <!-- 5. Product 頁面 (器材與商品分類型錄) -->
-        <div id="view-products" class="page-view pt-12 pb-20 bg-slate-50 border-t border-slate-200 overflow-hidden transform-gpu">
+        <div id="view-products" class="page-view pt-12 pb-20 bg-slate-50 border-t border-slate-200 overflow-hidden">
             <div class="max-w-7xl mx-auto px-6">
                 
                 <div class="mb-4 text-center flex flex-col items-center justify-center border-b border-slate-200 pb-6">
@@ -1472,24 +1478,29 @@
                     <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">消防器材與商品型錄</h2>
                 </div>
 
-                <div class="w-full relative flex flex-col items-center justify-center mt-2 mb-8 md:mb-4">
-                    
-                    <div class="category-scene relative w-full h-[280px] md:h-[350px] flex justify-center items-center">
+                <div class="hidden md:flex w-full relative flex-col items-center justify-center mt-2 mb-4">
+                    <div class="category-scene relative w-full h-[350px] flex justify-center items-center">
+                        <div class="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
+                        <div class="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         
-                        <div class="absolute inset-y-0 left-0 w-1/5 md:w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
-                        <div class="absolute inset-y-0 right-0 w-1/5 md:w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
-
-                        <div id="category-carousel" class="category-carousel-container relative w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
-                            </div>
+                        <div id="category-carousel" class="category-carousel-container relative w-[150px] h-[150px]"></div>
                     </div>
-
-                    <div class="text-center z-30 relative mt-28 md:mt-56">
-                        <h3 id="active-category-title" class="text-2xl md:text-3xl font-black text-slate-800 mb-3 transition-all duration-300">全部商品</h3>
+                    <div class="text-center z-30 relative mt-56">
+                        <h3 id="active-category-title-desktop" class="text-3xl font-black text-slate-800 mb-3 transition-all duration-300">全部商品</h3>
                         <div class="w-16 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full shadow-sm"></div>
                     </div>
                 </div>
 
-                <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-500 transform translate-y-0 opacity-100 relative z-20">
+                <div class="md:hidden w-full relative mt-4 mb-8">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar" id="mobile-category-list">
+                        </div>
+                    <div class="text-center mt-2">
+                        <h3 id="active-category-title-mobile" class="text-2xl font-black text-slate-800 mb-2 transition-all duration-300">全部商品</h3>
+                        <div class="w-12 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full shadow-sm"></div>
+                    </div>
+                </div>
+
+                <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-500 transform translate-y-0 opacity-100 relative z-20 mt-4 md:mt-0">
                     </div>
             </div>
         </div>
