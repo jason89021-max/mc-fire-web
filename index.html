@@ -1873,26 +1873,33 @@
         // 4. 工程實績資料與渲染 (Portfolio)
         // ==========================================
         const portfolioData = [
-            { id: 1, category: 'commercial', title: '信義區A級複合式商辦', type: '消防新建工程', desc: '克服超高層建築水壓問題，全棟導入智慧型火警與排煙連動系統。', img: '01.jpeg' },
-            { id: 2, category: 'healthcare', title: '北部大型醫學中心', type: '消防改建工程', desc: '在不影響醫院營運下，分區完成高難度管線替換與系統升級。', img: '02.jpeg' },
-            { id: 3, category: 'residential', title: '大安區頂級景觀豪宅', type: '消防設備建置', desc: '採用隱蔽型撒水頭與美觀型探測器，完美融入室內設計裝潢。', img: '03.jpeg' },
-            { id: 4, category: 'public', title: '國家級交通樞紐轉運站', type: '消防機電整合', desc: '面對龐大人流，建置極早期預警系統與超大型廣播避難引導。', img: '04.jpeg' },
-            { id: 5, category: 'public', title: '科學園區半導體廠房', type: '特殊滅火系統', desc: '無塵室與高壓機房導入 IG-55 惰性氣體滅火與高靈敏偵煙系統。', img: '05.jpeg' },
-            { id: 6, category: 'commercial', title: '連鎖大型購物購物中心', type: '消防改善工程', desc: '針對大跨距挑高商場，設計並安裝自動放水銃與排煙連動控制。', img: '06.jpeg' }
+            { id: 1, category: 'commercial', title: '台南紡織夢時代購物中心', type: '大型商業設施', desc: '克服超大型複合商場大跨距空間與龐大消費人流的排煙避難與系統連動挑戰。', img: '01.webp' },
+            { id: 2, category: 'commercial', title: '洲際棒球場漢神百貨', type: '大型商業設施', desc: '針對超大型商場與人流，提供最穩定、最高規格的消防安全防護。', img: '02.png' },
+            { id: 3, category: 'healthcare', title: '內湖三軍總醫院重症大樓', type: '國家級醫療防護網', desc: '實施最高等級消防系統建置，保障病患與第一線醫護人員的絕對生命安全。', img: '03.jpeg' },
+            { id: 4, category: 'public', title: '高雄市立圖書館總館', type: '指標公共建築', desc: '開放式空間與大量藏書的立體化防護，建置極早期預警系統。', img: '04.jpg' },
+            { id: 5, category: 'residential', title: '紅樹林山海匯 - 鄉林建設', type: '頂級景觀豪宅', desc: '完美隱匿消防管線與探測設備，實現頂尖防護與室內極致美學的雙贏。', img: '05.jpg' },
+            { id: 6, category: 'public', title: 'T2 機場工程 (中正二期)', type: '國家級公共工程', desc: '面對龐大出入境人流與複雜建築結構，建置全方位立體智能防災網。', img: '06.webp' },
+            { id: 7, category: 'healthcare', title: '臺大醫院健康大樓', type: '醫療機構', desc: '在不影響醫院營運下，分區完成高難度管線配置與系統無縫連動。', img: '07.webp' },
+            { id: 8, category: 'commercial', title: '新北裕隆城', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '08.jpeg' }
         ];
 
         const ongoingProjects = [
-            { title: '南港區 複合型智慧商辦大樓', status: '管線配置階段' },
-            { title: '新竹科學園區 第三期擴建廠房', status: '設備進場階段' },
-            { title: '台中市 國際連鎖五星級酒店', status: '消防圖說審查中' },
-            { title: '桃園市 大型物流倉儲中心', status: '系統連動測試中' }
+            { title: '台中凱悅飯店', status: '消防設備建置中' },
+            { title: '新北馥華艾美', status: '管線配置階段' },
+            { title: '新竹緯創AI智慧園區', status: '設備進場階段' },
+            { title: '桃園MOMO倉儲', status: '系統連動測試中' },
+            { title: '空軍防空指揮部', status: '消防圖說審查中' }
         ];
 
         const completedProjects = [
-            { year: '2025', title: '新北市 社會住宅統包工程' },
-            { year: '2024', title: '台北大巨蛋 周邊附屬商業設施' },
-            { year: '2023', title: '高雄市 捷運共構開發案' },
-            { year: '2022', title: '台南市 知名連鎖百貨旗艦店' }
+            { year: '2023', title: '金門昇恆昌' },
+            { year: '2022', title: '大直 102-3 高級商辦' },
+            { year: '2021', title: '瓏山林五谷王段住宅大樓' },
+            { year: '2020', title: '淡水區水仙段開發案' },
+            { year: '2018', title: '台鐵機務段檢修庫' },
+            { year: '2015', title: '台灣高速鐵路苗栗站' },
+            { year: '2014', title: '台北捷運環狀線' },
+            { year: '2010', title: '輔大醫學院' }
         ];
 
         function renderPortfolio(filter) {
