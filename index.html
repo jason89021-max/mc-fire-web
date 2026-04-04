@@ -1662,6 +1662,12 @@
                 if(el.dataset.target === matchTarget) el.classList.add('active');
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 🌟 新增這一段：切換頁面後，自動收起手機版目錄 🌟
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
             
             if(targetId === 'portfolio') {
                 if(!window.chartInitialized && typeof initChart === "function") initChart();
