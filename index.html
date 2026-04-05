@@ -1941,7 +1941,10 @@
                 // --- 💻 電腦版 3D 環形繪製 ---
                 if(carouselContainer) {
                     const item = document.createElement('div');
-                    item.className = `category-carousel-item absolute w-[290px] h-[290px] flex items-center justify-center cursor-pointer select-none group`;
+                    
+                    // 🌟 核心修復：加上 top-1/2 left-1/2 搭配 mt-[-145px] ml-[-145px] 🌟
+                    // 這樣能把 290px 寬高的商品「正中心」完美釘在旋轉軸心上，徹底解決偏心與不規則的搖晃感！
+                    item.className = `category-carousel-item absolute top-1/2 left-1/2 mt-[-145px] ml-[-145px] w-[290px] h-[290px] flex items-center justify-center cursor-pointer select-none group`;
                     
                     const itemAngle = index * ringAnglePerItem;
                     item.dataset.angle = itemAngle;
@@ -1985,11 +1988,11 @@
                 }
             });
             
-            // 初始化狀態 (根據螢幕寬度決定啟動哪一個)
+            // 初始化狀態
             if(window.innerWidth >= 768) {
                 updateCategoryScene();
             } else {
-                updateMobileCategory(ringActiveIndex); // 🌟 記住當前分類，不要再跳回第 0 個！
+                updateMobileCategory(ringActiveIndex);
             }
         }
 
@@ -2021,7 +2024,6 @@
         }
 
         function updateCategoryScene() {
-            // 🌟 核心修復：把遺失的容器宣告補回來了！
             const carouselContainer = document.getElementById('category-carousel');
             if(!carouselContainer) return;
             
