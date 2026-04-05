@@ -1792,7 +1792,7 @@
     </footer>
 
     <script>
-        // ==========================================
+// ==========================================
         // 1. SPA 切換與 UI 基礎邏輯
         // ==========================================
         function switchView(targetId) {
@@ -1807,7 +1807,6 @@
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // 🌟 新增這一段：切換頁面後，自動收起手機版目錄 🌟
             const mobileMenu = document.getElementById('mobileMenu');
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
@@ -1816,8 +1815,8 @@
             if(targetId === 'portfolio') {
                 if(!window.chartInitialized && typeof initChart === "function") initChart();
                 renderPortfolio('all');
-                renderOngoing();
-                renderCompleted();
+                if (typeof renderOngoing === "function") renderOngoing();
+                if (typeof renderCompleted === "function") renderCompleted();
             }
             
             if(targetId === 'products') {
@@ -1825,92 +1824,8 @@
             }
         }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if(menu) menu.classList.toggle('hidden');
-        }
-
         // ==========================================
-        // 2. 商品型錄與代理邏輯 (Catalog)
-        // ==========================================
-        const catalogData = [
-            { id: 1, category: 'extinguisher', name: '手提式乾粉滅火器', specs: '10P / 20P / 5P', desc: '適用於 A、B、C 類火災。藥劑符合國家標準。', icon: '🧯' },
-            { id: 2, category: 'extinguisher', name: 'CO2 二氧化碳滅火器', specs: '氣體滅火系列', desc: '滅火後無殘留物，專為機房、變電箱設計。', icon: '💨' },
-            { id: 3, category: 'extinguisher', name: '環保水霧滅火器', specs: '環保無毒 / 不導電', desc: '不污染環境，具備阻斷熱輻射及不導電特性。', icon: '💧' },
-            { id: 4, category: 'lighting', name: '緊急出口與方向指示燈', specs: 'LED 高亮度', desc: '火災斷電時提供清晰的逃生動線指引。', icon: '🏃‍♂️' },
-            { id: 5, category: 'lighting', name: '緊急照明燈', specs: '壁掛式 / 崁頂式', desc: '提供走廊、樓梯間等避難通道充足的照明。', icon: '💡' },
-            { id: 6, category: 'alarm', name: '住宅用火災警報器', specs: '能美 / 中美 / 永揚 / 紅橋', desc: '免配線、十年電池，光電式與定溫式型號。', icon: '🚨' },
-            { id: 14, category: 'alarm', name: '火警蜂鳴器', specs: '露出型 / 埋入型', desc: '高分貝發音設備，提供露出與埋入型設計。', icon: '🔊' },
-            { id: 7, category: 'detector', name: '偵煙探測器', specs: '光電式 (定址型 / 傳統型)', desc: '快速偵測初期煙霧，全系列支援定址型與傳統型。', icon: '📡' },
-            { id: 8, category: 'detector', name: '熱感探測器系列', specs: '差動式侷限型 / 補償型 / 定溫式', desc: '精準感測溫度變化，涵蓋多規格及定址/傳統型。', icon: '🌡️' },
-            { id: 15, category: 'detector', name: '瓦斯洩漏探測器', specs: '天然氣(NG) / 液化石油氣(LPG)', desc: '即時偵測微量可燃氣體，有效預防氣爆。', icon: '⚠️' },
-            
-            { id: 16, category: 'sprinkler', name: 'FIRELOCK™ FL-QR/C 隱蔽型', specs: '品牌：Victaulic 唯特利', icon: '✨', specBoxes: ['K 5.6', 'K 8.0'], features: ['快速反應', '全隱藏式設計', '附美觀裝飾平貼蓋板'] },
-            { id: 17, category: 'sprinkler', name: 'FIRELOCK™ 傳統型 / 側牆型', specs: '品牌：Victaulic 唯特利', icon: '🚿', specBoxes: ['K 5.6', 'K 8.0'], features: ['標準與快速反應', '適用於一般廠辦或無天花板空間'] },
-            { id: 19, category: 'sprinkler', name: 'FIRELOCK™ 泡沫噴頭', specs: '品牌：Victaulic 唯特利', icon: '🧪', specBoxes: ['K 2.8', 'K 5.6'], features: ['泡沫/水兩用噴頭', '專為化學與高風險區域設計'] },
-            { id: 27, category: 'sprinkler', name: 'FIRELOCK™ 乾式 / 耐腐蝕撒水頭', specs: '品牌：Victaulic 唯特利', icon: '❄️', specBoxes: ['多種 K 值可選'], features: ['專為冷凍庫設計', '防腐蝕塗層處理'] },
-            
-            { id: 21, category: 'sprinkler', name: 'NDC 撒水頭系列', specs: '品牌：日本 NDC', icon: '🚿', specBoxes: ['向上型', '向下型', '側牆型'], features: ['標準/快速反應可選', 'UL 國際認證'] },
-            { id: 25, category: 'sprinkler', name: 'NDC 隱蔽型撒水頭', specs: '品牌：日本 NDC', icon: '✨', specBoxes: ['K 5.6 (80)'], features: ['附美觀裝飾平貼蓋板', 'UL 國際認證'] },
-            
-            { id: 11, category: 'others', name: '門扣與防火裝置', specs: '磁力門扣 / 防火門扣', desc: '連動火警總機，火災時自動釋放關閉防火門。', icon: '🚪' },
-            { id: 12, category: 'others', name: '系統閥類與壓力開關', specs: '一齊開放閥 / 自動警報逆止閥', desc: '確保整體消防水系統管網與幫浦穩定運作。', icon: '🚰' },
-            
-            { id: 29, category: 'broadcast', name: 'TOA 緊急廣播系統', specs: '品牌：日本 TOA', icon: '📢', specBoxes: ['數位廣播主機', '揚聲器', '擴大機'], features: ['日本專業音響領導品牌', '依現場迴路客製化規劃'] },
-            { id: 30, category: 'broadcast', name: '國產 緊急廣播設備', specs: '品牌：台灣優質國產品牌', icon: '📢', specBoxes: ['標準廣播主機', '台製揚聲器'], features: ['消防署最新型式認可', '高性價比與擴充彈性'] }
-        ];
-
-        function renderCatalog(filter) {
-            const grid = document.getElementById('catalog-grid');
-            if(!grid) return;
-            grid.innerHTML = '';
-            const filtered = filter === 'all' ? catalogData : catalogData.filter(p => p.category === filter);
-            
-            const categoryColors = {
-                'extinguisher': 'bg-red-500', 'lighting': 'bg-yellow-400', 'alarm': 'bg-orange-500',
-                'detector': 'bg-blue-400', 'sprinkler': 'bg-sky-500', 'broadcast': 'bg-indigo-500', 'others': 'bg-slate-400'
-            };
-
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                const topColor = categoryColors[p.category] || 'bg-slate-300';
-                
-                let specHtml = '';
-                const specsArray = p.specBoxes || (p.specBoxes === undefined && !p.features ? (p.specs ? p.specs.split(' / ') : []) : []);
-                specsArray.forEach(s => { specHtml += `<span class="border border-slate-200 text-slate-500 text-[10px] px-1.5 py-0.5 mr-1.5 mb-1.5 inline-block bg-white shadow-sm">${s}</span>`; });
-
-                let featureHtml = '';
-                const featuresArray = p.features || (p.specBoxes === undefined && !p.features && p.desc ? [p.desc] : []);
-                featuresArray.forEach(f => {
-                    featureHtml += `<li class="flex items-start gap-1.5 mb-1 text-slate-500 text-xs font-medium"><span class="w-1 h-1 rounded-full bg-orange-400 mt-1.5 shrink-0"></span><span class="leading-snug">${f}</span></li>`;
-                });
-
-                card.className = 'bg-white border border-slate-200 flex flex-col hover:shadow-xl transition-all cursor-pointer relative overflow-hidden group min-h-[180px] rounded-xl';
-                card.innerHTML = `
-                    <div class="absolute top-0 left-0 w-full h-1 ${topColor}"></div>
-                    <div class="p-5 flex flex-row h-full gap-4">
-                        <div class="w-2/3 flex flex-col">
-                            <h4 class="text-sm font-black text-slate-900 mb-1 uppercase leading-tight group-hover:text-yellow-600 transition-colors">${p.name}</h4>
-                            ${p.specs ? `<p class="text-[10px] font-bold text-slate-400 mb-3 tracking-wider">${p.specs}</p>` : ''}
-                            <div class="flex flex-wrap mt-1 mb-3 gap-1">${specHtml}</div>
-                            <ul class="mt-auto space-y-1">${featureHtml}</ul>
-                        </div>
-                        <div class="w-1/3 flex flex-col items-center justify-between border-l border-slate-100 pl-4 relative">
-                            <div class="w-full aspect-square flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <span class="text-5xl opacity-80 drop-shadow-sm">${p.icon}</span>
-                            </div>
-                            <button onclick="switchView('contact'); event.stopPropagation();" class="w-full text-[10px] font-bold text-slate-500 border border-slate-200 py-1.5 rounded hover:bg-yellow-600 hover:text-white hover:border-yellow-600 transition-colors mt-auto whitespace-nowrap shadow-sm">
-                                聯絡詢價
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // ==========================================
-        // 3. 商品分類展示邏輯 (電腦版 3D 環形 / 手機版橫向滑動)
+        // 2. 3D 環形與手機版商品分類邏輯
         // ==========================================
         const categoryRingList = [
             { id: 'all', name: '全部商品', icon: '🌟', image: 'images/prodects/icons/all_products.png' },
@@ -1935,15 +1850,19 @@
             if(carouselContainer) carouselContainer.innerHTML = '';
             if(mobileContainer) mobileContainer.innerHTML = '';
 
-            const baseRadius = 500; // 電腦版專屬超大半徑
+            const baseRadius = 500; 
 
             categoryRingList.forEach((cat, index) => {
                 // --- 💻 電腦版 3D 環形繪製 ---
                 if(carouselContainer) {
                     const item = document.createElement('div');
                     
-                    // 🌟 核心修改：將 290px 縮小為 240px，並將 mt/ml 修正為 -120px 確保完美置中 🌟
-                    item.className = `category-carousel-item absolute top-1/2 left-1/2 mt-[-120px] ml-[-120px] w-[240px] h-[240px] flex items-center justify-center cursor-pointer select-none group`;
+                    // 🌟 核心修復：使用 inline style 鎖定尺寸與負邊距，避免 Tailwind 失效導致透明大玻璃擋住畫面！
+                    item.className = `category-carousel-item absolute top-1/2 left-1/2 flex items-center justify-center cursor-pointer select-none group`;
+                    item.style.width = '240px';
+                    item.style.height = '240px';
+                    item.style.marginTop = '-120px';
+                    item.style.marginLeft = '-120px';
                     
                     const itemAngle = index * ringAnglePerItem;
                     item.dataset.angle = itemAngle;
@@ -1995,10 +1914,8 @@
             }
         }
 
-        // 📱 手機版切換邏輯
         function updateMobileCategory(index) {
             ringActiveIndex = index;
-            
             const titleElMobile = document.getElementById('active-category-title-mobile');
             if(titleElMobile) titleElMobile.innerText = categoryRingList[ringActiveIndex].name;
             
@@ -2016,7 +1933,6 @@
             triggerCatalogUpdate();
         }
 
-        // 💻 電腦版 3D 旋轉馬達
         function rotateCategoryCarousel(direction) {
             ringCurrentRotation += direction * ringAnglePerItem;
             updateCategoryScene();
@@ -2058,8 +1974,10 @@
             
             triggerCatalogUpdate();
         }
-        
-        // 🌟 新增：商品型錄資料庫 (包含您要求的所有滅火器與照明燈規格) 🌟
+
+        // ==========================================
+        // 3. 商品型錄資料庫 (包含滅火器與照明燈規格)
+        // ==========================================
         const catalogData = {
             'extinguisher': [
                 { name: '車用型乾粉滅火器 (5P)', spec: '附車用固定架', price: '詢價' },
@@ -2085,43 +2003,37 @@
             ]
         };
 
-        // 🔄 共用的「更新下方商品網格」函數 (已連結 catalogData)
         function triggerCatalogUpdate() {
             const grid = document.getElementById('catalog-grid');
             if(grid) {
                 grid.classList.remove('opacity-100', 'translate-y-0');
                 grid.classList.add('opacity-0', 'translate-y-8');
                 setTimeout(() => {
-                    // 呼叫渲染商品卡片的函數
-                    if (typeof renderCatalog === "function") {
-                        renderCatalog(categoryRingList[ringActiveIndex].id); 
+                    grid.innerHTML = '';
+                    let currentCatId = categoryRingList[ringActiveIndex].id;
+                    let itemsToRender = [];
+                    
+                    if(currentCatId === 'all') {
+                        Object.values(catalogData).forEach(arr => itemsToRender = itemsToRender.concat(arr));
                     } else {
-                        // 如果原本沒有 renderCatalog 函數，這裡提供一個輕量版的渲染邏輯
-                        grid.innerHTML = '';
-                        let currentCatId = categoryRingList[ringActiveIndex].id;
-                        let itemsToRender = [];
-                        
-                        if(currentCatId === 'all') {
-                            Object.values(catalogData).forEach(arr => itemsToRender = itemsToRender.concat(arr));
-                        } else {
-                            itemsToRender = catalogData[currentCatId] || [];
-                        }
-
-                        itemsToRender.forEach(prod => {
-                            const card = document.createElement('div');
-                            card.className = "bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group";
-                            card.innerHTML = `
-                                <div class="w-full aspect-square bg-slate-50 rounded-xl mb-4 flex items-center justify-center text-4xl group-hover:scale-105 transition-transform">📦</div>
-                                <h4 class="font-bold text-slate-800 mb-1">${prod.name}</h4>
-                                <p class="text-xs text-slate-500 mb-4">${prod.spec}</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-yellow-600 font-bold">${prod.price}</span>
-                                    <button class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-yellow-600 transition-colors">聯絡諮詢</button>
-                                </div>
-                            `;
-                            grid.appendChild(card);
-                        });
+                        itemsToRender = catalogData[currentCatId] || [];
                     }
+
+                    itemsToRender.forEach(prod => {
+                        const card = document.createElement('div');
+                        card.className = "bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group";
+                        card.innerHTML = `
+                            <div class="w-full aspect-square bg-slate-50 rounded-xl mb-4 flex items-center justify-center text-4xl group-hover:scale-105 transition-transform">📦</div>
+                            <h4 class="font-bold text-slate-800 mb-1">${prod.name}</h4>
+                            <p class="text-xs text-slate-500 mb-4">${prod.spec}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-yellow-600 font-bold">${prod.price}</span>
+                                <button onclick="switchView('contact')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-yellow-600 transition-colors">聯絡諮詢</button>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    
                     grid.classList.remove('opacity-0', 'translate-y-8');
                     grid.classList.add('opacity-100', 'translate-y-0');
                 }, 300);
@@ -2187,6 +2099,31 @@
                 grid.appendChild(card);
             });
         }
+
+        function renderOngoing() {
+            const container = document.getElementById('ongoing-list');
+            if(!container) return;
+            container.innerHTML = '';
+            ongoingProjects.forEach(p => {
+                const el = document.createElement('div');
+                el.className = 'flex justify-between items-center py-3 border-b border-slate-700 last:border-0';
+                el.innerHTML = `<span class="text-white font-medium">${p.title}</span><span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">${p.status}</span>`;
+                container.appendChild(el);
+            });
+        }
+
+        function renderCompleted() {
+            const container = document.getElementById('completed-list');
+            if(!container) return;
+            container.innerHTML = '';
+            completedProjects.forEach(p => {
+                const el = document.createElement('div');
+                el.className = 'flex gap-4 items-center py-2';
+                el.innerHTML = `<span class="text-yellow-600 font-bold text-sm w-12">${p.year}</span><span class="text-slate-300 text-sm">${p.title}</span>`;
+                container.appendChild(el);
+            });
+        }
+
         // ==========================================
         // 5. AI 與聯絡表單
         // ==========================================
@@ -2294,8 +2231,8 @@
             const portfolioView = document.getElementById('view-portfolio');
             if(portfolioView && portfolioView.classList.contains('active')) {
                 renderPortfolio('all');
-                renderOngoing();
-                renderCompleted();
+                if (typeof renderOngoing === "function") renderOngoing();
+                if (typeof renderCompleted === "function") renderCompleted();
             }
         });
     </script>
