@@ -1942,9 +1942,8 @@
                 if(carouselContainer) {
                     const item = document.createElement('div');
                     
-                    // 🌟 核心修復：加上 top-1/2 left-1/2 搭配 mt-[-145px] ml-[-145px] 🌟
-                    // 這樣能把 290px 寬高的商品「正中心」完美釘在旋轉軸心上，徹底解決偏心與不規則的搖晃感！
-                    item.className = `category-carousel-item absolute top-1/2 left-1/2 mt-[-145px] ml-[-145px] w-[290px] h-[290px] flex items-center justify-center cursor-pointer select-none group`;
+                    // 🌟 核心修改：將 290px 縮小為 240px，並將 mt/ml 修正為 -120px 確保完美置中 🌟
+                    item.className = `category-carousel-item absolute top-1/2 left-1/2 mt-[-120px] ml-[-120px] w-[240px] h-[240px] flex items-center justify-center cursor-pointer select-none group`;
                     
                     const itemAngle = index * ringAnglePerItem;
                     item.dataset.angle = itemAngle;
@@ -1952,7 +1951,7 @@
                     
                     item.innerHTML = `
                         <img src="${cat.image}" alt="${cat.name}" 
-                             onerror="this.outerHTML='<div class=\\'flex flex-col items-center justify-center bg-white border border-slate-200 rounded-3xl w-full h-full shadow-lg transition-transform group-hover:scale-105\\'><span class=\\'text-8xl mb-4\\'>${cat.icon}</span><span class=\\'font-bold text-slate-500\\'>${cat.name}</span></div>'"
+                             onerror="this.outerHTML='<div class=\\'flex flex-col items-center justify-center bg-white border border-slate-200 rounded-3xl w-full h-full shadow-lg transition-transform group-hover:scale-105\\'><span class=\\'text-7xl mb-4\\'>${cat.icon}</span><span class=\\'font-bold text-slate-500\\'>${cat.name}</span></div>'"
                              style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0);"
                              class="w-full h-full object-contain pointer-events-none transition-transform group-hover:scale-105 relative z-10">
                     `;
@@ -1996,142 +1995,7 @@
             }
         }
 
-        // 📱 手機版切換邏輯
-        function updateMobileCategory(index) {
-            ringActiveIndex = index;
-            
-            const titleElMobile = document.getElementById('active-category-title-mobile');
-            if(titleElMobile) titleElMobile.innerText = categoryRingList[ringActiveIndex].name;
-            
-            const mobileContainer = document.getElementById('mobile-category-list');
-            if(mobileContainer) {
-                Array.from(mobileContainer.children).forEach((child, i) => {
-                    if(i === index) {
-                        child.classList.add('border-yellow-500', 'ring-2', 'ring-yellow-500/50', 'bg-yellow-50');
-                        child.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    } else {
-                        child.classList.remove('border-yellow-500', 'ring-2', 'ring-yellow-500/50', 'bg-yellow-50');
-                    }
-                });
-            }
-            triggerCatalogUpdate();
-        }
-
-        // 💻 電腦版 3D 旋轉馬達
-        function rotateCategoryCarousel(direction) {
-            ringCurrentRotation += direction * ringAnglePerItem;
-            updateCategoryScene();
-        }
-
-        function updateCategoryScene() {
-            const carouselContainer = document.getElementById('category-carousel');
-            if(!carouselContainer) return;
-            
-            carouselContainer.style.transform = `rotateX(-5deg) rotateY(${ringCurrentRotation}deg)`;
-
-            ringActiveIndex = Math.round(ringCurrentRotation / -ringAnglePerItem);
-            ringActiveIndex = ((ringActiveIndex % ringTotalItems) + ringTotalItems) % ringTotalItems;
-
-            const baseRadius = 500; 
-            const items = carouselContainer.children;
-
-            for (let i = 0; i < items.length; i++) {
-                let diff = Math.abs(i - ringActiveIndex);
-                if (diff > ringTotalItems / 2) diff = ringTotalItems - diff;
-
-                const angle = parseFloat(items[i].dataset.angle);
-
-                if (i === ringActiveIndex) {
-                    items[i].style.opacity = '1';
-                    items[i].style.pointerEvents = 'none'; 
-                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${baseRadius}px) scale(1)`;
-                } else {
-                    const scaleRate = 0.8 - (diff * 0.1); 
-                    const opacityRate = Math.max(0.15, 0.7 - (diff * 0.15)); 
-                    items[i].style.opacity = opacityRate.toString(); 
-                    items[i].style.pointerEvents = 'auto'; 
-                    items[i].style.transform = `rotateY(${angle}deg) translateZ(${baseRadius}px) scale(${scaleRate})`;
-                }
-            }
-
-            const titleElDesktop = document.getElementById('active-category-title-desktop');
-            if(titleElDesktop) titleElDesktop.innerText = categoryRingList[ringActiveIndex].name;
-            
-            triggerCatalogUpdate();
-        }
-        
-        // 🔄 共用的「更新下方商品網格」函數
-        function triggerCatalogUpdate() {
-            const grid = document.getElementById('catalog-grid');
-            if(grid) {
-                grid.classList.remove('opacity-100', 'translate-y-0');
-                grid.classList.add('opacity-0', 'translate-y-8');
-                setTimeout(() => {
-                    if (typeof renderCatalog === "function") renderCatalog(categoryRingList[ringActiveIndex].id); 
-                    grid.classList.remove('opacity-0', 'translate-y-8');
-                    grid.classList.add('opacity-100', 'translate-y-0');
-                }, 300);
-            }
-        }
-        // ==========================================
-        // 4. 工程實績資料與渲染 (Portfolio)
-        // ==========================================
-        const portfolioData = [
-            { id: 1, category: 'commercial', title: '台南紡織夢時代購物中心', type: '大型商業設施', desc: '克服超大型複合商場大跨距空間與龐大消費人流的排煙避難與系統連動挑戰。', img: '01.webp' },
-            { id: 2, category: 'commercial', title: '洲際棒球場漢神百貨', type: '大型商業設施', desc: '針對超大型商場與人流，提供最穩定、最高規格的消防安全防護。', img: '02.png' },
-            { id: 3, category: 'healthcare', title: '內湖三軍總醫院重症大樓', type: '國家級醫療防護網', desc: '實施最高等級消防系統建置，保障病患與第一線醫護人員的絕對生命安全。', img: '03.jpeg' },
-            { id: 4, category: 'public', title: '高雄市立圖書館總館', type: '指標公共建築', desc: '開放式空間與大量藏書的立體化防護，建置極早期預警系統。', img: '04.jpg' },
-            { id: 5, category: 'residential', title: '紅樹林山海匯 - 鄉林建設', type: '頂級景觀豪宅', desc: '完美隱匿消防管線與探測設備，實現頂尖防護與室內極致美學的雙贏。', img: '05.jpg' },
-            { id: 6, category: 'public', title: 'T2 機場工程 (中正二期)', type: '國家級公共工程', desc: '面對龐大出入境人流與複雜建築結構，建置全方位立體智能防災網。', img: '06.webp' },
-            { id: 7, category: 'healthcare', title: '臺大醫院健康大樓', type: '醫療機構', desc: '在不影響醫院營運下，分區完成高難度管線配置與系統無縫連動。', img: '07.webp' },
-            { id: 8, category: 'commercial', title: '新北裕隆城', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '08.jpeg' }
-        ];
-
-        const ongoingProjects = [
-            { title: '台中凱悅飯店', status: '消防設備建置中' },
-            { title: '新北馥華艾美', status: '管線配置階段' },
-            { title: '新竹緯創AI智慧園區', status: '設備進場階段' },
-            { title: '桃園MOMO倉儲', status: '系統連動測試中' },
-            { title: '空軍防空指揮部', status: '消防圖說審查中' }
-        ];
-
-        const completedProjects = [
-            { year: '2023', title: '金門昇恆昌' },
-            { year: '2022', title: '大直 102-3 高級商辦' },
-            { year: '2021', title: '瓏山林五谷王段住宅大樓' },
-            { year: '2020', title: '淡水區水仙段開發案' },
-            { year: '2018', title: '台鐵機務段檢修庫' },
-            { year: '2015', title: '台灣高速鐵路苗栗站' },
-            { year: '2014', title: '台北捷運環狀線' },
-            { year: '2010', title: '輔大醫學院' }
-        ];
-
-        function renderPortfolio(filter) {
-            const grid = document.getElementById('portfolio-grid');
-            if(!grid) return;
-            grid.innerHTML = '';
-            
-            const filtered = filter === 'all' ? portfolioData : portfolioData.filter(p => p.category === filter);
-            
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'bg-slate-800 rounded-xl overflow-hidden group hover:shadow-[0_0_20px_rgba(217,119,6,0.3)] transition-all duration-300 border border-slate-700';
-                card.innerHTML = `
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'400\\' height=\\'300\\' viewBox=\\'0 0 400 300\\'%3E%3Crect width=\\'400\\' height=\\'300\\' fill=\\'%231e293b\\'/%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'24\\' fill=\\'%2364748b\\'%3E實績照片更新中%3C/text%3E%3C/svg%3E';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-80"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-[10px] font-bold bg-yellow-600 text-slate-900 px-2 py-1 rounded tracking-widest">${p.type}</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-yellow-500 transition-colors">${p.title}</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">${p.desc}</p>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
+        // 📱 手
 
         function filterPortfolio(category, btnElement) {
             document.querySelectorAll('.portfolio-filter').forEach(btn => {
