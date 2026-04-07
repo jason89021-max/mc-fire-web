@@ -1792,8 +1792,14 @@
     </footer>
 
     <script>
-// ==========================================
-        // 1. SPA 切換與 UI 基礎邏輯
+        // 👇 就是缺了這四行！把這段貼在 script 裡面的最上方
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if(menu) menu.classList.toggle('hidden');
+        }
+
+        // ==========================================
+        // 1. SPA 切換與 UI 基礎邏輯 (這底下是您原本的程式碼，不用動)
         // ==========================================
         function switchView(targetId) {
             document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
