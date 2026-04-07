@@ -1976,7 +1976,7 @@
         }
 
         // ==========================================
-        // 3. 商品型錄資料庫 (已新增撒水頭與專業子分類)
+        // 3. 商品型錄資料庫 (完整收錄 6 大撒水頭系列)
         // ==========================================
         const catalogData = {
             'extinguisher': [
@@ -1996,14 +1996,38 @@
                 { name: '埋入式避難緊急方向燈', spec: '美觀嵌入式設計', price: '詢價', icon: '🔽' },
                 { name: '緊急照明燈 (24顆/48顆)', spec: 'LED 高亮度照明', price: '詢價', icon: '💡' }
             ],
-            // 🌟 撒水頭專區 (利用 subCategory 標籤來指定位置)
+            // 🌟 撒水頭專區 (6大分類完整收錄)
             'sprinkler': [
-                { name: 'FIRELOCK™ 隱蔽型', spec: 'K5.6/K8.0 快速反應', price: '詢價', icon: '✨', subCategory: 'standard' },
-                { name: 'FIRELOCK™ 傳統型', spec: 'K5.6 標準反應', price: '詢價', icon: '🚿', subCategory: 'standard' },
-                { name: 'NDC 向上/向下型', spec: 'K5.6/K8.0 UL認證', price: '詢價', icon: '🚿', subCategory: 'standard' },
-                { name: 'FIRELOCK™ 乾式撒水頭', spec: '防凍/冷鏈倉儲專用', price: '詢價', icon: '❄️', subCategory: 'special' },
-                { name: 'FIRELOCK™ 耐腐蝕撒水頭', spec: '化工廠/溫泉區專用', price: '詢價', icon: '🛡️', subCategory: 'special' }
-                // 註：擴大防護型(extended)、倉儲型(storage) 目前沒有資料，系統會自動顯示「建置中」
+                // 1. 標準防護系列
+                { name: 'FL-SR 標準反應型', spec: '最傳統穩定，玻璃球 5mm', price: '詢價', icon: '🚿', subCategory: 'standard' },
+                { name: 'FL-QR 快速反應型', spec: '感應快保護人命，玻璃球 3mm', price: '詢價', icon: '⚡', subCategory: 'standard' },
+                { name: 'FL-CNV 傳統型 (QR/SR)', spec: '水流可向上/向下噴灑', price: '詢價', icon: '↕️', subCategory: 'standard' },
+                { name: 'FL-EUR 歐洲型 (QR/SR)', spec: '符合歐洲安裝標準與認證', price: '詢價', icon: '🇪🇺', subCategory: 'standard' },
+
+                // 2. 擴大防護系列
+                { name: 'FL-ECLH 輕危險場所用', spec: '擴大防護，適用餐廳、旅館', price: '詢價', icon: '🏨', subCategory: 'extended' },
+                { name: 'FL-ECOH 普通危險場所用', spec: '大面積防護，適用賣場、展廳', price: '詢價', icon: '🏬', subCategory: 'extended' },
+                { name: 'FL-ECLH/SW 擴大側壁型', spec: '安裝於牆面，省去天花板配管', price: '詢價', icon: '🧱', subCategory: 'extended' },
+
+                // 3. 儲存倉儲系列
+                { name: 'FL-ESFR 早燃快速反應型', spec: '專為高架倉庫設計，無須中層撒水', price: '詢價', icon: '📦', subCategory: 'storage' },
+                { name: 'FL-CMSA 特定應用型', spec: '低水壓大流量，高風險儲存區適用', price: '詢價', icon: '🏭', subCategory: 'storage' },
+                { name: 'FL-INT 中間架型 (In-Rack)', spec: '安裝在貨架內部的防護撒水頭', price: '詢價', icon: '🗄️', subCategory: 'storage' },
+
+                // 4. 乾式撒水頭系列
+                { name: 'FL-DRY 乾式向上/向下型', spec: '充滿空氣防凍，冷凍庫/戶外適用', price: '詢價', icon: '❄️', subCategory: 'dry' },
+                { name: 'FL-DRY/C 乾式隱蔽型', spec: '美觀且防凍，常用於寒帶大門入口', price: '詢價', icon: '✨', subCategory: 'dry' },
+                { name: 'FL-DRY/VSW 乾式垂直側壁型', spec: '特殊空間的防凍側牆配置', price: '詢價', icon: '🧱', subCategory: 'dry' },
+
+                // 5. 住宅專用系列
+                { name: 'FL-RES 住宅向下型', spec: '快速啟動，專為居家室內空間設計', price: '詢價', icon: '🏠', subCategory: 'residential' },
+                { name: 'FL-RES/C 住宅隱蔽型', spec: '附帶裝飾蓋板，完美隱藏於天花板', price: '詢價', icon: '🛋️', subCategory: 'residential' },
+                { name: 'FL-RES/SW 住宅側壁型', spec: '居家側牆專用，增加避難時間', price: '詢價', icon: '🖼️', subCategory: 'residential' },
+
+                // 6. 特殊應用與噴頭系列
+                { name: 'FL-SA/WS 窗簾型水幕', spec: '噴灑玻璃表面，防止火勢跨窗蔓延', price: '詢價', icon: '🪟', subCategory: 'special' },
+                { name: 'FL-SA/IC 夾層型', spec: '專用於天花板與地板之間的狹窄空間', price: '詢價', icon: '🔧', subCategory: 'special' },
+                { name: 'FL-SA/NZ 水霧/泡沫噴頭', spec: '化工廠或特殊設備防護專用', price: '詢價', icon: '🧪', subCategory: 'special' }
             ]
         };
 
@@ -2016,9 +2040,8 @@
                     grid.innerHTML = '';
                     let currentCatId = categoryRingList[ringActiveIndex].id;
                     
-                    // 獨立一個「產生卡片」的小工具，避免重複寫 HTML
                     const createCard = (prod) => {
-                        const icon = prod.icon || '📦'; // 如果沒設定 icon 就用預設的箱子
+                        const icon = prod.icon || '📦';
                         const card = document.createElement('div');
                         card.className = "bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group flex flex-col h-full";
                         card.innerHTML = `
@@ -2033,19 +2056,20 @@
                         return card;
                     };
 
-                    // 🌟 如果點擊的是「撒水頭」，啟用特殊分類排版
                     if (currentCatId === 'sprinkler') {
+                        // 🌟 自動長出 6 大專業分類標題
                         const subCats = [
-                            { id: 'standard', name: '標準防護型 (Standard Coverage)', desc: '最基礎款式。適用：辦公室 🏢、住宅 🏠、一般商店' },
-                            { id: 'extended', name: '擴大防護型 (Extended Coverage)', desc: '單顆可覆蓋更大面積。適用：大型開放式辦公室、飯店大廳' },
-                            { id: 'storage', name: '儲存倉儲型 (Storage / ESFR)', desc: '能穿透強大上升熱氣流。適用：高架倉庫 📦、物流中心' },
-                            { id: 'special', name: '特殊環境型 (Special Application)', desc: '針對防凍或防腐蝕設計。適用：冷凍庫 ❄️、化工廠、乾式管路' }
+                            { id: 'standard', name: '標準防護系列 (Standard Coverage)', desc: '最普及的型號。適用：辦公室 🏢、住宅 🏠、一般商業空間' },
+                            { id: 'extended', name: '擴大防護系列 (Extended Coverage)', desc: '單顆保護面積大，節省管路。適用：大辦公室、賣場 🏬、飯店大廳' },
+                            { id: 'storage', name: '儲存倉儲系列 (Storage & ESFR)', desc: '大水滴擊穿熱氣流。適用：高挑高倉庫 📦、物流中心' },
+                            { id: 'dry', name: '乾式防凍系列 (Dry Sprinkler)', desc: '管內充滿空氣防凍。適用：冷凍庫 ❄️、冷藏倉儲、戶外停車場' },
+                            { id: 'residential', name: '住宅專用系列 (Residential)', desc: '強調快速啟動增加避難時間。適用：居家環境 🏠、高質感室內' },
+                            { id: 'special', name: '特殊應用與噴頭 (Special/Nozzles)', desc: '水幕防護與特殊藥劑。適用：防火玻璃 🪟、狹窄夾層、化工設備 🧪' }
                         ];
 
                         const allSprinklers = catalogData['sprinkler'] || [];
 
                         subCats.forEach(sub => {
-                            // 1. 生成質感標題
                             const header = document.createElement('div');
                             header.className = 'col-span-full mt-8 mb-2 border-b border-slate-200 pb-3 flex flex-col md:flex-row md:items-end gap-2 md:gap-4';
                             header.innerHTML = `
@@ -2056,30 +2080,25 @@
                             `;
                             grid.appendChild(header);
 
-                            // 2. 篩選該分類商品
                             const items = allSprinklers.filter(p => p.subCategory === sub.id);
                             
-                            // 3. 如果還沒有商品，顯示「建置中」預留位
                             if (items.length === 0) {
                                 const emptyMsg = document.createElement('div');
                                 emptyMsg.className = 'col-span-full text-xs text-slate-400 font-bold py-8 px-4 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 text-center tracking-widest';
                                 emptyMsg.innerHTML = '此規格商品型錄建置中，如需叫料請直接與我們聯絡';
                                 grid.appendChild(emptyMsg);
                             } else {
-                                // 如果有商品，把卡片塞進去
                                 items.forEach(prod => grid.appendChild(createCard(prod)));
                             }
                         });
 
                     } else {
-                        // 🌟 其他分類 (全部、滅火器、照明燈等) 維持一般排版
                         let itemsToRender = [];
                         if(currentCatId === 'all') {
                             Object.values(catalogData).forEach(arr => itemsToRender = itemsToRender.concat(arr));
                         } else {
                             itemsToRender = catalogData[currentCatId] || [];
                         }
-
                         itemsToRender.forEach(prod => grid.appendChild(createCard(prod)));
                     }
                     
