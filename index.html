@@ -1606,41 +1606,37 @@
                 </div>
 
                 <div class="hidden md:flex w-full relative flex-col items-center justify-center mt-2 mb-4">
-                    <div class="category-scene relative w-full h-[350px] flex justify-center items-center cursor-grab active:cursor-grabbing">
+                    
+                    <div class="category-scene relative w-full h-[350px] overflow-hidden cursor-grab active:cursor-grabbing">
                         <div class="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         <div class="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         
-                       <div class="absolute left-0 md:left-2 lg:left-4 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
+                        <div class="absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
                             <div class="animate-nudge-left flex flex-col items-center">
-                                <span class="text-3xl text-slate-400 drop-shadow-sm">❮</span>
-                                <span class="text-[10px] font-bold text-slate-400 tracking-widest mt-1">旋轉</span>
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-slate-400 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                <span class="text-[10px] font-bold text-slate-400 tracking-widest mt-1">滑動</span>
                             </div>
                         </div>
 
-                        <div id="category-carousel" class="category-carousel-container relative w-[150px] h-[150px]"></div>
+                        <div id="category-carousel" class="category-carousel-container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] z-10"></div>
 
-                        <div class="absolute right-0 md:right-2 lg:right-4 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
+                        <div class="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
                             <div class="animate-nudge-right flex flex-col items-center">
-                                <span class="text-3xl text-slate-400 drop-shadow-sm">❯</span>
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-slate-400 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
                                 <span class="text-[10px] font-bold text-slate-400 tracking-widest mt-1">旋轉</span>
-                            </div>
-                        </div>
-
-                        <div id="category-carousel" class="category-carousel-container relative w-[150px] h-[150px]"></div>
-
-                        <div class="absolute right-8 lg:right-20 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
-                            <div class="animate-nudge-right flex flex-col items-center">
-                                <span class="text-4xl text-slate-400 drop-shadow-sm">❯</span>
-                                <span class="text-xs font-bold text-slate-400 tracking-widest mt-1">旋轉</span>
                             </div>
                         </div>
                     </div>
-                    <div class="text-center z-30 relative mt-56">
+                    
+                    <div class="text-center z-30 relative mt-4 md:mt-8">
                         <h3 id="active-category-title-desktop" class="text-3xl font-black text-slate-800 mb-3 transition-all duration-300">全部商品</h3>
                         <div class="w-16 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full shadow-sm"></div>
                     </div>
                 </div>
-
                 <div class="md:hidden w-full relative mt-4 mb-8">
                     <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar" id="mobile-category-list">
                         </div>
