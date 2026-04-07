@@ -1976,25 +1976,34 @@
         }
 
         // ==========================================
-        // 3. 商品型錄資料庫 (包含滅火器與照明燈規格)
+        // 3. 商品型錄資料庫 (已新增撒水頭與專業子分類)
         // ==========================================
         const catalogData = {
             'extinguisher': [
-                { name: 'ABC 乾粉滅火器 (3P/5P/10P/20P)', spec: '居家、廠房必備', price: '詢價' },
-                { name: '車用型乾粉滅火器 (5P/10P/20P)', spec: '附專用固定架', price: '詢價' },
-                { name: 'CO2 二氧化碳滅火器 (10P/20P)', spec: '國家認證合格', price: '詢價' },
-                { name: '滅火器置放盒 (鐵製/塑膠製)', spec: '單/雙入，堅固耐用', price: '詢價' },
-                { name: '強化液環保型滅火器', spec: '環保潔淨，滅火效能佳', price: '詢價' },
-                { name: '小型環保液滅火器', spec: '適合女性居家應急使用，無粉塵好清理', price: '詢價' },
-                { name: '水霧型環保滅火器 (10P)', spec: '無毒無粉塵，電器產品適用', price: '詢價' }
+                { name: 'ABC 乾粉滅火器 (3P/5P/10P/20P)', spec: '居家、廠房必備', price: '詢價', icon: '🧯' },
+                { name: '車用型乾粉滅火器 (5P/10P/20P)', spec: '附專用固定架', price: '詢價', icon: '🧯' },
+                { name: 'CO2 二氧化碳滅火器 (10P/20P)', spec: '國家認證合格', price: '詢價', icon: '💨' },
+                { name: '滅火器置放盒 (鐵製/塑膠製)', spec: '單/雙入，堅固耐用', price: '詢價', icon: '📦' },
+                { name: '強化液環保型滅火器', spec: '環保潔淨，滅火效能佳', price: '詢價', icon: '💧' },
+                { name: '小型環保液滅火器', spec: '適合女性居家應急使用，無粉塵好清理', price: '詢價', icon: '💧' },
+                { name: '水霧型環保滅火器 (10P)', spec: '無毒無粉塵，電器產品適用', price: '詢價', icon: '💧' }
             ],
             'lighting': [
-                { name: '1:1 出口逃生燈 (C級/BH級)', spec: 'LED 高亮度', price: '詢價' },
-                { name: '1:3 出口逃生燈 (C級/BH級)', spec: '長型設計', price: '詢價' },
-                { name: '1:1 緊急避難方向燈 (C級/BH級)', spec: '單面/雙面/雙向/單向', price: '詢價' },
-                { name: '懸吊式避難方向燈', spec: '高天花板適用', price: '詢價' },
-                { name: '埋入式避難緊急方向燈', spec: '美觀嵌入式設計', price: '詢價' },
-                { name: '緊急照明燈 (24顆/48顆)', spec: 'LED 高亮度照明', price: '詢價' }
+                { name: '1:1 出口逃生燈 (C級/BH級)', spec: 'LED 高亮度', price: '詢價', icon: '🏃‍♂️' },
+                { name: '1:3 出口逃生燈 (C級/BH級)', spec: '長型設計', price: '詢價', icon: '🏃‍♂️' },
+                { name: '1:1 緊急避難方向燈 (C級/BH級)', spec: '單面/雙面/雙向/單向', price: '詢價', icon: '⬅️' },
+                { name: '懸吊式避難方向燈', spec: '高天花板適用', price: '詢價', icon: '⬇️' },
+                { name: '埋入式避難緊急方向燈', spec: '美觀嵌入式設計', price: '詢價', icon: '🔽' },
+                { name: '緊急照明燈 (24顆/48顆)', spec: 'LED 高亮度照明', price: '詢價', icon: '💡' }
+            ],
+            // 🌟 撒水頭專區 (利用 subCategory 標籤來指定位置)
+            'sprinkler': [
+                { name: 'FIRELOCK™ 隱蔽型', spec: 'K5.6/K8.0 快速反應', price: '詢價', icon: '✨', subCategory: 'standard' },
+                { name: 'FIRELOCK™ 傳統型', spec: 'K5.6 標準反應', price: '詢價', icon: '🚿', subCategory: 'standard' },
+                { name: 'NDC 向上/向下型', spec: 'K5.6/K8.0 UL認證', price: '詢價', icon: '🚿', subCategory: 'standard' },
+                { name: 'FIRELOCK™ 乾式撒水頭', spec: '防凍/冷鏈倉儲專用', price: '詢價', icon: '❄️', subCategory: 'special' },
+                { name: 'FIRELOCK™ 耐腐蝕撒水頭', spec: '化工廠/溫泉區專用', price: '詢價', icon: '🛡️', subCategory: 'special' }
+                // 註：擴大防護型(extended)、倉儲型(storage) 目前沒有資料，系統會自動顯示「建置中」
             ]
         };
 
@@ -2006,35 +2015,79 @@
                 setTimeout(() => {
                     grid.innerHTML = '';
                     let currentCatId = categoryRingList[ringActiveIndex].id;
-                    let itemsToRender = [];
                     
-                    if(currentCatId === 'all') {
-                        Object.values(catalogData).forEach(arr => itemsToRender = itemsToRender.concat(arr));
-                    } else {
-                        itemsToRender = catalogData[currentCatId] || [];
-                    }
-
-                    itemsToRender.forEach(prod => {
+                    // 獨立一個「產生卡片」的小工具，避免重複寫 HTML
+                    const createCard = (prod) => {
+                        const icon = prod.icon || '📦'; // 如果沒設定 icon 就用預設的箱子
                         const card = document.createElement('div');
-                        card.className = "bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group";
+                        card.className = "bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group flex flex-col h-full";
                         card.innerHTML = `
-                            <div class="w-full aspect-square bg-slate-50 rounded-xl mb-4 flex items-center justify-center text-4xl group-hover:scale-105 transition-transform">📦</div>
+                            <div class="w-full aspect-square bg-slate-50 rounded-xl mb-4 flex items-center justify-center text-4xl group-hover:scale-105 transition-transform">${icon}</div>
                             <h4 class="font-bold text-slate-800 mb-1">${prod.name}</h4>
-                            <p class="text-xs text-slate-500 mb-4">${prod.spec}</p>
-                            <div class="flex justify-between items-center">
+                            <p class="text-xs text-slate-500 mb-4 flex-grow">${prod.spec}</p>
+                            <div class="flex justify-between items-center mt-auto">
                                 <span class="text-yellow-600 font-bold">${prod.price}</span>
-                                <button onclick="switchView('contact')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-yellow-600 transition-colors">聯絡諮詢</button>
+                                <button onclick="switchView('contact')" class="text-[10px] font-bold bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-yellow-600 transition-colors">聯絡諮詢</button>
                             </div>
                         `;
-                        grid.appendChild(card);
-                    });
+                        return card;
+                    };
+
+                    // 🌟 如果點擊的是「撒水頭」，啟用特殊分類排版
+                    if (currentCatId === 'sprinkler') {
+                        const subCats = [
+                            { id: 'standard', name: '標準防護型 (Standard Coverage)', desc: '最基礎款式。適用：辦公室 🏢、住宅 🏠、一般商店' },
+                            { id: 'extended', name: '擴大防護型 (Extended Coverage)', desc: '單顆可覆蓋更大面積。適用：大型開放式辦公室、飯店大廳' },
+                            { id: 'storage', name: '儲存倉儲型 (Storage / ESFR)', desc: '能穿透強大上升熱氣流。適用：高架倉庫 📦、物流中心' },
+                            { id: 'special', name: '特殊環境型 (Special Application)', desc: '針對防凍或防腐蝕設計。適用：冷凍庫 ❄️、化工廠、乾式管路' }
+                        ];
+
+                        const allSprinklers = catalogData['sprinkler'] || [];
+
+                        subCats.forEach(sub => {
+                            // 1. 生成質感標題
+                            const header = document.createElement('div');
+                            header.className = 'col-span-full mt-8 mb-2 border-b border-slate-200 pb-3 flex flex-col md:flex-row md:items-end gap-2 md:gap-4';
+                            header.innerHTML = `
+                                <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                                    <span class="w-1.5 h-5 bg-yellow-500 rounded-sm inline-block shadow-sm"></span>${sub.name}
+                                </h3>
+                                <p class="text-xs font-bold text-slate-500 md:mb-0.5">${sub.desc}</p>
+                            `;
+                            grid.appendChild(header);
+
+                            // 2. 篩選該分類商品
+                            const items = allSprinklers.filter(p => p.subCategory === sub.id);
+                            
+                            // 3. 如果還沒有商品，顯示「建置中」預留位
+                            if (items.length === 0) {
+                                const emptyMsg = document.createElement('div');
+                                emptyMsg.className = 'col-span-full text-xs text-slate-400 font-bold py-8 px-4 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 text-center tracking-widest';
+                                emptyMsg.innerHTML = '此規格商品型錄建置中，如需叫料請直接與我們聯絡';
+                                grid.appendChild(emptyMsg);
+                            } else {
+                                // 如果有商品，把卡片塞進去
+                                items.forEach(prod => grid.appendChild(createCard(prod)));
+                            }
+                        });
+
+                    } else {
+                        // 🌟 其他分類 (全部、滅火器、照明燈等) 維持一般排版
+                        let itemsToRender = [];
+                        if(currentCatId === 'all') {
+                            Object.values(catalogData).forEach(arr => itemsToRender = itemsToRender.concat(arr));
+                        } else {
+                            itemsToRender = catalogData[currentCatId] || [];
+                        }
+
+                        itemsToRender.forEach(prod => grid.appendChild(createCard(prod)));
+                    }
                     
                     grid.classList.remove('opacity-0', 'translate-y-8');
                     grid.classList.add('opacity-100', 'translate-y-0');
                 }, 300);
             }
         }
-
         // ==========================================
         // 4. 工程實績資料與渲染 (Portfolio)
         // ==========================================
