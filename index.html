@@ -2,6 +2,23 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <style>
+        
+        /* 🌟 提示箭頭的微幅水平跳動動畫 🌟 */
+        @keyframes nudge-left {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-6px); }
+        }
+        @keyframes nudge-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+        .animate-nudge-left {
+            animation: nudge-left 2s ease-in-out infinite;
+        }
+        .animate-nudge-right {
+            animation: nudge-right 2s ease-in-out infinite;
+        }
+        
         /* 🌟 電腦版 3D 環形旋轉專用設定 🌟 */
         .category-scene {
             perspective: 1200px;
@@ -1589,11 +1606,25 @@
                 </div>
 
                 <div class="hidden md:flex w-full relative flex-col items-center justify-center mt-2 mb-4">
-                    <div class="category-scene relative w-full h-[350px] flex justify-center items-center">
+                    <div class="category-scene relative w-full h-[350px] flex justify-center items-center cursor-grab active:cursor-grabbing">
                         <div class="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         <div class="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none"></div>
                         
+                        <div class="absolute left-8 lg:left-20 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
+                            <div class="animate-nudge-left flex flex-col items-center">
+                                <span class="text-4xl text-slate-400 drop-shadow-sm">❮</span>
+                                <span class="text-xs font-bold text-slate-400 tracking-widest mt-1">旋轉</span>
+                            </div>
+                        </div>
+
                         <div id="category-carousel" class="category-carousel-container relative w-[150px] h-[150px]"></div>
+
+                        <div class="absolute right-8 lg:right-20 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center pointer-events-none opacity-40">
+                            <div class="animate-nudge-right flex flex-col items-center">
+                                <span class="text-4xl text-slate-400 drop-shadow-sm">❯</span>
+                                <span class="text-xs font-bold text-slate-400 tracking-widest mt-1">旋轉</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="text-center z-30 relative mt-56">
                         <h3 id="active-category-title-desktop" class="text-3xl font-black text-slate-800 mb-3 transition-all duration-300">全部商品</h3>
@@ -1604,6 +1635,12 @@
                 <div class="md:hidden w-full relative mt-4 mb-8">
                     <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar" id="mobile-category-list">
                         </div>
+                    <div class="flex justify-center items-center gap-2 mt-1 mb-3 opacity-40 pointer-events-none">
+                        <span class="text-[10px] text-slate-400 animate-nudge-left">❮</span>
+                        <span class="text-[10px] font-bold tracking-widest text-slate-400">左右滑動切換</span>
+                        <span class="text-[10px] text-slate-400 animate-nudge-right">❯</span>
+                    </div>
+                    
                     <div class="text-center mt-2">
                         <h3 id="active-category-title-mobile" class="text-2xl font-black text-slate-800 mb-2 transition-all duration-300">全部商品</h3>
                         <div class="w-12 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 mx-auto rounded-full shadow-sm"></div>
@@ -2039,14 +2076,14 @@
                 { name: 'FL-RES/C 住宅隱蔽型', spec: '附帶裝飾蓋板，完美隱藏於天花板', price: '詢價', icon: '🛋️', subCategory: 'residential' },
                 { name: 'FL-RES/SW 住宅側壁型', spec: '居家側牆專用，增加避難時間', price: '詢價', icon: '🖼️', subCategory: 'residential' },
 
-                // 6. 特殊應用與噴頭系列
+                // 7. 特殊應用與噴頭系列
                 { name: 'FL-SA/WS 窗簾型水幕', spec: '噴灑玻璃表面，防止火勢跨窗蔓延', price: '詢價', icon: '🪟', subCategory: 'special' },
                 { name: 'FL-SA/IC 夾層型', spec: '專用於天花板與地板之間的狹窄空間', price: '詢價', icon: '🔧', subCategory: 'special' },
                 { name: 'FL-SA/NZ 水霧/泡沫噴頭', spec: '化工廠或特殊設備防護專用', price: '詢價', icon: '🧪', subCategory: 'special' },
                 { name: 'Protector 泡沫撒水頭', spec: '寶特 | 停車場與化學儲槽專用泡沫滅火', price: '詢價', icon: '🧪', subCategory: 'special' },
                 { name: 'Protector 開放式撒水頭', spec: '寶特 | 一齊開放水幕防護，適用劇院與危險廠房', price: '詢價', icon: '🌊', subCategory: 'special' },
                 
-                //  7. 撒水軟管系列
+                //  8. 撒水軟管系列
                 { name: 'VicFlex™ AH1/AH2 編織型', spec: '100% 彎曲防護防扭結，商辦與一般廠房首選', price: '詢價', icon: '🪢', subCategory: 'flex' },
                 { name: 'VicFlex™ AH2-CC 無塵室專用', spec: '專為高科技廠房潔淨室(Clean Room)設計', price: '詢價', icon: '✨', subCategory: 'flex' },
                 { name: 'VicFlex™ VS1 乾式軟管系統', spec: '一體成型乾式設計，專為冷凍庫與防凍環境打造', price: '詢價', icon: '❄️', subCategory: 'flex' },
