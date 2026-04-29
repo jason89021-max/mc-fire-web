@@ -2485,9 +2485,10 @@
             }
         }
         // ==========================================
-        // 4. 工程實績資料與渲染 (Portfolio)
+        // 4. 工程實績資料與渲染 (質感科技升級版)
         // ==========================================
         const portfolioData = [
+            // ... (保留您原本的 portfolioData 陣列不動，這裡我省略以節省版面，您不用改它)
             { id: 1, category: 'commercial', title: '台南紡織夢時代購物中心', type: '大型商業設施', desc: '克服超大型複合商場大跨距空間與龐大消費人流的排煙避難與系統連動挑戰。', img: '01.webp' },
             { id: 2, category: 'commercial', title: '洲際棒球場漢神百貨', type: '大型商業設施', desc: '針對超大型商場與人流，提供最穩定、最高規格的消防安全防護。', img: '02.png' },
             { id: 3, category: 'healthcare', title: '內湖三軍總醫院重症大樓', type: '國家級醫療防護網', desc: '實施最高等級消防系統建置，保障病患與第一線醫護人員的絕對生命安全。', img: '03.jpeg' },
@@ -2498,25 +2499,28 @@
             { id: 8, category: 'commercial', title: '新北裕隆城', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '08.jpeg' }
         ];
 
+        // 🌟 升級版資料：加入了進度 % 數與標籤 🌟
         const ongoingProjects = [
-            { title: '台中凱悅飯店', status: '消防設備建置中' },
-            { title: '新北馥華艾美', status: '管線配置階段' },
-            { title: '新竹緯創AI智慧園區', status: '設備進場階段' },
-            { title: '桃園MOMO倉儲', status: '系統連動測試中' },
-            { title: '空軍防空指揮部', status: '消防圖說審查中' }
+            { title: '台中凱悅飯店', status: '消防設備建置中', progress: 65, tag: '指標飯店' },
+            { title: '新北馥華艾美', status: '管線配置階段', progress: 40, tag: '頂級商用' },
+            { title: '新竹緯創AI智慧園區', status: '設備進場階段', progress: 25, tag: '科技廠辦' },
+            { title: '桃園MOMO倉儲', status: '系統連動測試中', progress: 85, tag: '大型物流' },
+            { title: '空軍防空指揮部', status: '消防圖說審查中', progress: 10, tag: '軍事工程' }
         ];
 
+        // 🌟 升級版資料：加入了建案類型標籤 🌟
         const completedProjects = [
-            { year: '2023', title: '金門昇恆昌' },
-            { year: '2022', title: '大直 102-3 高級商辦' },
-            { year: '2021', title: '瓏山林五谷王段住宅大樓' },
-            { year: '2020', title: '淡水區水仙段開發案' },
-            { year: '2018', title: '台鐵機務段檢修庫' },
-            { year: '2015', title: '台灣高速鐵路苗栗站' },
-            { year: '2014', title: '台北捷運環狀線' },
-            { year: '2010', title: '輔大醫學院' }
+            { year: '2023', title: '金門昇恆昌', type: '免稅商場' },
+            { year: '2022', title: '大直 102-3', type: '高級商辦' },
+            { year: '2021', title: '瓏山林五谷王段', type: '住宅大樓' },
+            { year: '2020', title: '淡水區水仙段', type: '建商開發案' },
+            { year: '2018', title: '台鐵機務段檢修庫', type: '交通設施' },
+            { year: '2015', title: '台灣高鐵苗栗站', type: '國家基建' },
+            { year: '2014', title: '台北捷運環狀線', type: '軌道工程' },
+            { year: '2010', title: '輔仁大學醫學院', type: '醫療學術' }
         ];
 
+        // ... (這裡保留您原本的 renderPortfolio 函數不動) ...
         function renderPortfolio(filter) {
             const grid = document.getElementById('portfolio-grid');
             if(!grid) return;
@@ -2544,26 +2548,65 @@
             });
         }
 
+        // 🌟 升級版渲染：進行中指標建案 (動態戰情室風格) 🌟
         function renderOngoing() {
             const container = document.getElementById('ongoing-list');
             if(!container) return;
             container.innerHTML = '';
             ongoingProjects.forEach(p => {
                 const el = document.createElement('div');
-                el.className = 'flex justify-between items-center py-3 border-b border-slate-700 last:border-0';
-                el.innerHTML = `<span class="text-white font-medium">${p.title}</span><span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">${p.status}</span>`;
+                // 使用玻璃透視、發光邊框與雷達光暈
+                el.className = 'relative group bg-slate-800/50 backdrop-blur-sm border border-slate-700 hover:border-emerald-500/50 p-5 rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] overflow-hidden cursor-default';
+                el.innerHTML = `
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-emerald-500/10 blur-2xl rounded-full group-hover:bg-emerald-500/20 transition-colors"></div>
+                    
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <div>
+                            <span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase block mb-1">${p.tag}</span>
+                            <h4 class="text-white font-bold text-lg group-hover:text-emerald-400 transition-colors leading-tight">${p.title}</h4>
+                        </div>
+                        <span class="bg-emerald-900/40 border border-emerald-700/50 text-emerald-400 text-[10px] px-2 py-1 rounded shrink-0 animate-pulse font-bold tracking-wide">${p.status}</span>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 mb-2 overflow-hidden border border-slate-800">
+                            <div class="bg-gradient-to-r from-teal-500 to-emerald-400 h-1.5 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" style="width: ${p.progress}%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                            <span>Project Progress</span>
+                            <span class="text-emerald-500">${p.progress}%</span>
+                        </div>
+                    </div>
+                `;
                 container.appendChild(el);
             });
         }
 
+        // 🌟 升級版渲染：歷年經典完工 (頂級金獎藝廊風格) 🌟
         function renderCompleted() {
             const container = document.getElementById('completed-list');
             if(!container) return;
             container.innerHTML = '';
             completedProjects.forEach(p => {
                 const el = document.createElement('div');
-                el.className = 'flex gap-4 items-center py-2';
-                el.innerHTML = `<span class="text-yellow-600 font-bold text-sm w-12">${p.year}</span><span class="text-slate-300 text-sm">${p.title}</span>`;
+                // 滑鼠懸浮時呈現深色卡片質感，並有金色箭頭互動
+                el.className = 'flex items-center gap-4 group cursor-pointer p-3 rounded-xl hover:bg-slate-800/80 transition-all border border-transparent hover:border-slate-700 hover:shadow-lg';
+                el.innerHTML = `
+                    <div class="w-14 h-14 shrink-0 rounded-lg bg-gradient-to-br from-yellow-600/10 to-yellow-900/30 border border-yellow-700/30 flex items-center justify-center flex-col group-hover:border-yellow-500/60 group-hover:shadow-[0_0_15px_rgba(217,119,6,0.2)] transition-all">
+                        <span class="text-yellow-500 text-sm font-black tracking-wider">${p.year}</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-slate-300 font-bold text-base group-hover:text-white transition-colors mb-1">${p.title}</h4>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] text-slate-500 font-bold tracking-widest">${p.type}</span>
+                        </div>
+                    </div>
+                    <div class="shrink-0 opacity-0 group-hover:opacity-100 group-hover:-translate-x-1 transition-all">
+                        <div class="w-8 h-8 rounded-full bg-yellow-600/20 flex items-center justify-center text-yellow-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                    </div>
+                `;
                 container.appendChild(el);
             });
         }
