@@ -2262,36 +2262,79 @@
         }
 
         // ==========================================
-        // 1. SPA 切換與 UI 基礎邏輯 (這底下是您原本的程式碼，不用動)
+        // 核心切換引擎 (升級版：支援網址變化與上一頁功能)
         // ==========================================
+
+        // 1. 當按鈕被點擊時，我們只負責「改變網址」
         function switchView(targetId) {
-            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
-            const targetView = document.getElementById('view-' + targetId);
-            if(targetView) targetView.classList.add('active');
+            if (window.location.hash !== '#' + targetId) {
+                window.location.hash = targetId; // 這會觸發下方的 hashchange 事件
+            } else {
+                renderView(targetId); // 如果網址沒變(重複點擊)，直接渲染
+            }
+        }
+
+        // 2. 真正負責「隱藏/顯示畫面」的渲染函數
+        function renderView(targetId) {
+            // 隱藏所有頁面
+            document.querySelectorAll('.page-view').forEach(el => {
+                el.classList.remove('active');
+            });
             
+            // 移除所有導覽列的 active 狀態
             document.querySelectorAll('.nav-link').forEach(el => {
                 el.classList.remove('active');
-                let matchTarget = targetId.startsWith('equip-') ? 'equipment' : targetId;
-                if(el.dataset.target === matchTarget) el.classList.add('active');
             });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
+            // 顯示目標頁面
+            const targetView = document.getElementById('view-' + targetId);
+            if (targetView) {
+                targetView.classList.add('active');
+            } else {
+                // 如果找不到對應的 ID (例如亂打網址)，預設回到首頁
+                document.getElementById('view-home').classList.add('active');
+                targetId = 'home';
             }
+
+            // 更新導覽列狀態
+            const navLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
+            if(navLink) navLink.classList.add('active');
             
+            // 特殊處理：如果是設備子頁面，讓主選單的「經銷/代理」保持亮起
+            if(targetId.startsWith('equip-') && targetId !== 'equipment') {
+                 const equipLink = document.querySelector(`.nav-link[data-target="equipment"]`);
+                 if(equipLink) equipLink.classList.add('active');
+            }
+
+            // 觸發特定頁面的渲染邏輯 (如工程實績圖表、輪播等)
             if(targetId === 'portfolio') {
                 if(!window.chartInitialized && typeof initChart === "function") initChart();
-                renderPortfolio('all');
+                if (typeof renderPortfolio === "function") renderPortfolio('all');
                 if (typeof renderOngoing === "function") renderOngoing();
                 if (typeof renderCompleted === "function") renderCompleted();
             }
+
+            // 關閉手機版選單
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
             
-            if(targetId === 'products') {
-                setTimeout(initCategoryCarousel, 100);
-            }
+            // 切換頁面時，自動捲動到網頁最上方
+            window.scrollTo(0,0);
         }
+
+        // 3. 監聽器：當網址的 Hash (#) 改變時 (包含按瀏覽器的上一頁/下一頁)
+        window.addEventListener('hashchange', () => {
+            let hash = window.location.hash.replace('#', '');
+            if (!hash) hash = 'home'; // 如果沒有 hash，預設為首頁
+            renderView(hash);
+        });
+
+        // 4. 監聽器：當網頁第一次載入或重新整理時，讀取目前的網址並顯示對應頁面
+        window.addEventListener('load', () => {
+            let hash = window.location.hash.replace('#', '');
+            if (!hash) hash = 'home';
+            renderView(hash);
+        });
 
         // ==========================================
         // 2. 3D 環形與手機版商品分類邏輯
