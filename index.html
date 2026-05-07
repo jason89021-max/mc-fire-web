@@ -2222,8 +2222,8 @@
             { id: 'all', name: '全部商品', icon: '🌟', image: 'images/prodects/icons/all_products.png' },
             { id: 'extinguisher', name: '各類滅火器', icon: '🧯', image: 'images/prodects/icons/extinguisher.png' },
             { id: 'lighting', name: '照明/方向燈', icon: '💡', image: 'images/prodects/icons/lighting.png' },
-            { id: 'alarm', name: '住警器與蜂鳴器', icon: '🚨', image: 'images/prodects/icons/alarm.png' },
-            { id: 'detector', name: '各類探測器', icon: '📡', image: 'images/prodects/icons/detector.png' },
+            { id: 'alarm', name: '瓦斯&住宅警報器', icon: '🚨', image: 'images/prodects/icons/alarm.png' },
+            { id: 'detector', name: '火警探測器', icon: '📡', image: 'images/prodects/icons/detector.png' },
             { id: 'sprinkler', name: '消防撒水頭', icon: '🚿', image: 'images/prodects/icons/sprinkler.png' },
             { id: 'broadcast', name: '緊急廣播設備', icon: '📢', image: 'images/prodects/icons/broadcast.png' },
             { id: 'others', name: '閥類與其他配件', icon: '🔧', image: 'images/prodects/icons/others.png' }
@@ -2385,11 +2385,23 @@
                 { name: '1:1 緊急避難方向燈 (C級/BH級)', spec: '單面/雙面/雙向/單向', price: '詢價', icon: '⬅️', image: 'images/lighting/lighting03.jfif', subCategory: '崁頂式' },
                 { name: '1:1 緊急避難方向燈 (C級/BH級)', spec: '單面/雙面/雙向/單向', price: '詢價', icon: '⬅️', image: 'images/lighting/lighting04.jfif', subCategory: '壁掛型' },
                 { name: '1:1 出口逃生燈 (C級/BH級)', spec: 'LED 投光式', price: '詢價', icon: '⬅️', image: 'images/lighting/lighting05.jfif', subCategory: '崁入式' },
+                { name: '語音閃間聲音引導燈', spec: 'LED 投光式', price: '詢價', icon: '⬅️', image: 'images/lighting/lightingvoice.jfif', subCategory: '崁入式' },
                 { name: '1:1 緊急避難方向燈 (C級/BH級)', spec: 'gj; 雙向/投光式', price: '詢價', icon: '🏃‍♂️', image: 'images/lighting/lighting06.jfif', subCategory: '崁入式' },
                 { name: '1:3 埋入式避難緊急方向燈', spec: '美觀嵌入式設計', price: '詢價', icon: '🔽', image: 'images/lighting/lighting07.jfif', subCategory: '崁入式' }, 
                 { name: '1:3 避難緊急方向燈 (C級/BH級)', spec: '單面/雙面/雙向/單向', price: '詢價', icon: '🔽', image: 'images/lighting/lighting08.jfif', subCategory: '壁掛/吸頂' }, 
                 { name: '多迴路引導燈具連動控制盤', spec: '分區管理/負載分散', price: '詢價', icon: '🔽', image: 'images/lighting/lighting09.jfif', subCategory: '提供監控回饋' }, 
                 { name: '緊急照明燈 (24顆/48顆)', spec: 'LED 高亮度照明', price: '詢價', icon: '💡', image: 'images/lighting/fl-sr.jpg', subCategory: 'standard' }
+            ],
+            'detector': [
+                { name: '傳統型偵煙探測器', spec: 'P型/二種', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/smoke02.jfif', subCategory: '偵煙' }, 
+                { name: '傳統型定溫探測器', spec: 'P型', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/Degree02.jfif', subCategory: '定溫' }, 
+                { name: '傳統型差動探測器', spec: 'P型', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/heat01.jfif', subCategory: '差動' }, 
+                { name: '差動分佈型探測器', spec: '空氣管探測', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/heat03.jfif', subCategory: '差動分佈' }, 
+                { name: '火焰探測器', spec: '高風險、高價值或火勢迅速環境', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/fire01.jfif', subCategory: '火焰探測器' }, 
+                { name: '紅外線三波長式火焰探測器', spec: '超遠偵測距離/極低誤報/戶外首選', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/fire02.jfif', subCategory: '紅外線三波長式火焰探測器' }, 
+                { name: '光電分離式煙感探測器', spec: '挑高空間/取代點型探測器', price: '詢價', icon: '🏃‍♂️', image: 'images/detector/smoke03.jfif', subCategory: 'adress' }, 
+                { name: '定址型偵煙探測器', spec: '續接/非續接型', price: '詢價', icon: '🔽', image: 'images/lighting/adress01.jfif', subCategory: '提供監控回饋' }, 
+                { name: '定址型定溫探測器', spec: '續接/非續接型', price: '詢價', icon: '💡', image: 'images/lighting/adress02.jfif', subCategory: 'adress02' }
             ],
             // 🌟 撒水頭專區 (8大分類完整收錄，已新增 image 欄位)
             'sprinkler': [
@@ -2441,6 +2453,11 @@
                 { name: 'VicFlex™ VS1 乾式軟管系統', spec: '一體成型乾式設計，專為冷凍庫與防凍環境打造', price: '詢價', icon: '❄️', image: 'images/sprinkler/vic-vs1.jpg', subCategory: 'flex' },
                 { name: 'VicFlex™ 天花板固定支架', spec: 'AB1/AB2/AB4/AB10，完美對應輕鋼架與木作天花板', price: '詢價', icon: '🔧', image: 'images/sprinkler/vic-bracket.jpg', subCategory: 'flex' }
              ],
+            'extinguisher': [
+                { name: '緊急廣播喇叭-壁掛型', spec: 'ABS', price: '詢價', icon: '🧯' },image: 'images/speaker/speaker01.jfif', subCategory: '壁掛型'},
+                { name: '緊急廣播喇叭-崁頂型', spec: '烤漆(鐵)', price: '詢價', icon: '🧯' },image: 'images/speaker/speaker02.jfif', subCategory: '崁頂型'},
+                 { name: '緊急廣播喇叭-壁掛型喇叭', spec: 'ABS', price: '詢價', icon: '🧯' },image: 'images/speaker/speaker03.jfif', subCategory: '壁掛型'}
+                ],
             'others': [
                 { name: '自動警報逆止閥', spec: 'Series 751', price: '詢價', icon: '🏃‍♂️', image: 'images/others/Series751.jfif', subCategory: 'Series 751' }, 
                 { name: '流水檢知裝置', spec: '黑色/紅色', price: '詢價', icon: '🏃‍♂️', image: 'images/others/valve001.jfif', subCategory: 'valve001' },
@@ -2449,6 +2466,7 @@
                 { name: '末端排水測試閥', spec: '流線型閥體/全流量設計', price: '詢價', icon: '⬅️', image: 'images/others/DrainBall.jfif', subCategory: 'DrainBall' },
                 { name: '減壓閥', spec: '867 系列（三向先導閥）', price: '詢價', icon: '⬅️', image: 'images/others/867.jfif', subCategory: '867' },
                 { name: '蝶閥', spec: ' Series 122（區劃控制閥）', price: '詢價', icon: '⬅️', image: 'images/others/series122.jfif', subCategory: 'series122' },
+                { name: '太平龍頭', spec: ' 1.5"/2.5"-10k/16k', price: '詢價', icon: '⬅️', image: 'images/others/others001.jfif', subCategory: 'series122' },
                 ]
                 
         };
