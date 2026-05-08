@@ -955,7 +955,7 @@
         </div>
 
         <!-- 4. 設備分類大廳 (Equipment) -->
-      <div id="view-equipment" class="page-view py-20 bg-white border-t border-slate-100">
+        <div id="view-equipment" class="page-view py-20 bg-white border-t border-slate-100">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
                     <p class="text-sm font-bold text-yellow-600 tracking-widest mb-2">EQUIPMENT CATEGORIES</p>
@@ -966,6 +966,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 01 火警系統 (可點擊) -->
                     <div onclick="switchView('equip-fire-alarm')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
                         <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
                         <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">01</div>
@@ -981,6 +982,7 @@
                         </div>
                     </div>
                     
+                    <!-- 02 自動撒水與泡沫設備 (可點擊) -->
                     <div onclick="switchView('equip-sprinkler')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
                         <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
                         <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">02</div>
@@ -996,6 +998,7 @@
                         </div>
                     </div>
 
+                    <!-- 03 二氧化碳滅火 (可點擊) -->
                     <div onclick="switchView('equip-co2')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
                         <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
                         <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">03</div>
@@ -1011,8 +1014,1005 @@
                         </div>
                     </div>
 
+                    <!-- 04 乾粉滅火設備 (靜態) -->
                     <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 hover:border-yellow-500 hover:shadow-xl transition-all flex flex-col group relative overflow-hidden">
-                        <div class="absolute -right-6 -top-6 text-slate-2
+                        <div class="absolute -right-6 -top-6 text-slate-200 font-black text-8xl opacity-30 group-hover:text-yellow-100 group-hover:scale-110 transition-all">04</div>
+                        <div class="relative z-10">
+                            <h4 class="text-xl font-bold text-slate-900 mb-3 border-b border-slate-200 pb-3">乾粉滅火設備</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">具備瞬間壓制火勢的強大能力，適用於各類高風險油氣、化學品廠區等特殊火災防護。</p>
+                        </div>
+                    </div>
+
+                    <!-- 05 簡易自動滅火 (可點擊) -->
+                    <div onclick="switchView('equip-simple-auto')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
+                        <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">05</div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4 border-b border-slate-200 pb-4">
+                                <h4 class="text-xl font-bold text-slate-900 mt-1">簡易自動滅火</h4>
+                                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md group-hover:shadow-lg group-hover:from-yellow-600 group-hover:to-yellow-700 transition-all whitespace-nowrap">
+                                    <span>點擊探索廠牌</span>
+                                    <span class="text-base leading-none group-hover:translate-x-1 transition-transform">&rarr;</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed">不依賴電力即能自動偵測火源，大幅降低人員操作不當風險。適用於小型廚房、設備機房與排煙管內。</p>
+                        </div>
+                    </div>
+
+                    <!-- 06 放水型自動撒水設備 (可點擊) -->
+                    <div onclick="switchView('equip-monitor')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
+                        <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">06</div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4 border-b border-slate-200 pb-4">
+                                <h4 class="text-xl font-bold text-slate-900 mt-1">放水型自動撒水設備</h4>
+                                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md group-hover:shadow-lg group-hover:from-yellow-600 group-hover:to-yellow-700 transition-all whitespace-nowrap">
+                                    <span>點擊探索廠牌</span>
+                                    <span class="text-base leading-none group-hover:translate-x-1 transition-transform">&rarr;</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed">針對挑高大跨距空間（如巨型展場、體育館）所設計之智慧型大範圍撒水防護系統。</p>
+                        </div>
+                    </div>
+
+                    <!-- 07 緊急廣播 (可點擊) -->
+                    <div onclick="switchView('equip-broadcast')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
+                        <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">07</div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4 border-b border-slate-200 pb-4">
+                                <h4 class="text-xl font-bold text-slate-900 mt-1">緊急廣播設備</h4>
+                                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md group-hover:shadow-lg group-hover:from-yellow-600 group-hover:to-yellow-700 transition-all whitespace-nowrap">
+                                    <span>點擊探索廠牌</span>
+                                    <span class="text-base leading-none group-hover:translate-x-1 transition-transform">&rarr;</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed">結合智能情境控制，於災時提供最清晰、明確的語音逃生動線指引，穩定群眾情緒。</p>
+                        </div>
+                    </div>
+
+                    <!-- 08 消防排煙 (靜態) -->
+                    <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 hover:border-yellow-500 hover:shadow-xl transition-all flex flex-col group relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 text-slate-200 font-black text-8xl opacity-30 group-hover:text-yellow-100 group-hover:scale-110 transition-all">08</div>
+                        <div class="relative z-10">
+                            <h4 class="text-xl font-bold text-slate-900 mb-3 border-b border-slate-200 pb-3">消防排煙</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">涵蓋建築自然排煙與複雜機械排煙系統運算，精準控制煙流動線，確保逃生廊道安全無阻。</p>
+                        </div>
+                    </div>
+
+                    <!-- 09 惰性氣體滅火 (可點擊) -->
+                    <div onclick="switchView('equip-inert-gas')" class="bg-white p-8 rounded-xl border-2 border-yellow-400 hover:border-yellow-500 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group relative overflow-hidden cursor-pointer transform hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/50 to-transparent z-0"></div>
+                        <div class="absolute -right-6 -top-6 text-yellow-600 font-black text-8xl opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all z-0">09</div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4 border-b border-slate-200 pb-4">
+                                <h4 class="text-xl font-bold text-slate-900 mt-1">惰性氣體滅火</h4>
+                                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md group-hover:shadow-lg group-hover:from-yellow-600 group-hover:to-yellow-700 transition-all whitespace-nowrap">
+                                    <span>點擊探索廠牌</span>
+                                    <span class="text-base leading-none group-hover:translate-x-1 transition-transform">&rarr;</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed">對人體無毒、無色無味，不產生腐蝕性有害化合物。兼具絕對環保與保護高價位資產的安全解方。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.1 子頁面 - 火警系統 -->
+        <div id="view-equip-fire-alarm" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">01</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Fire Alarm Systems</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">頂級火警系統代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">明昌消防嚴選國際一線火警設備廠牌。從高階商辦、大型公共工程到高科技廠房，我們為您配置最穩定、精準的火災預警神經網路，確保生命財產的絕對安全。</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- NOHMI -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/nohmi.jpeg" alt="NOHMI Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">日本能美 <span class="text-slate-400 font-medium ml-2">NOHMI</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">百年工藝，亞洲消防設備領導品牌</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">傳承日本極致的製造工藝與嚴苛標準，提供超低誤報率與極高穩定性的火災預警方案，廣泛應用於國內外各大指標性建築與精密公共工程。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">R型/P型火警總機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">各類探測器 (偵煙/定溫/差動)</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">排煙/泡沫控制盤</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.tnohmi.com.tw/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+                           
+                            <img src="images/prodects/nohmipic.jpeg" alt="能美火警總機情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                              
+                            <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+                                 
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+                                  
+                            <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+                                  
+                               <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+                                    
+                               <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">能美火警總機與探測器</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EST -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/est.jpeg" alt="EST Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇺🇸</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">EDWARDS <span class="text-slate-400 font-medium ml-2">EST</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">歐美頂尖智慧型火警系統</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">專為大型複合式建築、超高層大樓與智慧城市設計。具備極致的系統擴充性與強大的圖控整合能力，是國際頂級建商的首選保障系統。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">EST4 / EST3 智慧型總機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">Signature 系列光電偵煙器</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">FireWorks 圖控軟體</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.edwardsfiresafety.com/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+    <img src="images/prodects/estpic.jpeg" alt="EST 智慧型總機情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">EST4 智慧型總機與圖控軟體</p>
+                      </div>
+                     </div>
+                    </div>
+
+                    <!-- SUNG -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/sung.jpeg" alt="SUNG Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇹🇼</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">松輝 <span class="text-slate-400 font-medium ml-2">SUNG</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">深耕台灣的高品質消防製造商</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">專注於本地化的高性價比解決方案，產品線完整且完全符合台灣最新消防署規範，提供中大型住宅與常規廠辦最堅實的基礎保護。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">P型自動火警總機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">光電式/定溫式探測器</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">消防廣播主機</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.sung.com.tw/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+                        <img src="images/prodects/sungpic.jpeg" alt="松輝設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                       <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+                      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+                        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+                          <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">松輝 P 型總機與設備</p>
+                         </div>
+                        </div>
+                        </div>
+                        <div class="mt-4 lg:hidden"><a href="https://www.sung.com.tw/" target="_blank" class="flex justify-center items-center gap-2 text-sm font-bold text-yellow-600 border border-yellow-600 px-4 py-3 rounded-lg hover:bg-yellow-600 hover:text-white transition-colors">瀏覽原廠官網 <span>↗</span></a></div>
+                    </div>
+
+                    <!-- HORING LIH -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/horinglih.jpeg" alt="HORING LIH Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇹🇼</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">宏力 <span class="text-slate-400 font-medium ml-2">HORING LIH</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">行銷全球的台灣消防設備大廠</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">台灣極具代表性的消防製造商，產品榮獲多項國際認證 (UL/CE/EN)。以極高的耐用度與穩定的品質深受國內外大型工程信賴。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">智慧型定址火警總機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">各類探測器 (偵煙/定溫/差動)</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">防爆型探測設備</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.horinglih.com/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+     <img src="images/prodects/horinglihpic.jpeg" alt="宏力設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">宏力定址型總機與防爆探測器</p>
+                         </div>
+                         </div>
+                         <div class="mt-4 lg:hidden"><a href="https://www.horinglih.com/" target="_blank" class="flex justify-center items-center gap-2 text-sm font-bold text-yellow-600 border border-yellow-600 px-4 py-3 rounded-lg hover:bg-yellow-600 hover:text-white transition-colors">瀏覽原廠官網 <span>↗</span></a></div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- 4.2 子頁面 - 自動撒水與泡沫滅火設備 -->
+        <div id="view-equip-sprinkler" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">02</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Sprinkler & Foam Systems</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">自動撒水與泡沫設備代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">提供最高規格的水系統防護。明昌消防嚴選國際頂尖水系統與泡沫設備廠牌，為您構築最堅實、高效的立體滅火防線。</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Victaulic -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-blue-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/victaulic.jpeg" alt="Victaulic Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇺🇸</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">唯特利 <span class="text-slate-400 font-medium ml-2">Victaulic</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">全球機械管路連接與消防水系統領導品牌</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">提供極高可靠度的撒水頭與系統閥類設備。其創新的機械接頭技術，大幅提升高樓層與大型廠房的現場施工效率與系統穩定性。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">各類消防撒水頭</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">預動式撒水系統</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">自動警報逆止閥</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">機械接頭與管件</span>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+     <img src="images/prodects/victaulicpic.jpg" alt="Victaulic 情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Victaulic 消防閥組與預動式系統</p>
+                      </div>
+                      </div>
+                      </div>
+
+                    <!-- Yamato Protec -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-blue-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/yamato-protec.jpeg" alt="Yamato Protec Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Yamato Protec</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">日本歷史最悠久的綜合消防設備巨擘</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">日本第一家生產滅火器的企業。在泡沫滅火系統與自動撒水設備領域具備深厚技術底蘊，專為高風險工業設施提供全方位防護。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">泡沫滅火系統</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">泡沫原液與比例混合器</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">自動撒水設備</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+    <img src="images/prodects/yamatopic.jpeg" alt="Yamato 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Yamato 泡沫原液槽與滅火系統</p>
+                    </div>
+                    </div>
+                    </div>
+
+                    <!-- NDC -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-blue-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/ndc.jpeg" alt="NDC Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">日本 NDC <span class="text-slate-400 font-medium ml-2">Nippon Dry-Chemical</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">亞洲頂尖防護水系統製造商</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">日本指標性綜合消防大廠。其撒水設備、一齊開放閥與特殊滅火系統以極致的精密度與耐用性著稱，廣泛應用於各大高階建築。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">各類撒水頭與感知頭</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">一齊開放閥 (Deluge Valve)</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">泡沫噴頭</span>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+   <img src="images/prodects/ndcpic.jpeg" alt="NDC 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">NDC 一齊開放閥與感知頭</p>
+    </div>
+</div>
+                    </div>
+
+                    <!-- SENJU -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-blue-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/senju.jpeg" alt="SENJU Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">千住 <span class="text-slate-400 font-medium ml-2">SENJU</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">追求極致精度的撒水頭精工大廠</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">專注於高精度消防撒水頭研發的日本精工品牌。在「全隱蔽型」與「特殊美觀設計」撒水頭領域表現卓越。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">隱蔽型撒水頭 (附專用蓋板)</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">傳統向上/向下撒水頭</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">住宅用精緻型撒水頭</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+   <img src="images/prodects/senjupic.jpeg" alt="SENJU 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">千住隱蔽型撒水頭與美觀蓋板</p>
+    </div>
+</div>
+                    </div>
+
+                    <!-- Protector Safety -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-blue-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/protector.png" alt="Protector Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🌐</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Protector Safety</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">高性價比與高可靠度的國際防護品牌</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">產品線涵蓋各式撒水頭、泡沫噴頭與系統閥件，以高性價比與穩定效能深受各大營造工程信賴。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">各式撒水頭</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">泡沫產生器與噴頭</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">消防水帶與瞄子</span>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+   <img src="images/prodects/protectorpic.jpeg" alt="Protector 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Protector 各式撒水頭與系統閥件</p>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.3 子頁面 - 二氧化碳滅火設備 -->
+        <div id="view-equip-co2" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">03</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">CO2 Extinguishing Systems</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">二氧化碳滅火設備代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">專為高科技廠房、變電站與精密機房打造的潔淨滅火方案。我們嚴選全球頂尖氣體滅火系統品牌，提供高效、無殘留的防護。</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Kidde -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-gray-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/kidde.png" alt="Kidde Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇺🇸</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Kidde</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">全球領先的氣體滅火與消防安全防護專家</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">高壓二氧化碳系統具備極快的撲滅速度且不留殘留物，是保護高價值電子設備與資料中心的業界標準配備。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">高壓 CO2 滅火系統鋼瓶組</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">氣體滅火釋放控制盤</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">選擇閥與專用釋放噴頭</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.kidde.com/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-gray-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+     <img src="images/prodects/kiddepic.jpeg" alt="Kidde 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Kidde 高壓 CO2 鋼瓶組</p>
+    </div>
+</div>
+                        <div class="mt-4 lg:hidden"><a href="https://www.kidde.com/" target="_blank" class="flex justify-center items-center gap-2 text-sm font-bold text-yellow-600 border border-yellow-600 px-4 py-3 rounded-lg hover:bg-yellow-600 hover:text-white transition-colors">瀏覽原廠官網 <span>↗</span></a></div>
+                    </div>
+
+                    <!-- Notifier -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-gray-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/notifier.png" alt="Notifier Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇺🇸</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Notifier <span class="text-slate-400 font-medium ml-2">by Honeywell</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">Honeywell 旗下頂級智慧防災控制品牌</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">以極度穩定與智慧化的火警與氣體滅火控制系統聞名。能完美連動 CO2 等特殊設備，提供高科技廠房早期預警與精準釋放控制。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">氣體滅火智慧控制主機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">高階火警探測與連動系統</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">ONYX® 系列圖控軟體</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.notifier.com/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-gray-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+   <img src="images/prodects/notifierpic.jpeg" alt="Notifier 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Notifier 控制盤與 ONYX 系統</p>
+    </div>
+</div>
+                        <div class="mt-4 lg:hidden"><a href="https://www.notifier.com/" target="_blank" class="flex justify-center items-center gap-2 text-sm font-bold text-yellow-600 border border-yellow-600 px-4 py-3 rounded-lg hover:bg-yellow-600 hover:text-white transition-colors">瀏覽原廠官網 <span>↗</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.4 子頁面 - 簡易自動滅火 -->
+        <div id="view-equip-simple-auto" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">05</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Simple Auto Extinguishing</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">簡易自動滅火設備代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">針對商業廚房、精密機櫃與發電機房等高風險局部空間。提供無需依賴外部電力的純機械式自動滅火方案。</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Rotarex -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/rotarex.jpeg" alt="Rotarex Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇪🇺</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Rotarex</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">歐洲氣體與設備防護工藝的極致</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">專利的 FireDETEC® 探火管技術，無需電源即可在設備內部偵測火源，管線燒穿瞬間直接釋放滅火藥劑，將機電設備損害降至最低。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">FireDETEC 探火管滅火系統</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">直接/間接氣體釋放裝置</span>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+                            
+                             <img src="images/prodects/rotarexpic.jpeg" alt="Rotarex 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                            
+                            <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+                            
+                            <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+                                <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+                                <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Rotarex 探火管安裝於機櫃內部</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pyro Chem -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/pyrochem.jpeg" alt="Pyro Chem Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇺🇸</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Pyro Chem <span class="text-slate-400 font-medium ml-2">by Tyco</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">美國商業廚房防護的權威品牌</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">專精於商業餐廳廚房防護。其 Kitchen Knight II 系統採用獨特皂化藥劑，能瞬間撲滅高溫油鍋火災，切斷氧氣防止復燃。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">Kitchen Knight II 廚房滅火系統</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">廚房高溫熔線探測器</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+                            <img src="images/prodects/pyrochempic.jpeg" alt="Pyro Chem 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                            <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+                                <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+                                <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">Kitchen Knight II 商業廚房防護</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 4.5 子頁面 - 放水型自動撒水設備 -->
+        <div id="view-equip-monitor" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">06</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Water Monitor Systems</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">放水型自動撒水設備代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">突破傳統撒水頭高度限制的終極防護。專為巨型展覽館、體育場等「挑高大跨距空間」設計，具備智慧尋跡與精準射水功能。</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-3xl p-8 md:p-12 mb-16 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
+                    <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/20 blur-[100px] rounded-full pointer-events-none"></div>
+                    
+                    <div class="w-full lg:w-1/2 relative z-10">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center p-2 shrink-0">
+                                <img src="images/logos/nohmi.jpeg" alt="NOHMI Logo" class="w-full h-full object-contain">
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black text-white tracking-wider">日本能美 <span class="text-blue-400 font-medium ml-1">NOHMI</span></h3>
+                                <p class="text-slate-400 text-sm font-bold">亞洲最先進的光學智慧放水銃系統</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-300 leading-relaxed mb-8">
+                            結合高靈敏度 AI 雙波長探測技術，能主動尋找火源座標，並遙控水砲進行集中噴灑。完美整合能美防災雲端系統 (IoT)，設備狀態與水壓皆可遠端即時監控。
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                                <h4 class="text-blue-400 font-bold mb-1">主動尋標</h4>
+                                <p class="text-xs text-slate-400">精準打擊起火點，減少水損。</p>
+                            </div>
+                            <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                                <h4 class="text-blue-400 font-bold mb-1">超大防護半徑</h4>
+                                <p class="text-xs text-slate-400">保留建築設計的空間美學。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 relative z-10">
+                        <div class="relative aspect-video md:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-slate-700 group bg-slate-800">
+                            <img src="images/prodects/nohmipic_large.jpeg" alt="能美放水型設備" class="w-full h-full object-contain mix-blend-screen transition-transform duration-700 group-hover:scale-110" onerror="this.outerHTML='<div class=\\'flex items-center justify-center h-full text-slate-600 text-6xl\\'>🤖</div>'">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-slate-200 relative overflow-hidden flex flex-col lg:flex-row-reverse gap-12 items-center">
+                    
+                    <div class="w-full lg:w-1/2 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-bold tracking-widest mb-6 uppercase">
+                            <span class="text-base">🏆</span> Benchmark Project
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">
+                            大型複合商場指標<br>
+                            <span class="text-yellow-600">台南紡織夢時代購物中心</span>
+                        </h3>
+                        <p class="text-slate-600 text-base leading-relaxed mb-6">
+                            南紡夢時代作為南台灣最具指標性的超大型複合式商場，其內部擁有廣闊的中庭與極高挑高的公共空間。每日數以萬計的消費人流，讓消防安全的容錯率為「零」。
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3">
+                                <span class="text-yellow-600 font-black mt-1">✓</span>
+                                <span class="text-slate-700 text-sm">導入能美放水型系統，克服中庭大跨距與挑高限制。</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-yellow-600 font-black mt-1">✓</span>
+                                <span class="text-slate-700 text-sm">精準走線與隱藏設計，確保設備不破壞商場室內美學。</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-yellow-600 font-black mt-1">✓</span>
+                                <span class="text-slate-700 text-sm">完成放水設備與商場排煙、廣播、總機的複雜連動。</span>
+                            </li>
+                        </ul>
+                        <button onclick="switchView('contact')" class="bg-slate-900 text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-yellow-600 transition-colors shadow-md">預約專案評估</button>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 relative z-10">
+                        <div class="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden shadow-xl border-4 border-slate-100 group">
+                            <img src="images/portfolio/01.webp" alt="南紡夢時代實績" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop';">
+                            <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur shadow-md p-4 rounded-xl border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-base mb-1">系統穩定運行中</h4>
+                                <p class="text-xs text-slate-500 font-bold">明昌消防團隊 責任施工</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+                    <!-- NOHMI -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/nohmi.jpeg" alt="TOA Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">日本能美 <span class="text-slate-400 font-medium ml-2">NOHMI</span></h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">亞洲最先進的光學智慧放水銃系統</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">結合高靈敏度光學探測技術，能智慧判別火源的三維座標，並遙控水砲進行集中噴灑，達到無可比擬的滅火效率。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">智慧型自動放水銃 (Water Monitor)</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">放水型專用火焰探測器</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 hidden lg:block">
+                                <a href="https://www.tnohmi.com.tw/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                            </div>
+                        </div>
+                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+    <img src="images/prodects/nohmipic.jpeg" alt="能美放水設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">能美智慧型自動放水設備</p>
+    </div>
+</div>
+                        <div class="mt-4 lg:hidden"><a href="https://www.tnohmi.com.tw/" target="_blank" class="flex justify-center items-center gap-2 text-sm font-bold text-yellow-600 border border-yellow-600 px-4 py-3 rounded-lg hover:bg-yellow-600 hover:text-white transition-colors">瀏覽原廠官網 <span>↗</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.6 子頁面 - 緊急廣播 -->
+        <div id="view-equip-broadcast" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">07</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Emergency Broadcasting</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">緊急廣播設備代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">確保災難發生時語音引導絕對清晰穿透的生命之音。整合國際頂級音響品牌與優質國產設備，為商辦大樓與廠房提供兼具音質與穩定性的廣播解方。</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- TOA -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/toa.jpeg" alt="TOA Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">TOA</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">日本公共廣播與專業音響的絕對領導者</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">緊急廣播主機與揚聲器以極致的清晰度與超高耐用性著稱。能與背景音樂系統完美結合，在火災瞬間強制切換為逃生語音引導。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">一體式數位緊急廣播主機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">高音質崁頂 / 壁掛揚聲器</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+    <img src="images/prodects/toapic.jpeg" alt="TOA 設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">TOA 數位緊急廣播主機與揚聲器</p>
+    </div>
+</div>
+                    </div>
+
+                    <!-- 國產品牌 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/taiwan.jpeg" alt="Taiwan Brands Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇹🇼</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">台灣優質國產品牌</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">高性價比、完全符合國內法規的安全保證</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">嚴選具備消防署認可的國產製造商。提供極具彈性的擴充能力與高性價比，維修料件充足，是中小型商場與廠辦的最佳選擇。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">標準型緊急廣播主機</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">台製高分貝揚聲器</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+    <img src="images/prodects/taiwanpic.jpeg" alt="國產廣播情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">國產緊急廣播主機與壁掛揚聲器</p>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.7 子頁面 - 惰性氣體滅火 -->
+        <div id="view-equip-inert-gas" class="page-view py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+                    <div class="w-full lg:w-2/3">
+                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
+                            &larr; 返回經銷/代理大廳
+                        </button>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">09</div>
+                            <div>
+                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Inert Gas Systems</p>
+                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">惰性氣體滅火設備代理</h2>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-lg leading-relaxed mt-6">兼顧絕對防護與零環境污染的綠色科技。專為數據中心與電信機房設計，提供對人體最安全的氣體滅火環境。</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Rotarex -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-full lg:w-3/5 flex flex-col z-10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
+                                        <img src="images/logos/rotarex.jpeg" alt="Taiwan Brands Logo" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <span class="text-2xl">🇪🇺</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">Rotarex</h3>
+                                        </div>
+                                        <p class="text-slate-500 text-sm font-bold">高壓氣體控制與減壓技術的世界級權威</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">Rotarex 提供極具專利的恆壓釋放閥門技術，確保滅火氣體平穩且迅速地充滿空間，避免瞬間高壓造成室內結構損壞，是頂尖綠色機房指定用料。</p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">IG-55 / IG-541 系統</span>
+                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">專利恆壓釋放閥門</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
+    <img src="images/prodects/rotarexpic.jpeg" alt="Rotarex 惰性氣體設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
+        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
+        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">IG-55 惰性氣體鋼瓶排與專利恆壓閥</p>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- 5. Product 頁面 (器材與商品分類型錄) -->
         <div id="view-products" class="page-view pt-12 pb-20 bg-slate-50 border-t border-slate-200 overflow-hidden">
