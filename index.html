@@ -1716,67 +1716,127 @@
             </div>
         </div>
         <!-- 4.5 子頁面 - 放水型自動撒水設備 -->
-        <div id="view-equip-monitor" class="page-view py-20 bg-slate-50 border-t border-slate-200">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
-                    <div class="w-full lg:w-2/3">
-                        <button onclick="switchView('equipment')" class="text-slate-500 hover:text-yellow-600 font-bold text-sm flex items-center gap-2 mb-8 transition-colors">
-                            &larr; 返回經銷/代理大廳
-                        </button>
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="text-6xl md:text-7xl font-black text-slate-200 select-none">06</div>
-                            <div>
-                                <p class="text-sm font-bold text-yellow-600 tracking-widest mb-1 uppercase">Water Monitor Systems</p>
-                                <h2 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">放水型自動撒水設備代理</h2>
-                            </div>
-                        </div>
-                        <p class="text-slate-600 text-lg leading-relaxed mt-6">突破傳統撒水頭高度限制的終極防護。專為巨型展覽館、體育場等「挑高大跨距空間」設計，具備智慧尋跡與精準射水功能。</p>
-                    </div>
-                </div>
+        <div id="view-equip-monitor" class="page-view pt-20 pb-0 bg-white">
+            
+            <section class="relative bg-slate-900 pt-16 pb-24 overflow-hidden border-b border-slate-800">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')]"></div>
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+                
+                <div class="max-w-7xl mx-auto px-6 relative z-10">
+                    <button onclick="switchView('equipment')" class="mb-8 flex items-center text-slate-400 hover:text-white transition-colors group text-sm font-bold tracking-wider">
+                        <span class="mr-2 group-hover:-translate-x-1 transition-transform">←</span> 返回設備大廳
+                    </button>
 
-                <div class="space-y-8">
-                    <!-- NOHMI -->
-                    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex flex-col lg:flex-row gap-8">
-                        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent -z-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="w-full lg:w-3/5 flex flex-col z-10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-slate-100 pb-6">
-                                <div class="flex items-center gap-5">
-                                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-center p-2 shrink-0 group-hover:border-yellow-400 transition-all relative overflow-hidden">
-                                        <img src="images/logos/nohmi.jpeg" alt="TOA Logo" class="w-full h-full object-contain">
-                                    </div>
-                                    <div>
-                                        <div class="flex items-center gap-3 mb-1">
-                                            <span class="text-2xl">🇯🇵</span><h3 class="text-2xl font-black text-slate-900 tracking-wider">日本能美 <span class="text-slate-400 font-medium ml-2">NOHMI</span></h3>
-                                        </div>
-                                        <p class="text-slate-500 text-sm font-bold">亞洲最先進的光學智慧放水銃系統</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">結合高靈敏度光學探測技術，能智慧判別火源的三維座標，並遙控水砲進行集中噴灑，達到無可比擬的滅火效率。</p>
-                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-100">
-                                <p class="text-xs font-bold text-slate-400 mb-3 tracking-widest uppercase">核心供應產品</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">智慧型自動放水銃 (Water Monitor)</span>
-                                    <span class="bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded text-sm font-medium shadow-sm">放水型專用火焰探測器</span>
-                                </div>
-                            </div>
-                            <div class="mt-6 hidden lg:block">
-                                <a href="https://www.tnohmi.com.tw/" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition-colors">瀏覽原廠官網 <span>↗</span></a>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="inline-block px-3 py-1 rounded bg-blue-900/50 border border-blue-700 text-blue-400 text-xs font-black tracking-widest mb-4 uppercase">NOHMI Water Monitor</span>
+                            <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                                日本能美 NOHMI<br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">放水型自動撒水系統</span>
+                            </h2>
+                            <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                                專為挑高超過 10 公尺的超大空間設計。傳統撒水頭無法企及的高度，交由它來守護。內建 AI 雙波長紅外線/紫外線探測器，能主動尋找火源座標，並驅動放水槍進行高壓精準打擊，在火勢蔓延前瞬間壓制。
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <span class="bg-slate-800 text-slate-300 px-4 py-2 rounded-full text-sm font-bold border border-slate-700">✔️ 挑高展場</span>
+                                <span class="bg-slate-800 text-slate-300 px-4 py-2 rounded-full text-sm font-bold border border-slate-700">✔️ 大型商場與中庭</span>
+                                <span class="bg-slate-800 text-slate-300 px-4 py-2 rounded-full text-sm font-bold border border-slate-700">✔️ 巨型倉儲物流</span>
+                                <span class="bg-slate-800 text-slate-300 px-4 py-2 rounded-full text-sm font-bold border border-slate-700">✔️ 體育館/巨蛋</span>
                             </div>
                         </div>
-                       <div class="w-full lg:w-2/5 min-h-[200px] lg:min-h-full rounded-xl overflow-hidden relative border border-slate-200 group-hover:border-yellow-400 transition-colors shadow-sm flex-shrink-0 flex items-center justify-center bg-slate-100 group">
-    <img src="images/prodects/nohmipic.jpeg" alt="能美放水設備情境" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-    <span class="hidden text-6xl opacity-10 absolute transition-transform duration-700 group-hover:scale-110 z-0">📸</span>
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-full p-5 z-20 pointer-events-none">
-        <div class="inline-block px-2 py-1 bg-yellow-500 text-slate-900 text-[10px] font-black tracking-widest rounded mb-2 uppercase">FEATURED</div>
-        <p class="text-white text-sm font-bold tracking-wide drop-shadow-md">能美智慧型自動放水設備</p>
-    </div>
-</div>
-                        <div class="mt-4 lg:hidden"><a href="https://www.tnohmi.com.tw/" target="_blank" class="flex justify-center items-center gap-2 text-sm font-bold text-yellow-600 border border-yellow-600 px-4 py-3 rounded-lg hover:bg-yellow-600 hover:text-white transition-colors">瀏覽原廠官網 <span>↗</span></a></div>
+
+                        <div class="relative w-full aspect-video md:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-slate-700 bg-slate-800 group p-6 flex items-center justify-center">
+                            <img src="images/prodects/nohmipic_large.jpeg" alt="能美放水型設備" class="w-full h-full object-contain mix-blend-screen transition-transform duration-700 group-hover:scale-110" onerror="this.outerHTML='<span class=\\'text-6xl\\'>🤖</span>'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <section class="py-20 bg-slate-50">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h3 class="text-3xl font-black text-slate-900 mb-4">為什麼選擇放水型系統？</h3>
+                        <div class="w-16 h-1 bg-blue-500 mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-2xl mb-6">🎯</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-3">主動尋標，精準滅火</h4>
+                            <p class="text-slate-600 leading-relaxed text-sm">捨棄傳統被動受熱爆破。探測器一發現火光，立即計算三維座標，控制放水槍直接對準起火點進行大流量水柱射擊，大幅減少不必要的水損。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="w-12 h-12 bg-cyan-100 text-cyan-600 rounded-lg flex items-center justify-center text-2xl mb-6">📏</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-3">超大防護半徑</h4>
+                            <p class="text-slate-600 leading-relaxed text-sm">單支放水槍可覆蓋極大的面積。這意味著您不需要在美麗的挑高天花板上密密麻麻地佈滿管線與撒水頭，完美保留建築設計的空間美學。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-2xl mb-6">☁️</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-3">NOHMI 雲端連動</h4>
+                            <p class="text-slate-600 leading-relaxed text-sm">完美整合能美防災雲端系統。設備狀態、水壓、尋標軌跡與火警訊號，皆可透過手機或中控室遠端即時監控，管理零死角。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="relative py-24 bg-white overflow-hidden">
+                <div class="max-w-7xl mx-auto px-6 relative z-10">
+                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                        <div class="w-full lg:w-1/2 relative group">
+                            <div class="absolute -inset-4 bg-yellow-500 rounded-2xl transform rotate-2 opacity-20 group-hover:rotate-3 transition-transform duration-500"></div>
+                            <div class="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-white bg-slate-200">
+                                <img src="images/portfolio/01.webp" alt="南紡夢時代放水設備實績" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop';">
+                                <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur shadow-xl p-5 rounded-xl border border-slate-100 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-xs font-black text-yellow-600 tracking-widest uppercase">Featured Case</span>
+                                        <span class="flex h-3 w-3 relative">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                                        </span>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 text-lg">系統穩定運行中</h4>
+                                    <p class="text-xs text-slate-500 mt-1">明昌消防團隊 責任施工</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full lg:w-1/2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-bold tracking-widest mb-6 uppercase">
+                                <span class="text-base">🏆</span> Benchmark Project
+                            </div>
+                            <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
+                                大型複合商場指標<br>
+                                <span class="text-yellow-600">台南紡織夢時代購物中心</span>
+                            </h2>
+                            <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                                南紡夢時代作為南台灣最具指標性的超大型複合式商場，其內部擁有廣闊的中庭與極高挑高的公共空間。每日數以萬計的消費人流，讓消防安全的容錯率為「零」。
+                            </p>
+                            
+                            <div class="space-y-6 mb-10">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0 font-bold">01</div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-slate-900 mb-1">克服大跨距與挑高限制</h4>
+                                        <p class="text-slate-600 text-sm leading-relaxed">我們在商場的挑高中庭導入能美放水型系統。完美解決了傳統撒水頭在超高空間下，水滴可能因熱氣流無法抵達火源的物理限制。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0 font-bold">02</div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-slate-900 mb-1">系統無縫連動與美學兼顧</h4>
+                                        <p class="text-slate-600 text-sm leading-relaxed">從前端圖面檢討開始，明昌團隊便將放水設備與商場排煙、廣播、火警總機進行複雜的連動設計。同時精準走線，確保設備不破壞商場極致的室內裝修美學。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button onclick="switchView('contact')" class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 transition-all duration-200 bg-yellow-500 border border-transparent rounded-full hover:bg-yellow-400 focus:outline-none shadow-lg hover:shadow-xl">
+                                預約您的專案評估
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- 4.6 子頁面 - 緊急廣播 -->
