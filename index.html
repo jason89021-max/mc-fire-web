@@ -2006,28 +2006,73 @@
                         <h2 class="text-3xl md:text-4xl font-black mb-6">淬鍊於指標性工程的卓越實績</h2>
                         <p class="text-slate-400 leading-relaxed max-w-2xl text-lg">社會認同 (Social Proof) 與能力背書。涵蓋公共工程、商辦、豪宅等不同領域的深度案例分析。</p>
                     </div>
-                    <div class="w-full md:w-1/3 bg-slate-800 p-4 rounded-xl border border-slate-700">
-                        <p class="text-center text-xs text-slate-400 font-bold mb-2">整合實績領域分佈</p>
-                        <div class="chart-container h-[200px] max-h-[200px]">
-                            <canvas id="portfolioChart"></canvas>
+                    <div class="w-full md:w-5/12 lg:w-1/3 bg-slate-800/50 border border-slate-700 rounded-2xl p-6 backdrop-blur-sm flex flex-col justify-center shadow-xl">
+                        <h3 class="text-lg font-black text-white mb-6 flex items-center gap-2"><span class="text-yellow-500">📊</span> 整合實績領域分布</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
+                                    <span>大型商業設施 / 飯店</span>
+                                    <span class="text-yellow-500">35%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 rounded-full h-2 border border-slate-700 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-yellow-600 to-yellow-400 h-full rounded-full shadow-[0_0_10px_rgba(250,204,21,0.5)]" style="width: 35%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
+                                    <span>高階集合住宅 / 豪宅</span>
+                                    <span class="text-blue-400">25%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 rounded-full h-2 border border-slate-700 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full shadow-[0_0_10px_rgba(56,189,248,0.5)]" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
+                                    <span>高科技廠辦 / 倉儲</span>
+                                    <span class="text-emerald-400">20%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 rounded-full h-2 border border-slate-700 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full rounded-full shadow-[0_0_10px_rgba(52,211,153,0.5)]" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
+                                    <span>公共工程 / 基礎建設</span>
+                                    <span class="text-purple-400">15%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 rounded-full h-2 border border-slate-700 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-purple-600 to-purple-400 h-full rounded-full shadow-[0_0_10px_rgba(192,132,252,0.5)]" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
+                                    <span>醫療機構 / 學術</span>
+                                    <span class="text-rose-400">5%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 rounded-full h-2 border border-slate-700 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-rose-600 to-rose-400 h-full rounded-full shadow-[0_0_10px_rgba(251,113,133,0.5)]" style="width: 5%"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 <!-- 實績分類過濾按鈕 -->
-                <div class="flex flex-wrap justify-center md:justify-start gap-3 mb-10 border-b border-slate-800 pb-8">
-                    <button onclick="filterPortfolio('all', this)" class="portfolio-filter active px-5 py-2.5 rounded-full font-bold bg-yellow-600 text-slate-900 text-sm transition-colors shadow-lg">全部實績</button>
-                    <button onclick="filterPortfolio('commercial', this)" class="portfolio-filter px-5 py-2.5 rounded-full font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors text-sm border border-slate-700">商業設施</button>
-                    <button onclick="filterPortfolio('residential', this)" class="portfolio-filter px-5 py-2.5 rounded-full font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors text-sm border border-slate-700">頂級住宅</button>
-                    <button onclick="filterPortfolio('healthcare', this)" class="portfolio-filter px-5 py-2.5 rounded-full font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors text-sm border border-slate-700">醫療與學術</button>
-                    <button onclick="filterPortfolio('public', this)" class="portfolio-filter px-5 py-2.5 rounded-full font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors text-sm border border-slate-700">公共工程與廠辦</button>
-                </div>
+               <div class="flex flex-wrap justify-center gap-3 mb-12">
+                        <button onclick="renderPortfolio('all')" class="px-6 py-2 rounded-full text-sm font-bold bg-yellow-600 text-slate-900 shadow-[0_0_15px_rgba(217,119,6,0.4)] hover:bg-yellow-500 transition-colors">全部實績</button>
+                        <button onclick="renderPortfolio('commercial')" class="px-6 py-2 rounded-full text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:border-yellow-500/50 hover:text-yellow-500 transition-colors">商業設施</button>
+                        <button onclick="renderPortfolio('residential')" class="px-6 py-2 rounded-full text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:border-yellow-500/50 hover:text-yellow-500 transition-colors">頂級住宅</button>
+                        <button onclick="renderPortfolio('healthcare')" class="px-6 py-2 rounded-full text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:border-yellow-500/50 hover:text-yellow-500 transition-colors">醫療學術</button>
+                        <button onclick="renderPortfolio('public')" class="px-6 py-2 rounded-full text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:border-yellow-500/50 hover:text-yellow-500 transition-colors">公共工程</button>
+                        <button onclick="renderPortfolio('industrial')" class="px-6 py-2 rounded-full text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:border-yellow-500/50 hover:text-yellow-500 transition-colors">工業廠辦</button>
+                    </div>
 
                 <!-- 指標實績大卡片網格 (由 JavaScript 動態生成) -->
-                <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 </div>
 
-               <div class="mt-24 pt-16 border-t border-slate-800">
+                <div class="mt-24 pt-16 border-t border-slate-800">
                     <div class="mb-10 flex flex-col md:flex-row justify-between items-end gap-6">
                         <div>
                             <p class="text-sm font-bold text-yellow-500 tracking-widest mb-2">ONGOING PROJECTS</p>
@@ -2052,12 +2097,6 @@
                     <div id="completed-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     </div>
                 </div>
-                    <!-- 完工清單 (由 JavaScript 動態生成) -->
-                    <div id="completed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- 7. 專屬諮詢 (Contact) -->
         <div id="view-contact" class="page-view py-20 bg-white">
@@ -3626,18 +3665,29 @@
             { title: '北投振興段', location: '台北市北投區', scope: '新建大樓消防工程', tag: '集合住宅' }
         ];
 
-        // 🌟 升級版資料：加入了建案類型標籤 🌟
+        // 🌟 升級版資料：加入了截圖中的飯店、廠辦、豪宅與公共工程 🌟
         const completedProjects = [
+            { year: '2023', title: '嘉義福容大飯店', type: '國際飯店' },
             { year: '2023', title: '金門昇恆昌', type: '免稅商場' },
+            { year: '2022', title: '遠雄人壽春秋礁溪渡假酒店', type: '渡假酒店' },
+            { year: '2022', title: '澎湖昇恆昌馬公第三漁港', type: '免稅商場' },
             { year: '2022', title: '大直 102-3', type: '高級商辦' },
+            { year: '2021', title: '寶輝建設 秋紅谷', type: '頂級豪宅' },
+            { year: '2021', title: '華銀資訊大樓暨頂埔科技大樓', type: '科技廠辦' },
             { year: '2021', title: '瓏山林五谷王段', type: '住宅大樓' },
+            { year: '2020', title: '高雄御盟晶英酒店', type: '頂級飯店' },
+            { year: '2020', title: '法務部廉政署', type: '政府機關' },
             { year: '2020', title: '淡水區水仙段', type: '建商開發案' },
+            { year: '2019', title: '基平隧道', type: '公共工程' },
+            { year: '2019', title: '樹林新日興廠房', type: '科技廠房' },
+            { year: '2018', title: '億東泰山區廠房 (三好米)', type: '工業廠房' },
+            { year: '2018', title: '璞園小王子', type: '精品住宅' },
             { year: '2018', title: '台鐵機務段檢修庫', type: '交通設施' },
+            { year: '2017', title: '東遠精技', type: '科技廠辦' },
             { year: '2015', title: '台灣高鐵苗栗站', type: '國家基建' },
             { year: '2014', title: '台北捷運環狀線', type: '軌道工程' },
             { year: '2010', title: '輔仁大學醫學院', type: '醫療學術' }
         ];
-
         // ... (這裡保留您原本的 renderPortfolio 函數不動) ...
         function renderPortfolio(filter) {
             const grid = document.getElementById('portfolio-grid');
@@ -3832,12 +3882,11 @@
             
             initCategoryCarousel();
             
-            const portfolioView = document.getElementById('view-portfolio');
-            if(portfolioView && portfolioView.classList.contains('active')) {
-                renderPortfolio('all');
-                if (typeof renderOngoing === "function") renderOngoing();
-                if (typeof renderCompleted === "function") renderCompleted();
-            }
+            // 👇 關鍵修復：直接呼叫渲染函數，不要包在 if 條件裡面！ 👇
+            renderPortfolio('all');
+            if (typeof renderOngoing === "function") renderOngoing();
+            if (typeof renderCompleted === "function") renderCompleted();
+            // 👆 關鍵修復結束 👆
         });
     </script>
 </body>
