@@ -3595,7 +3595,7 @@
             { id: 13, category: 'residential', title: '淡水區 水仙段開發案', type: '大型集合住宅開發', desc: '提供從地下室停車場到高樓層住區的全方位水壓運算與消防整合。', img: '13.jpeg' },
             { id: 14, category: 'commercial', title: '金門昇恆昌金湖廣場', type: '大型免稅商場', desc: '針對離島大型指標性商業設施，建置高穩定性的全方位消防警報與水系統防護。', img: '14.jfif' },
             { id: 15, category: 'commercial', title: '金門金湖大飯店', type: '頂級國際飯店', desc: '兼顧國際級飯店極致裝修美學與客房隱私安全，提供無死角的早期預警與連動避難系統。', img: '15.jpg' },
-            { id: 16, category: 'industrial', title: '振業化工廠房', type: '高風險工業設施', desc: '面對化學品儲存與製程的高危險環境，導入最高規格防爆防腐防護與泡沫、氣體滅火系統。', img: '16.jfif' },
+            { id: 16, category: 'industrial', title: '振業化工廠房', type: '高風險工業設施', desc: '面對化學品儲存與製程的高危險環境，導入最高規格防爆防腐防護與泡沫、氣體滅火系統。', img: '16.jpg' },
             { id: 17, category: 'public', title: '高雄海洋流行音樂中心', type: '指標性文化設施', desc: '克服前衛不規則建築外觀與挑高展演空間的排煙氣流運算，保障萬人演唱會的絕對安全。', img: '17.jfif' },
             { id: 18, category: 'commercial', title: '御盟國際天勤辦公大樓', type: '頂級 A 級商辦', desc: '配合綠建築標準與頂尖企業需求，建置高節能、高連動性的智慧化大樓消防安全網。', img: '18.jfif' },
             { id: 19, category: 'public', title: '國道五號蘇澳服務區', type: '國道重要樞紐', desc: '針對大量流動人車與開放式餐飲空間，配置穩定且易於維護管理的快速火災壓制系統。', img: '19.jfif' },
@@ -3604,11 +3604,26 @@
 
         // 🌟 升級版資料：加入了進度 % 數與標籤 🌟
         const ongoingProjects = [
-            { title: '台中凱悅飯店', status: '消防設備建置中', progress: 65, tag: '指標飯店' },
-            { title: '新北馥華艾美', status: '管線配置階段', progress: 40, tag: '頂級商用' },
-            { title: '新竹緯創AI智慧園區', status: '設備進場階段', progress: 25, tag: '科技廠辦' },
-            { title: '桃園MOMO倉儲', status: '系統連動測試中', progress: 85, tag: '大型物流' },
-            { title: '空軍防空指揮部', status: '消防圖說審查中', progress: 10, tag: '軍事工程' }
+            { title: '台中凱悅飯店', location: '台中市', scope: '全棟消防設備新建', tag: '指標飯店' },
+            { title: '新北馥華艾美', location: '新北市板橋區', scope: '綜合消防與排煙系統', tag: '頂級商用' },
+            { title: '新竹緯創AI智慧園區', location: '新竹縣竹北市', scope: '高科技廠房消防系統', tag: '科技廠辦' },
+            { title: '桃園MOMO倉儲', location: '桃園市', scope: '大型倉儲防災連動', tag: '大型物流' },
+            { title: '空軍防空指揮部', location: '專案機關', scope: '國防標準消防建置', tag: '軍事工程' },
+            
+            // 新增指標與企業總部案件
+            { title: 'MOXA新莊企業總部', location: '新北市新莊區', scope: '企業總部消防與智慧連動', tag: '企業總部' },
+            { title: '捷運聯開大樓新建案', location: '捷運共構', scope: '捷運聯開消防與避難系統', tag: '公共工程' },
+            { title: '鴻邦大直裝修案', location: '台北市中山區', scope: '室內裝修消防法規檢討與變更', tag: '商辦裝修' },
+            
+            // 新增指標住宅與新建大樓案件
+            { title: '築觀建設中山北路', location: '台北市中山區', scope: '新建大樓消防工程', tag: '頂級住宅' },
+            { title: '禾碩建設大業段', location: '台北市北投區', scope: '新建大樓消防工程', tag: '指標住宅' },
+            { title: '淞順建設 - 朱崙街', location: '台北市中山區', scope: '全棟消防設備新建', tag: '精品住宅' },
+            { title: '淞順建設 - 丹陽段', location: '台北市中正區', scope: '全棟消防設備新建', tag: '精品住宅' },
+            { title: '淞順建設 - 美仁段', location: '台北市松山區', scope: '全棟消防設備新建', tag: '精品住宅' },
+            { title: '麗鼎劍潭案', location: '台北市士林區', scope: '新建大樓消防工程', tag: '指標建案' },
+            { title: '富貴森林公園大樓', location: '新北市', scope: '新建大樓消防工程', tag: '集合住宅' },
+            { title: '北投振興段', location: '台北市北投區', scope: '新建大樓消防工程', tag: '集合住宅' }
         ];
 
         // 🌟 升級版資料：加入了建案類型標籤 🌟
@@ -3651,7 +3666,7 @@
             });
         }
 
-        // 🌟 升級版渲染：進行中指標建案 (動態戰情室風格) 🌟
+       // 🌟 升級版渲染：施工中案件 (改為顯示地點與施作項目的靜態質感卡片) 🌟
         function renderOngoing() {
             const container = document.getElementById('ongoing-list');
             if(!container) return;
@@ -3668,16 +3683,15 @@
                             <span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase block mb-1">${p.tag}</span>
                             <h4 class="text-white font-bold text-lg group-hover:text-emerald-400 transition-colors leading-tight">${p.title}</h4>
                         </div>
-                        <span class="bg-emerald-900/40 border border-emerald-700/50 text-emerald-400 text-[10px] px-2 py-1 rounded shrink-0 animate-pulse font-bold tracking-wide">${p.status}</span>
+                        <span class="bg-slate-800/80 border border-slate-600 text-slate-300 text-[10px] px-2 py-1 rounded shrink-0 font-bold tracking-wide flex items-center gap-1 shadow-sm"><span class="text-emerald-400">📍</span>${p.location}</span>
                     </div>
                     
-                    <div class="relative z-10">
-                        <div class="w-full bg-slate-900 rounded-full h-1.5 mb-2 overflow-hidden border border-slate-800">
-                            <div class="bg-gradient-to-r from-teal-500 to-emerald-400 h-1.5 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" style="width: ${p.progress}%"></div>
-                        </div>
-                        <div class="flex justify-between text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                            <span>Project Progress</span>
-                            <span class="text-emerald-500">${p.progress}%</span>
+                    <div class="relative z-10 mt-3 pt-3 border-t border-slate-700/50">
+                        <div class="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300">
+                            <div class="w-7 h-7 rounded-md bg-emerald-900/30 border border-emerald-700/50 flex items-center justify-center text-emerald-400 text-xs shrink-0">
+                                🛠️
+                            </div>
+                            <span class="text-slate-300 text-sm font-medium tracking-wide">${p.scope}</span>
                         </div>
                     </div>
                 `;
