@@ -3580,6 +3580,7 @@
         // ==========================================
         const portfolioData = [
             // ... (保留您原本的 portfolioData 陣列不動，這裡我省略以節省版面，您不用改它)
+            const portfolioData = [
             { id: 1, category: 'commercial', title: '台南紡織夢時代購物中心', type: '大型商業設施', desc: '克服超大型複合商場大跨距空間與龐大消費人流的排煙避難與系統連動挑戰。', img: '01.webp' },
             { id: 2, category: 'commercial', title: '洲際棒球場漢神百貨', type: '大型商業設施', desc: '針對超大型商場與人流，提供最穩定、最高規格的消防安全防護。', img: '02.png' },
             { id: 3, category: 'healthcare', title: '內湖三軍總醫院重症大樓', type: '國家級醫療防護網', desc: '實施最高等級消防系統建置，保障病患與第一線醫護人員的絕對生命安全。', img: '03.jpeg' },
@@ -3588,11 +3589,18 @@
             { id: 6, category: 'public', title: 'T2 機場工程 (中正二期)', type: '國家級公共工程', desc: '面對龐大出入境人流與複雜建築結構，建置全方位立體智能防災網。', img: '06.webp' },
             { id: 7, category: 'healthcare', title: '臺大醫院健康大樓', type: '醫療機構', desc: '在不影響醫院營運下，分區完成高難度管線配置與系統無縫連動。', img: '07.webp' },
             { id: 8, category: 'commercial', title: '新北裕隆城', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '08.jpeg' },
-            { id: 8, category: 'commercial', title: '臺大醫院 健康大樓', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '09.jpeg' },
-            { id: 8, category: 'commercial', title: '大直 102-3 高級商辦', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '10.jpeg' },
-            { id: 8, category: 'commercial', title: '瓏山林五谷王段 住宅大樓', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '11.jpeg' },
-            { id: 8, category: 'commercial', title: '台鐵機務段檢修庫', type: '大型複合商場', desc: '提供兼具商場與影城的全方位消防排煙與智能避難引導系統。', img: '12.jpeg' },
-            { id: 8, category: 'commercial', title: '淡水區 水仙段開發案', type: '大型集合住宅開發', desc: '提供從地下室停車場到高樓層住區的全方位水壓運算與消防整合。', img: '13.jpeg' },
+            { id: 9, category: 'healthcare', title: '臺大醫院 癌醫中心醫院', type: '國家級醫療機構', desc: '確保高精密醫療儀器與無塵環境安全，建置高穩定火警預警與潔淨滅火系統。', img: '09.jpeg' },
+            { id: 10, category: 'commercial', title: '大直 102-3 高級商辦', type: '頂級 A 級商辦', desc: '為企業總部打造極致美學與安全兼具的隱蔽型消防防護與智慧總機連動。', img: '10.jpeg' },
+            { id: 11, category: 'residential', title: '瓏山林五谷王段 住宅大樓', type: '大型集合住宅', desc: '嚴格把關高樓層水壓與居家防災連動，提供住戶最安心的居住防線。', img: '11.jpeg' },
+            { id: 12, category: 'public', title: '台鐵機務段檢修庫', type: '交通基礎設施', desc: '針對挑高鐵道維修廠房，導入大跨距排煙與高壓防護水系統，確保機具安全。', img: '12.jpeg' },
+            { id: 13, category: 'residential', title: '淡水區 水仙段開發案', type: '大型集合住宅開發', desc: '提供從地下室停車場到高樓層住區的全方位水壓運算與消防整合。', img: '13.jpeg' },
+            { id: 14, category: 'commercial', title: '金門昇恆昌金湖廣場', type: '大型免稅商場', desc: '針對離島大型指標性商業設施，建置高穩定性的全方位消防警報與水系統防護。', img: '14.jfif' },
+            { id: 15, category: 'commercial', title: '金門金湖大飯店', type: '頂級國際飯店', desc: '兼顧國際級飯店極致裝修美學與客房隱私安全，提供無死角的早期預警與連動避難系統。', img: '15.jpg' },
+            { id: 16, category: 'industrial', title: '振業化工廠房', type: '高風險工業設施', desc: '面對化學品儲存與製程的高危險環境，導入最高規格防爆防腐防護與泡沫、氣體滅火系統。', img: '16.jfif' },
+            { id: 17, category: 'public', title: '高雄海洋流行音樂中心', type: '指標性文化設施', desc: '克服前衛不規則建築外觀與挑高展演空間的排煙氣流運算，保障萬人演唱會的絕對安全。', img: '17.jfif' },
+            { id: 18, category: 'commercial', title: '御盟國際天勤辦公大樓', type: '頂級 A 級商辦', desc: '配合綠建築標準與頂尖企業需求，建置高節能、高連動性的智慧化大樓消防安全網。', img: '18.jfif' },
+            { id: 19, category: 'public', title: '國道五號蘇澳服務區', type: '國道重要樞紐', desc: '針對大量流動人車與開放式餐飲空間，配置穩定且易於維護管理的快速火災壓制系統。', img: '19.jfif' },
+            { id: 20, category: 'commercial', title: '遠雄 H100 企業總部', type: '超高層指標建築', desc: '克服超高樓層的極端水壓挑戰，導入國際認證撒水設備與高強度管網系統，確保極致穩定。', img: '20.jfif' }
         ];
 
         // 🌟 升級版資料：加入了進度 % 數與標籤 🌟
