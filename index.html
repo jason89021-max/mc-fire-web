@@ -3355,36 +3355,73 @@
         }
 
         // ==========================================
-        // 1. SPA 切換與 UI 基礎邏輯 (這底下是您原本的程式碼，不用動)
+        // 1. SPA 切換與 UI 基礎邏輯 (加入 History API 支援上一頁)
         // ==========================================
-        function switchView(targetId) {
-            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
-            const targetView = document.getElementById('view-' + targetId);
-            if(targetView) targetView.classList.add('active');
+        
+        // 🌟 參數新增 isHistoryAction，判斷是否為「按上一頁」觸發的
+        function switchView(targetId, isHistoryAction = false) {
             
+            // 隱藏所有頁面
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            
+            // 尋找目標頁面並顯示
+            const targetView = document.getElementById('view-' + targetId);
+            if(targetView) {
+                targetView.classList.add('active');
+            } else {
+                // 如果找不到該頁面 (防呆)，預設回到首頁
+                document.getElementById('view-home').classList.add('active');
+                targetId = 'home';
+            }
+
+            // 🌟 關鍵邏輯：如果是使用者「手動點擊按鈕」，就改變網址列並推入歷史紀錄
+            if (!isHistoryAction) {
+                // 這樣網址列就會變成 yoursitename.com/#about
+                window.history.pushState({ viewId: targetId }, '', '#' + targetId);
+            }
+
+            // 更新導覽列底線狀態
             document.querySelectorAll('.nav-link').forEach(el => {
                 el.classList.remove('active');
                 let matchTarget = targetId.startsWith('equip-') ? 'equipment' : targetId;
+                if(targetId.startsWith('feature-')) matchTarget = 'products'; // 特色頁面對應產品分類
                 if(el.dataset.target === matchTarget) el.classList.add('active');
             });
+            
+            // 畫面捲動到最上方
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
+            // 關閉手機版選單
             const mobileMenu = document.getElementById('mobileMenu');
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
             }
             
+            // 觸發特定頁面的渲染動畫
             if(targetId === 'portfolio') {
                 if(!window.chartInitialized && typeof initChart === "function") initChart();
                 renderPortfolio('all');
                 if (typeof renderOngoing === "function") renderOngoing();
                 if (typeof renderCompleted === "function") renderCompleted();
             }
-            
             if(targetId === 'products') {
                 setTimeout(initCategoryCarousel, 100);
             }
         }
+
+        // 🌟 關鍵事件：監聽瀏覽器的「上一頁 / 下一頁」按鈕
+        window.addEventListener('popstate', function(event) {
+            // 從網址的 hash 中取得目標頁面 ID (例如從 #about 變成 about)
+            let hash = window.location.hash.substring(1);
+            
+            // 如果網址沒有 hash (退到最一開始)，預設為 home
+            if (!hash) {
+                hash = 'home';
+            }
+            
+            // 呼叫切換函數，並告訴它「這是歷史紀錄操作」，不要再重複寫入網址了
+            switchView(hash, true);
+        });
 
         // ==========================================
         // 2. 3D 環形與手機版商品分類邏輯
@@ -3419,7 +3456,6 @@
                 if(carouselContainer) {
                     const item = document.createElement('div');
                     
-                    // 🌟 核心修復：使用 inline style 鎖定尺寸與負邊距，避免 Tailwind 失效導致透明大玻璃擋住畫面！
                     item.className = `category-carousel-item absolute top-1/2 left-1/2 flex items-center justify-center cursor-pointer select-none group`;
                     item.style.width = '240px';
                     item.style.height = '240px';
@@ -4041,6 +4077,16 @@
             updateCarousel();
             startInterval();
             
+            // 🌟 核心修復：網頁剛載入時，檢查網址是否有指定頁面 (例如被分享了 #portfolio 網址)
+            let initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                // 如果有指定頁面，直接顯示該頁面
+                switchView(initialHash, true);
+            } else {
+                // 如果沒有指定頁面，預設為首頁，並把首頁寫入歷史紀錄
+                window.history.replaceState({ viewId: 'home' }, '', '#home');
+            }
+
             const track = document.getElementById('carousel-track');
             if(track) {
                 let startX = 0; let endX = 0;
@@ -4066,11 +4112,9 @@
             
             initCategoryCarousel();
             
-            // 👇 關鍵修復：直接呼叫渲染函數，不要包在 if 條件裡面！ 👇
             renderPortfolio('all');
             if (typeof renderOngoing === "function") renderOngoing();
             if (typeof renderCompleted === "function") renderCompleted();
-            // 👆 關鍵修復結束 👆
         });
     </script>
 </body>
