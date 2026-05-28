@@ -4005,24 +4005,30 @@
                 if (diff < -Math.floor(totalSlides / 2)) diff += totalSlides;
                 if (diff > Math.floor(totalSlides / 2)) diff -= totalSlides;
 
-                // 🌟 3D 轉盤核心數學算式 🌟
+                // 🌟 3D 轉盤核心數學算式 (平躺重疊、更近、更清晰的高質感畫廊風格) 🌟
                 if (diff === 0) {
-                    // 正中間主圖：最大、最清晰
+                    // 👑 正中間主圖：最大、最亮、最前面
                     slide.style.transform = 'translateX(0%) translateZ(0px) scale(1) rotateY(0deg)';
                     slide.style.zIndex = '30';
                     slide.style.opacity = '1';
                     slide.style.filter = 'brightness(1) blur(0px)';
+                    
                 } else if (diff === 1 || diff === -1) {
-                    // 左右 Stand by 副圖：往外推 75%、往後退 200px、縮小、加上稍微的模糊與向內旋轉
-                    const dir = diff; 
-                    slide.style.transform = `translateX(${dir * 75}%) translateZ(-200px) scale(0.85) rotateY(${dir * -20}deg)`;
+                    // 🖼️ 左右 Stand by 副圖：平躺不傾斜 (rotateY為0)、拉近、無模糊
+                    const dir = diff; // 1(右邊) 或 -1(左邊)
+                    // 參數解析：
+                    // translateX(60%)：讓圖片稍微靠近主圖，重疊得更美觀
+                    // translateZ(-50px)：拉近距離，不要退得太遠
+                    // scale(0.85)：微微縮小，形成主副層次感
+                    slide.style.transform = `translateX(${dir * 60}%) translateZ(-50px) scale(0.85) rotateY(0deg)`;
                     slide.style.zIndex = '20';
-                    slide.style.opacity = '0.6';
-                    slide.style.filter = 'brightness(0.5) blur(2px)'; 
+                    slide.style.opacity = '0.9'; // 提高透明度，讓圖片更清晰
+                    slide.style.filter = 'brightness(0.7) blur(0px)'; // 拿掉模糊，只稍微調暗以襯托主圖
+                    
                 } else {
-                    // 隱藏在更後面的圖片
+                    // 👻 隱藏在更後面的圖片 (快速退場隱藏)
                     const dir = diff > 0 ? 1 : -1;
-                    slide.style.transform = `translateX(${dir * 100}%) translateZ(-400px) scale(0.5) rotateY(${dir * -40}deg)`;
+                    slide.style.transform = `translateX(${dir * 100}%) translateZ(-200px) scale(0.6) rotateY(0deg)`;
                     slide.style.zIndex = '10';
                     slide.style.opacity = '0'; 
                 }
