@@ -3713,24 +3713,30 @@
                             mediaHtml = `<span class="text-4xl group-hover:scale-110 transition-transform">${icon}</span>`;
                         }
 
-                        // 🌟 新增：自動判斷並生成電商導購按鈕
+                        // 🌟 升級版：高質感電商導購按鈕
                         let shoppingLinksHtml = '';
                         if (prod.shopeeLink || prod.coupangLink) {
                             shoppingLinksHtml = `<div class="flex gap-2 w-full mt-4 pt-3 border-t border-slate-100">`;
                             
-                            // 如果有蝦皮連結，生成橘色按鈕
+                            // 蝦皮按鈕 (稍微加上浮動陰影與圓角優化)
                             if (prod.shopeeLink) {
                                 shoppingLinksHtml += `
-                                    <a href="${prod.shopeeLink}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-[#ee4d2d] hover:bg-[#d74326] text-white text-[11px] font-bold py-2 rounded-lg text-center transition-colors shadow-sm flex items-center justify-center gap-1">
-                                        蝦皮購買
+                                    <a href="${prod.shopeeLink}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-[#ee4d2d] hover:bg-[#d74326] text-white text-[11px] font-bold py-2.5 rounded-lg text-center transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 flex items-center justify-center gap-1.5 border border-transparent">
+                                        <span class="tracking-widest">蝦皮購買</span>
                                     </a>`;
                             }
                             
-                            // 如果有 Coupang 連結，生成黑色按鈕
+                            // 💎 高質感 Coupang 按鈕
                             if (prod.coupangLink) {
                                 shoppingLinksHtml += `
-                                    <a href="${prod.coupangLink}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-[#111111] hover:bg-[#2c2c2c] text-white text-[11px] font-bold py-2 rounded-lg text-center transition-colors shadow-sm flex items-center justify-center gap-1">
-                                        Coupang
+                                    <a href="${prod.coupangLink}" target="_blank" onclick="event.stopPropagation()" 
+                                       class="flex-1 relative bg-gradient-to-br from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white py-2.5 px-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-slate-700/50 hover:border-slate-500 flex items-center justify-center gap-2.5 group">
+                                        
+                                        <img src="images/logos/coupang.png" alt="Coupang" class="h-3 object-contain" onerror="this.outerHTML='<span class=\\'font-black tracking-wider text-red-500 text-[11px]\\'>coupang</span>'">
+                                        
+                                        <div class="w-[1px] h-3.5 bg-slate-600/70"></div>
+                                        
+                                        <span class="text-[11px] text-slate-300 group-hover:text-white transition-colors tracking-[0.15em] font-bold mt-[1px]">線上零售</span>
                                     </a>`;
                             }
                             
